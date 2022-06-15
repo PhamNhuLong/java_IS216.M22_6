@@ -7,56 +7,46 @@ package DAO;
 
 /**
  *
- * @author minh
+ * @author minh,hai
  */
 import Object.CuonSach;
 import java.sql.*;
+
 public class CuonSachDAO {
 
     public static PreparedStatement pst = null;
     public static ResultSet rs = null;
-    public static CallableStatement stmt = null ;
+    public static CallableStatement stmt = null;
     public static Connection conn = Connect.getConnect();
     
-    public static boolean InsertCuonSach(CuonSach cs) {
-        
-        String sql = "call them_cuon_sach(?,?)";
+
+    public static boolean DeleteCuonSach(int masach, int madausach) {
+        try{
+               stmt = conn.prepareCall(
+                    "{call XOACUONSACH(?,?)}");
+            stmt.setInt("masach", masach);
+           stmt.setInt("mads", madausach);
+           boolean result = stmt.execute();
+           return result;
+        }catch(SQLException ex) {
+            throw new ArithmeticException(ex.getMessage());
+        }
+       
+    }
+    
+   
+    public static boolean DeleteCuonSachDauSach(String madausach) {
+         String sql = "DELETE FROM CUONSACH where MADAUSACH = ?";
         try {
-            
             stmt = conn.prepareCall(sql);
-            stmt.setString(1, cs.getmASACH());
-            stmt.setString(2, cs.getmADAUSACH());
-           
-            
-            return stmt.executeUpdate()>0; 
+            stmt.setString(1,madausach);
+            var rs =stmt.executeUpdate();
+            if(rs > 0){
+                return true;
+            }
+            return false; 
         } catch(SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
         }
     }
-   public static boolean DeleteCuonSach(String masach) {
-        
-         String sql = "call XOA_CUON_SACH(?)";
-        try {
-            stmt = conn.prepareCall(sql);
-            stmt.setString(1,masach);
-            return stmt.executeUpdate()>0; 
-        } catch(SQLException ex) {
-            throw new ArithmeticException(ex.getMessage());
-        }
-    }
-   public boolean UpdateCuonSach(CuonSach cs)  {
-        String sql = "update CUONSACH set  MADAUSACH = ?, TINHTRANG = ? where MASACH = ?";
-        
-        try
-        {
-            pst= conn.prepareStatement(sql); 
-            pst.setString(3, cs.getmASACH());
-            pst.setString(1, cs.getmADAUSACH());
-            pst.setString(2, cs.gettINHTRANG());
-          
-            return pst.executeUpdate() >0;
-        }        catch(SQLException ex) {
-            throw new ArithmeticException(ex.getMessage());
-    }
-}
 }

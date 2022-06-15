@@ -11,44 +11,29 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.*;
+
 /**
  *
- * @author Nguyen Linh,minh
+ * @author hai,minh
  */
 public class QuanLyCuonSach extends javax.swing.JFrame {
 
     /**
      * Creates new form CuonSach
      */
-    public String sql =" select* from CUONSACH order by MASACH asc " ; 
+    public String sql = " select* from CUONSACH order by MASACH asc ";
+
     public QuanLyCuonSach() {
         initComponents();
         showtb();
-        LoadCB();
-         getContentPane().setBackground(Color.white); 
-           setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        getContentPane().setBackground(Color.white);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-      public final void showtb()
-    {
+
+    public final void showtb() {
         DuLieuBang.Load(sql, tbCuonSach);
     }
-     
-      public void LoadCB()
-    {
-        String sql = "select TINHTRANG from CUONSACH group by TINHTRANG "; 
-        try{
-            Connection conn = Connect.getConnect();
-            PreparedStatement pst= conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
-                this.cbTinhTrang.addItem(rs.getString("TINHTRANG"));
-            }
-        }catch(Exception e)
-        {
-            System.out.println(e.toString());
-        }
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,23 +43,25 @@ public class QuanLyCuonSach extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        ThemMoi = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        Xoa = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
-        CapNhat = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
-        LamMoi = new javax.swing.JButton();
+        cbTinhTrang = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtMaSach = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtMaDauSach = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cbTinhTrang = new javax.swing.JComboBox<>();
+        txtTinhTrang = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtTen = new javax.swing.JTextField();
+        txtNhaXB = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtNam = new javax.swing.JTextField();
+        txtViTri = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        btnXoa = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCuonSach = new javax.swing.JTable();
@@ -83,92 +70,112 @@ public class QuanLyCuonSach extends javax.swing.JFrame {
         TimKiem = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jToolBar1.setRollover(true);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-home-50.png"))); // NOI18N
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton1);
-        jToolBar1.add(jSeparator1);
-
-        ThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-add-50.png"))); // NOI18N
-        ThemMoi.setFocusable(false);
-        ThemMoi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ThemMoi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        ThemMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThemMoiActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(ThemMoi);
-        jToolBar1.add(jSeparator3);
-
-        Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-delete-50.png"))); // NOI18N
-        Xoa.setFocusable(false);
-        Xoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Xoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                XoaActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(Xoa);
-        jToolBar1.add(jSeparator4);
-
-        CapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-edit-50.png"))); // NOI18N
-        CapNhat.setFocusable(false);
-        CapNhat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        CapNhat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        CapNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CapNhatActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(CapNhat);
-        jToolBar1.add(jSeparator5);
-
-        LamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-refresh-50.png"))); // NOI18N
-        LamMoi.setFocusable(false);
-        LamMoi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        LamMoi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        LamMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LamMoiActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(LamMoi);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel2.setText("Mã sách");
 
+        txtMaSach.setEditable(false);
+
         jLabel3.setText("Mã đầu sách");
 
+        txtMaDauSach.setEditable(false);
+        txtMaDauSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaDauSachActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Tình trạng");
+
+        txtTinhTrang.setEditable(false);
+        txtTinhTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTinhTrangActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("THÔNG TIN ĐẦU SÁCH");
+
+        jLabel7.setText("Tên đầu sách");
+
+        txtTen.setEditable(false);
+
+        txtNhaXB.setEditable(false);
+
+        jLabel8.setText("Nhà xuất bản");
+
+        jLabel9.setText("Năm xuất bản");
+
+        txtNam.setEditable(false);
+
+        txtViTri.setEditable(false);
+
+        jLabel10.setText("Vị trí");
+
+        btnXoa.setBackground(new java.awt.Color(255, 0, 0));
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoa.setText("Xóa cuốn sách");
+        btnXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMaSach)
-                    .addComponent(txtMaDauSach)
-                    .addComponent(cbTinhTrang, 0, 212, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMaDauSach, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                            .addComponent(txtMaSach)
+                            .addComponent(txtTinhTrang)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTen))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNhaXB))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnXoa)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtViTri, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNam))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,9 +190,29 @@ public class QuanLyCuonSach extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMaDauSach, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTinhTrang, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNhaXB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNam, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -244,11 +271,11 @@ public class QuanLyCuonSach extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
@@ -293,212 +320,149 @@ public class QuanLyCuonSach extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTimKiem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapNhatActionPerformed
-        // TODO add your handling code here:
-        if(this.txtMaSach.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã  sách","Thông báo",1);
-        else
-        {
-            try{   
-                int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn cập nhật cuốn sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-               CuonSach cs = new CuonSach();
-               cs.setmASACH(txtMaSach.getText());
-               cs.setmADAUSACH(txtMaDauSach.getText());
-               cs.settINHTRANG(cbTinhTrang.getSelectedItem().toString());
-               CuonSachDAO dao = new CuonSachDAO();
-               dao.UpdateCuonSach(cs);           
-               JOptionPane.showMessageDialog(null, "Mã sách được sửa thành công","Thông báo",1 );   
-               showtb();
-        }
-            }
-            catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(null, "Lỗi: "+ e.getMessage(),"Thông báo",1 );
-                }    
-            }
-    }//GEN-LAST:event_CapNhatActionPerformed
-
     private void TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimKiemActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaSach.getText().length()!=0)
-        {
-            String sql1 = " select * from CUONSACH where MASACH like '%"+this.txtMaSach.getText()+"%' ";
+        if (this.txtMaSach.getText().length() != 0) {
+            String sql1 = " select * from CUONSACH where MASACH like '%" + this.txtMaSach.getText() + "%' ";
             DuLieuBang.Load(sql1, tbCuonSach);
-        }
-        else if(this.txtMaDauSach.getText().length()!=0)
-        {
-            String sql2 = " select * from CUONSACH where MADAUSACH like '%"+this.txtMaDauSach.getText()+"%' ";
+        } else if (this.txtMaDauSach.getText().length() != 0) {
+            String sql2 = " select * from CUONSACH where MADAUSACH like '%" + this.txtMaDauSach.getText() + "%' ";
             DuLieuBang.Load(sql2, tbCuonSach);
+        } else if (this.cbTinhTrang.getSelectedIndex() == 0) {
+            String sql3 = " select * from CUONSACH where TINHTRANG like '%" + this.cbTinhTrang.getSelectedItem() + "%' ";
+            DuLieuBang.Load(sql3, tbCuonSach);
+        } else if (this.cbTinhTrang.getSelectedIndex() == 1) {
+            String sql3 = " select * from CUONSACH where TINHTRANG like '%" + this.cbTinhTrang.getSelectedItem() + "%' ";
+            DuLieuBang.Load(sql3, tbCuonSach);
+        } else if (this.txtTimKiem.getText().length() != 0) {
+            String sql = "SELECT * FROM CUONSACH where MASACH like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or MADAUSACH like '%" + this.txtTimKiem.getText() + "%' "
+                    + "or TINHTRANG like '%" + this.txtTimKiem.getText() + "%'";
+            DuLieuBang.Load(sql, tbCuonSach);
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập", "Thông báo", 1);
         }
-        else if(this.cbTinhTrang.getSelectedIndex()==0)
-            {
-                String sql3 = " select * from CUONSACH where TINHTRANG like '%"+this.cbTinhTrang.getSelectedItem()+"%' ";
-                DuLieuBang.Load(sql3, tbCuonSach);    
-            }
-        else if(this.cbTinhTrang.getSelectedIndex()==1)
-            {
-                String sql3 = " select * from CUONSACH where TINHTRANG like '%"+this.cbTinhTrang.getSelectedItem()+"%' ";
-                DuLieuBang.Load(sql3, tbCuonSach);    
-            }  
-        else if(this.txtTimKiem.getText().length()!=0)
-        {
-            String sql ="SELECT * FROM CUONSACH where MASACH like'%"+this.txtTimKiem.getText()+"%' "
-                            + "or MADAUSACH like '%"+this.txtTimKiem.getText()+"%' "
-                            + "or TINHTRANG like '%"+this.txtTimKiem.getText()+"%'";
-                        DuLieuBang.Load(sql, tbCuonSach);
-        }
-        else 
-        {
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập","Thông báo",1);
-        }
-        
+
     }//GEN-LAST:event_TimKiemActionPerformed
 
-   
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void ThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemMoiActionPerformed
-        // TODO add your handling code here:
-         if(this.txtMaSach.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã sách","Thông báo",1);
-        else
-            if(this.txtMaDauSach.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã đầu sách","Thông báo",1);
-        else
-        {
-            try{   
-                int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm cuốn sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-                CuonSach cs = new CuonSach();
-                cs.setmASACH(txtMaSach.getText());
-                cs.setmADAUSACH(txtMaDauSach.getText());
-                cs.settINHTRANG(cbTinhTrang.getSelectedItem().toString());
-                CuonSachDAO.InsertCuonSach(cs);           
-                JOptionPane.showMessageDialog(null, "Mã sách được thêm vào thành công","Thông báo",1 );    
-                showtb();
-        }
-            }
-            catch(Exception e)
-                {
-                   // JOptionPane.showMessageDialog(null, "Lỗi: "+ e.getMessage(),"Thông báo",1 );
-                    //ORA-01400:
-                    if(e.getMessage().contains("ORA-01400"))
-                      JOptionPane.showMessageDialog(null, "Mã đầu sách không được để trống, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);
-                     if(e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_CUONSACH) violated"))
-                      JOptionPane.showMessageDialog(null, "Mã cuốn sách đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-                }    
-            }
-    }//GEN-LAST:event_ThemMoiActionPerformed
-
-    private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
-        // TODO add your handling code here:
-        if(this.txtMaSach.getText().length()==0)
-           JOptionPane.showMessageDialog(null,"Bạn cần chọn mã sách để xóa","Thông báo",1);
-        else
-        {
-        try{  
-                
-        int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa cuốn sách này","Xác nhận", JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.YES_OPTION){
-        CuonSachDAO.DeleteCuonSach(txtMaSach.getText());
-        JOptionPane.showMessageDialog(null, "Mã sách xóa thành công!", "Thông báo",1);
-        showtb();
-        } else {
-        JOptionPane.showMessageDialog(null, "Mã sách xóa thất bại!", "Thông báo",1);
-        }
-      } catch (Exception e){
-         // JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-         //ORA-02292:
-          if(e.getMessage().contains("ORA-02292"))
-          JOptionPane.showMessageDialog(null, "Xóa không thành công. Cuốn sách này đang cho mượn", "Lỗi", JOptionPane.WARNING_MESSAGE);
-      }
-        } 
-    }//GEN-LAST:event_XoaActionPerformed
-
-    private void LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LamMoiActionPerformed
-        // TODO add your handling code here:
-         txtMaSach.setText("");
-        txtMaDauSach.setText("");
-        cbTinhTrang.setSelectedItem(null);
-        txtTimKiem.setText("");
-        showtb();
-    }//GEN-LAST:event_LamMoiActionPerformed
 
     private void tbCuonSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCuonSachMouseClicked
         // TODO add your handling code here:
-         try{
-            
-           int row = this.tbCuonSach.getSelectedRow();
-           String MArow = (String) (this.tbCuonSach.getModel().getValueAt(row, 0));
-           String sql1 = " select * from CUONSACH where MASACH='"+MArow+"'";
-           ResultSet rs = DuLieuBang.ShowTextField(sql1);
-           
-           if(rs.next())
-           {
-               
-               this.txtMaSach.setText(rs.getString("MASACH"));
-               this.txtMaDauSach.setText(rs.getString("MADAUSACH"));
-               this.cbTinhTrang.setSelectedItem(rs.getString("TINHTRANG"));
-               
-           }
-           
-    }                                      
- 
-        catch(SQLException e)   
-        {
+        try {
+
+            int row = this.tbCuonSach.getSelectedRow();
+            String MSrow = String.valueOf(this.tbCuonSach.getModel().getValueAt(row, 0));
+            String MDSrow = String.valueOf(this.tbCuonSach.getModel().getValueAt(row, 1));
+            String sql1 = " select MASACH,DAUSACH.MADAUSACH as MADAUSACH ,TINHTRANG, TENDAUSACH, NXB,NAMXB,VITRI "
+                    + "from CUONSACH JOIN DAUSACH ON CUONSACH.MADAUSACH = DAUSACH.MADAUSACH"
+                    + "  where MASACH='" + MSrow + "'";
+            ResultSet rs = DuLieuBang.ShowTextField(sql1);
+
+            if (rs.next()) {
+                this.txtMaSach.setText(rs.getString("MASACH"));
+                this.txtMaDauSach.setText(rs.getString("MADAUSACH"));
+                this.txtTinhTrang.setText(rs.getString("TINHTRANG"));
+                this.txtTen.setText(rs.getString("TENDAUSACH"));
+                this.txtNhaXB.setText(rs.getString("NXB"));
+                this.txtNam.setText(rs.getString("NAMXB"));
+                this.txtViTri.setText(rs.getString("VITRI"));
+            }
+
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_tbCuonSachMouseClicked
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            String sql ="SELECT * FROM CUONSACH where MASACH like'%"+this.txtTimKiem.getText()+"%' "
-                            + "or MADAUSACH like '%"+this.txtTimKiem.getText()+"%' "
-                            + "or TINHTRANG like '%"+this.txtTimKiem.getText()+"%'";
-                        DuLieuBang.Load(sql, tbCuonSach);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String sql = "SELECT * FROM CUONSACH where MASACH like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or MADAUSACH like '%" + this.txtTimKiem.getText() + "%' "
+                    + "or TINHTRANG like '%" + this.txtTimKiem.getText() + "%'";
+            DuLieuBang.Load(sql, tbCuonSach);
         }
     }//GEN-LAST:event_txtTimKiemKeyPressed
+
+    private void txtMaDauSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaDauSachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaDauSachActionPerformed
+
+    private void txtTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTinhTrangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTinhTrangActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        if (this.txtMaSach.getText().length() == 0) {
+
+            JOptionPane.showMessageDialog(null, "Bạn cần chọn cuốn sách để xóa", "Thông báo", 1);
+        } else {
+            try {
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa cuốn sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    if (this.txtTinhTrang.getText().equals("đang cho mượn")) {
+                        JOptionPane.showMessageDialog(null, "Xóa không thành công. Cuốn sách này đang cho mượn", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        CuonSachDAO.DeleteCuonSach(Integer.valueOf(this.txtMaSach.getText()), Integer.valueOf(this.txtMaDauSach.getText()));
+                            JOptionPane.showMessageDialog(null, "Cuốn sách xóa thành công!", "Thông báo", 1);
+                            showtb();
+                            lammoi();
+                        }
+                    }
+                }
+             catch (Exception e) {
+                //JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+                //ORA-02292
+                if (e.getMessage().contains("ORA-02292")) {
+                    JOptionPane.showMessageDialog(null, "Xóa không thành công. Đầu sách này đang cho mượn", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+    public void lammoi() {
+        this.txtMaSach.setText("");
+        this.txtMaDauSach.setText("");
+        this.txtTinhTrang.setText("");
+        this.txtTen.setText("");
+        this.txtNam.setText("");
+        this.txtNhaXB.setText("");
+        this.txtViTri.setText("");
+
+    }
 
     /**
      * @param args the command line arguments
@@ -537,31 +501,32 @@ public class QuanLyCuonSach extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CapNhat;
-    private javax.swing.JButton LamMoi;
-    private javax.swing.JButton ThemMoi;
     private javax.swing.JButton TimKiem;
-    private javax.swing.JButton Xoa;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbTinhTrang;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator3;
-    private javax.swing.JToolBar.Separator jSeparator4;
-    private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable tbCuonSach;
     private javax.swing.JTextField txtMaDauSach;
     private javax.swing.JTextField txtMaSach;
+    private javax.swing.JTextField txtNam;
+    private javax.swing.JTextField txtNhaXB;
+    private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtTinhTrang;
+    private javax.swing.JTextField txtViTri;
     // End of variables declaration//GEN-END:variables
 
-   
 }

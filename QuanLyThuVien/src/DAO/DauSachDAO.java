@@ -7,7 +7,7 @@ package DAO;
 
 /**
  *
- * @author minh
+ * @author minh,hai
  */
 import java.sql.*;
 import Object.*;
@@ -19,18 +19,17 @@ public class DauSachDAO {
     
     public static boolean InsertDauSach(DauSach ds) {
         
-        String sql = "insert into DAUSACH(MADAUSACH, TENDAUSACH, TACGIA, NXB, NAMXB, TONGSO, VITRI, SANCO, DANGCHOMUON) values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into DAUSACH(TENDAUSACH, TACGIA, NXB, NAMXB, TONGSO, VITRI, SANCO, DANGCHOMUON) values(?,?,?,?,?,?,?,?)";
         try {
             pst= conn.prepareStatement(sql); 
-            pst.setString(1, ds.getmADAUSACH());
-            pst.setString(2, ds.gettENDAUSACH());
-            pst.setString(3, ds.gettACGIA());
-            pst.setString(4, ds.getnXB());
-            pst.setInt(5, ds.getnAMXB());
-            pst.setString(6, ds.gettONGSO());
-            pst.setString(7, ds.getvITRI());
-            pst.setString(8, ds.getsANCO());
-            pst.setString(9, ds.getdANGCHOMUON());
+            pst.setString(1, ds.gettENDAUSACH());
+            pst.setString(2, ds.gettACGIA());
+            pst.setString(3, ds.getnXB());
+            pst.setInt(4, ds.getnAMXB());
+            pst.setInt(5, ds.gettONGSO());
+            pst.setString(6, ds.getvITRI());
+            pst.setInt(7, ds.gettONGSO());
+            pst.setInt(8, ds.getdANGCHOMUON());
             return pst.executeUpdate()>0; 
         } catch(SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
@@ -38,34 +37,51 @@ public class DauSachDAO {
     }
    public static boolean DeleteDauSach(String madausach) {
         
-         String sql = "call XOA_DAU_SACH(?)";
+        String sql = "DELETE FROM DAUSACH where MADAUSACH = ?";
         try {
             stmt = conn.prepareCall(sql); 
             stmt.setString(1,madausach);
-            return stmt.executeUpdate()>0; 
+            int rs =stmt.executeUpdate();
+            if(rs > 0){
+                return true;
+            }
+            return false;  
         } catch(SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
         }
     }
-   public boolean UpdateDauSach(DauSach ds)  {
+    public boolean UpdateDauSach(DauSach ds) {
         String sql = "update DAUSACH set  TENDAUSACH = ?, TACGIA = ?, NXB = ?, NAMXB=?, TONGSO =?, VITRI=?, SANCO = ?, DANGCHOMUON = ? where MADAUSACH = ?";
-        
-        try
-        {
-            pst= conn.prepareStatement(sql); 
-            pst.setString(9, ds.getmADAUSACH());
+
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setInt(9, ds.getmADAUSACH());
             pst.setString(1, ds.gettENDAUSACH());
             pst.setString(2, ds.gettACGIA());
             pst.setString(3, ds.getnXB());
             pst.setInt(4, ds.getnAMXB());
-            pst.setString(5, ds.gettONGSO());
+            pst.setInt(5, ds.gettONGSO());
             pst.setString(6, ds.getvITRI());
-            pst.setString(7, ds.getsANCO());
-            pst.setString(8, ds.getdANGCHOMUON());
-               
-            return pst.executeUpdate() >0;
-        }        catch(SQLException ex) {
+            pst.setInt(7, ds.getsANCO());
+            pst.setInt(8, ds.getdANGCHOMUON());
+
+            return pst.executeUpdate() > 0;
+        } catch (SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
+        }
     }
-}
+    
+    public boolean UpdateDauSachCS(int mads,int them) {
+        
+        try {
+            stmt = conn.prepareCall(
+                    "{call THEMCUONSACH(?,?)}");
+            stmt.setInt("mads", mads);
+           stmt.setInt("tongso", them);
+           boolean result = stmt.execute();
+           return result;
+        } catch (SQLException ex) {
+            throw new ArithmeticException(ex.getMessage());
+        }
+    }
 }
