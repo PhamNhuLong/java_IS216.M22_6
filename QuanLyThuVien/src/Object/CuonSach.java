@@ -10,30 +10,31 @@ package Object;
  * @author minh
  */
 public class CuonSach {
-   private String mASACH, mADAUSACH,tINHTRANG;
+   private int mASACH, mADAUSACH;
+   private String tINHTRANG;
 
     public CuonSach() {
     }
 
-    public CuonSach(String mASACH, String mADAUSACH, String tINHTRANG) {
+    public CuonSach(int mASACH, int mADAUSACH, String tINHTRANG) {
         this.mASACH = mASACH;
         this.mADAUSACH = mADAUSACH;
         this.tINHTRANG = tINHTRANG;
     }
 
-    public String getmASACH() {
+    public int getmASACH() {
         return mASACH;
     }
 
-    public void setmASACH(String mASACH) {
+    public void setmASACH(int mASACH) {
         this.mASACH = mASACH;
     }
 
-    public String getmADAUSACH() {
+    public int getmADAUSACH() {
         return mADAUSACH;
     }
 
-    public void setmADAUSACH(String mADAUSACH) {
+    public void setmADAUSACH(int mADAUSACH) {
         this.mADAUSACH = mADAUSACH;
     }
 
@@ -44,6 +45,8 @@ public class CuonSach {
     public void settINHTRANG(String tINHTRANG) {
         this.tINHTRANG = tINHTRANG;
     }
+
+   
    
 }
 

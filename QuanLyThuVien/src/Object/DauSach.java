@@ -9,43 +9,25 @@ import java.sql.Date;
 
 /**
  *
- * @author minh
+ * @author minh,hai
  */
 public class DauSach {
-    private String mADAUSACH, tENDAUSACH, tACGIA, nXB, tONGSO, vITRI, sANCO, dANGCHOMUON;
-    private int nAMXB;
+    private String tENDAUSACH, tACGIA, nXB , vITRI;
+    private int mADAUSACH, nAMXB,tONGSO, sANCO, dANGCHOMUON;
 
     public DauSach() {
     }
 
-    public DauSach(String mADAUSACH, String tENDAUSACH, String tACGIA, String nXB, int nAMXB, String tONGSO, String vITRI, String sANCO, String dANGCHOMUON) {
-        this.mADAUSACH = mADAUSACH;
+    public DauSach(String tENDAUSACH, String tACGIA, String nXB, String vITRI, int mADAUSACH, int nAMXB, int tONGSO, int sANCO, int dANGCHOMUON) {
         this.tENDAUSACH = tENDAUSACH;
         this.tACGIA = tACGIA;
         this.nXB = nXB;
+        this.vITRI = vITRI;
+        this.mADAUSACH = mADAUSACH;
         this.nAMXB = nAMXB;
         this.tONGSO = tONGSO;
-        this.vITRI = vITRI;
         this.sANCO = sANCO;
         this.dANGCHOMUON = dANGCHOMUON;
-    }
-
-    public int getnAMXB() {
-        return nAMXB;
-    }
-
-    public void setnAMXB(int nAMXB) {
-        this.nAMXB = nAMXB;
-    }
-
-   
-
-    public String getmADAUSACH() {
-        return mADAUSACH;
-    }
-
-    public void setmADAUSACH(String mADAUSACH) {
-        this.mADAUSACH = mADAUSACH;
     }
 
     public String gettENDAUSACH() {
@@ -72,14 +54,6 @@ public class DauSach {
         this.nXB = nXB;
     }
 
-    public String gettONGSO() {
-        return tONGSO;
-    }
-
-    public void settONGSO(String tONGSO) {
-        this.tONGSO = tONGSO;
-    }
-
     public String getvITRI() {
         return vITRI;
     }
@@ -88,21 +62,46 @@ public class DauSach {
         this.vITRI = vITRI;
     }
 
-    public String getsANCO() {
+    public int getmADAUSACH() {
+        return mADAUSACH;
+    }
+
+    public void setmADAUSACH(int mADAUSACH) {
+        this.mADAUSACH = mADAUSACH;
+    }
+
+    public int getnAMXB() {
+        return nAMXB;
+    }
+
+    public void setnAMXB(int nAMXB) {
+        this.nAMXB = nAMXB;
+    }
+
+    public int gettONGSO() {
+        return tONGSO;
+    }
+
+    public void settONGSO(int tONGSO) {
+        this.tONGSO = tONGSO;
+    }
+
+    public int getsANCO() {
         return sANCO;
     }
 
-    public void setsANCO(String sANCO) {
+    public void setsANCO(int sANCO) {
         this.sANCO = sANCO;
     }
 
-    public String getdANGCHOMUON() {
+    public int getdANGCHOMUON() {
         return dANGCHOMUON;
     }
 
-    public void setdANGCHOMUON(String dANGCHOMUON) {
+    public void setdANGCHOMUON(int dANGCHOMUON) {
         this.dANGCHOMUON = dANGCHOMUON;
     }
+
     
     
 }

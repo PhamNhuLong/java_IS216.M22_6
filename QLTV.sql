@@ -10,9 +10,10 @@ use QLTV;
 /* Table: CTMS                                                  */
 /*==============================================================*/
 create table CTMS (
-   MASACH               char(6)              not null,
-   MAPHIEUMUON          char(6)              not null,
-   constraint PK_CTMS primary key (MASACH, MAPHIEUMUON)
+   MASACH              int              not null,
+   MAPHIEUMUONSACH         int              not null,
+   TINHTRANG		nvarchar(20),
+   constraint PK_CTMS primary key (MASACH, MAPHIEUMUONSACH)
 )
 
 
@@ -20,10 +21,10 @@ create table CTMS (
 /* Table: CTTS                                                  */
 /*==============================================================*/
 create table CTTS (
-   MASACH               char(6)              not null,
-   MAPHIEUTRA           char(6)              not null,
+   MASACH               int              not null,
+   MAPHIEUTRA           int              not null,
    SONGAYTRATRE         int                  null,
-   TIENPHAT             numeric              null,
+   TIENPHAT             int              null,
    constraint PK_CTTS primary key (MASACH, MAPHIEUTRA)
 )
 
@@ -31,26 +32,24 @@ create table CTTS (
 /* Table: CUONSACH                                              */
 /*==============================================================*/
 create table CUONSACH (
-   MASACH               char(6)              not null,
-   MADAUSACH            char(6)              null,
-   TINHTRANG            varchar(20)          null,
-   constraint PK_CUONSACH primary key (MASACH)
+   MASACH               int IDENTITY(1,1) PRIMARY KEY,
+   MADAUSACH            int             null,
+   TINHTRANG            nvarchar(20)          null,
 )
 
 /*==============================================================*/
 /* Table: DAUSACH                                               */
 /*==============================================================*/
 create table DAUSACH (
-   MADAUSACH            char(6)              not null,
-   TENDAUSACH           varchar(50)          null,
-   TACGIA               varchar(200)         null,
-   NXB                  varchar(50)          null,
-   NAMXB                numeric              null,
-   TONGSO               numeric              null,
-   VITRI                varchar(20)          null,
-   SANCO                numeric              null,
-   DANGCHOMUON          numeric              null,
-   constraint PK_DAUSACH primary key (MADAUSACH)
+   MADAUSACH            int IDENTITY(1,1) PRIMARY KEY,
+   TENDAUSACH           nvarchar(50)          null,
+   TACGIA               nvarchar(200)         null,
+   NXB                  nvarchar(50)          null,
+   NAMXB                int              null,
+   TONGSO               int              null,
+   VITRI                nvarchar(20)          null,
+   SANCO                int              null,
+   DANGCHOMUON          int              null,
 )
 go
 
@@ -58,48 +57,43 @@ go
 /* Table: DOCGIA                                                */
 /*==============================================================*/
 create table DOCGIA (
-   MADOCGIA             char(6)              not null,
-   HOTEN                varchar(40)          null,
+   MADOCGIA             int IDENTITY(1,1) PRIMARY KEY,
+   HOTEN                nvarchar(40)          null,
    NGAYSINH             datetime             null,
-   LOAIDG               varchar(20)          null,
-   DIACHI               varchar(50)          null,
-   EMAIL                varchar(40)          null,
+   LOAIDG               nvarchar(20)          null,
+   DIACHI               nvarchar(50)          null,
+   EMAIL                nvarchar(40)          null,
    NGLAPTHE             datetime             null,
-   TINHTRANGDG          varchar(20)          null,
-   constraint PK_DOCGIA primary key (MADOCGIA)
+   TINHTRANGDG          nvarchar(20)          null,
 )
 
 /*==============================================================*/
 /* Table: HOADON                                                */
 /*==============================================================*/
 create table HOADON (
-   MAHOADON             char(6)              not null,
-   MAPHIEUTRA           char(6)              null,
-   TIENNO               numeric              null,
-   TIENTHU              numeric              null,
-   TIENTHUA             numeric              null,
-   constraint PK_HOADON primary key (MAHOADON)
+   MAHD            int IDENTITY(1,1) PRIMARY KEY,
+   MAPHIEUTRA           int             not null,
+   TIENNO               int              null,
+   TIENTHU              int              null,
 )
 
 /*==============================================================*/
 /* Table: PHIEUMUONSACH                                         */
 /*==============================================================*/
 create table PHIEUMUONSACH (
-   MAPHIEUMUON          char(6)              not null,
-   MADOCGIA             char(6)              null,
+   MAPHIEUMUONSACH      int IDENTITY(1,1) PRIMARY KEY,
+   MADOCGIA             int              not null,
    NGAYMUON             datetime             null,
-   constraint PK_PHIEUMUONSACH primary key (MAPHIEUMUON)
 )
 
 /*==============================================================*/
 /* Table: PHIEUTRASACH                                          */
 /*==============================================================*/
 create table PHIEUTRASACH (
-   MAPHIEUTRA           char(6)              not null,
-   MADOCGIA             char(6)              null,
+   MAPHIEUTRA           int IDENTITY(1,1) PRIMARY KEY,
+   MADOCGIA             int              not null,
    NGAYTRA              datetime             null,
-   TIENPHATKINAY        numeric              null,
-   constraint PK_PHIEUTRASACH primary key (MAPHIEUTRA)
+   TIENPHATKINAY        int              null,
 )
 /*==============================================================*/
 /*							   KHÓA NGOẠI                       */
@@ -126,8 +120,8 @@ ADD CONSTRAINT FK_TS_HD
 
 ALTER TABLE CTMS
 ADD CONSTRAINT FK_CTMS_PM
-  FOREIGN KEY (MAPHIEUMUON)
-  REFERENCES PHIEUMUONSACH (MAPHIEUMUON);
+  FOREIGN KEY (MAPHIEUMUONSACH)
+  REFERENCES PHIEUMUONSACH (MAPHIEUMUONSACH);
 
 ALTER TABLE CTMS
 ADD CONSTRAINT FK_CTMS_CS
@@ -154,4 +148,54 @@ CREATE TABLE NGUOIDUNG
         MATKHAU VARCHAR(30),
         QUYEN INT, -- 1: QUảN Lý, 2: THủ THư
         CONSTRAINT PK_TEN PRIMARY KEY(TEN)
-)
+);
+
+
+GO
+CREATE PROC THEMCUONSACH (@mads int, @tongso int)
+AS
+DECLARE @COUNT	INT = 0;
+WHILE @COUNT < @tongso
+BEGIN
+	INSERT INTO CUONSACH(MADAUSACH,TINHTRANG) VALUES (@mads,N'sẵn có');
+	SET @COUNT = @COUNT + 1;
+END;
+
+go
+CREATE TRIGGER TRG_DAUSACH
+ON DAUSACH
+AFTER INSERT
+AS
+DECLARE @MDS INT = 0;
+DECLARE @TS INT = 0;
+BEGIN
+   SELECT TOP 1 @MDS =  MADAUSACH  FROM DAUSACH ORDER BY MADAUSACH DESC;
+   SELECT TOP 1 @TS =  TONGSO  FROM DAUSACH ORDER BY MADAUSACH DESC;
+   EXEC THEMCUONSACH @mads = @MDS,@tongso = @TS
+END;
+
+
+
+DROP PROCEDURE IF EXISTS XOACUONSACH; 
+GO
+CREATE PROC XOACUONSACH (@masach int,@mads int)
+AS
+SET NOCOUNT ON
+DECLARE @COUNT INT = 0;
+DECLARE @TONGSO INT = 0;
+BEGIN
+	SELECT @COUNT = COUNT(*) FROM CUONSACH JOIN CTMS ON CUONSACH.MASACH = CTMS.MASACH WHERE CTMS.MASACH = @masach;
+	IF(@COUNT = 0)
+		BEGIN
+			DELETE FROM CUONSACH WHERE MASACH = @masach;
+			UPDATE DAUSACH
+			SET TONGSO = TONGSO -1,
+				SANCO = SANCO -1
+			WHERE MADAUSACH = @mads;
+			SELECT @TONGSO = TONGSO FROM DAUSACH WHERE MADAUSACH = @mads;
+			IF(@TONGSO = 0)
+				BEGIN
+					DELETE FROM DAUSACH WHERE MADAUSACH = @mads;
+				END
+		END
+END;
