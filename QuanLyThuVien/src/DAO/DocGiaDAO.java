@@ -20,33 +20,48 @@ public class DocGiaDAO {
   
       public static boolean InsertDocGia(DocGia dg) {
         
-        String sql = "{CALL THEM_DOC_GIA(?,?,?,?,?,?,?)} ";
+        String sql = " insert into DOCGIA (HOTEN,NGAYSINH,LOAIDG,DIACHI,EMAIL,NGLAPTHE) values ( ?, ? , ?, ? , ? , ?) ";
         try
         {
-            stmt = conn.prepareCall(sql);
-            stmt.setString(1, dg.getmADOCGIA());
-            stmt.setString(2, dg.gethOTEN());
-            stmt.setDate(3,(Date) dg.getnGAYSINH());
-            stmt.setString(4, dg.getlOAIDG());
-            stmt.setString(5, dg.getdIACHI());
-            stmt.setString(6, dg.geteMAIL());
-            stmt.setDate(7,(Date) dg.getnGAYLAPTHE());
-            return stmt.executeUpdate()>0; 
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, dg.gethOTEN());
+            pst.setDate(2,(Date) dg.getnGAYSINH());
+            pst.setString(3, dg.getlOAIDG());
+            pst.setString(4, dg.getdIACHI());
+            pst.setString(5, dg.geteMAIL());
+            pst.setDate(6,(Date) dg.getnGAYLAPTHE());
+            return pst.executeUpdate()>0; 
         } catch(SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
         }
     }
    public static boolean DeleteDocGia(String madocgia) {
         
-         String sql = "call xoa_doc_gia(?)";
+         String sql = "DELETE FROM DOCGIA where MADOCGIA = ?";
         try {
-            stmt = conn.prepareCall(sql);
-            stmt.setString(1,madocgia);
-            return stmt.executeUpdate()>0; 
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,madocgia);
+            return pst.executeUpdate()>0; 
         } catch(SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
         }
     }
+   public static int checkdg_muonsach(String madocgia)
+   {
+       int temp = 0;
+        String sql = "select count(masach) as tongmuon from PHIEUMUONSACH P, CTMS CT where P.MAPHIEUMUONSACH = CT.MAPHIEUMUONSACH and p.madocgia = ?   and ct.TINHTRANG ='chưa trả'";
+        try {
+            pst = conn.prepareStatement(sql); 
+            pst.setString(1,madocgia);
+            rs =pst.executeQuery();
+            while(rs.next()){
+               temp = rs.getInt("tongmuon");
+            }
+        } catch(SQLException ex) {
+            throw new ArithmeticException(ex.getMessage());
+        }
+        return temp;
+   }
    public boolean UpdateDocGia(DocGia dg)  {
         String sql = "update DOCGIA set  HOTEN = ?, NGAYSINH = ?, LOAIDG = ?, DIACHI=?, EMAIL =?, nglapthe=? where MADOCGIA = ?";
         
@@ -67,5 +82,5 @@ public class DocGiaDAO {
             throw new ArithmeticException(ex.getMessage());
     }
 }
-   
+
 }

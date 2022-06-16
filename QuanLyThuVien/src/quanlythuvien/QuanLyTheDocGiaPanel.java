@@ -16,8 +16,12 @@ import DAO.*;
 import Object.*;
 //import com.sun.glass.events.KeyEvent;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
+
 
 public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
 
@@ -25,32 +29,40 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
      * Creates new form QuanLyDocGia
      */
     public static String sql = "select * from DOCGIA order by MADOCGIA asc";
-    public static String sql1 = "select count(*) as tong from DOCGIA order by MADOCGIA asc";
+    public static String sql1 = "select count(*) as tong from DOCGIA order by 1 asc";
     public static PreparedStatement pst = null;
     public static ResultSet rs = null;
     public static Connection conn = Connect.getConnect();
+
     public QuanLyTheDocGiaPanel() {
         initComponents();
         showtb();
-        setBackground(Color.white); 
+        setBackground(Color.white);
+        txtMaDocGia.setVisible(false);
+        lbMaDocGia.setVisible(false);
         //System.out.print(tbDocGia.getRowCount());
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMM, y");  
+        Date date = new Date();  
+        jDateNgayLapThe.setDate(date);
     }
-    public final void showtb()
-    {
-    DuLieuBang.Load(sql, tbDocGia);
+
+    public final void showtb() {
+        DuLieuBang.Load(sql, tbDocGia);
     }
-    public int dem(){
-        int temp =0;
+
+    public int dem() {
+        int temp = 0;
         try {
-            pst=conn.prepareStatement(sql1);
-            rs= pst.executeQuery();
-            while(rs.next()){
-             temp = rs.getInt("tong");
+            pst = conn.prepareStatement(sql1);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                temp = rs.getInt("tong");
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuanLyTheDocGiaPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return temp;
+        return temp;
     }
 
     /**
@@ -63,7 +75,7 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lbMaDocGia = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -99,7 +111,7 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.pink, null));
         jPanel1.setPreferredSize(new java.awt.Dimension(309, 395));
 
-        jLabel2.setText("Mã độc giả");
+        lbMaDocGia.setText("Mã độc giả");
 
         jLabel3.setText("Họ tên");
 
@@ -122,47 +134,48 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
 
         jLabel9.setText("Tình trạng");
 
-        txtTinhTrang.setEditable(false);
+        txtTinhTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTinhTrangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jDateNgayLapThe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDiaChi, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtLoaiDG, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateNgaySinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHoTen, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTinhTrang)
-                    .addComponent(txtMaDocGia))
+                .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jDateNgayLapThe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(txtDiaChi, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtLoaiDG, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jDateNgaySinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtHoTen, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtTinhTrang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMaDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,7 +203,11 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMaDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
@@ -353,7 +370,7 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -377,40 +394,36 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbDocGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDocGiaMouseClicked
         // TODO add your handling code here:
-        try{
-            
-           int row = this.tbDocGia.getSelectedRow();
-           String MArow = (String) (this.tbDocGia.getModel().getValueAt(row, 0));
-           String sql1 = " select * from DOCGIA where MADOCGIA='"+MArow+"'";
-           ResultSet rs = DuLieuBang.ShowTextField(sql1);
-           
-           if(rs.next())
-           {
-               
-               this.txtMaDocGia.setText(rs.getString("MADOCGIA"));
-               this.txtHoTen.setText(rs.getString("HOTEN"));
-               this.jDateNgaySinh.setDate(rs.getDate("NGAYSINH"));
-               this.txtLoaiDG.setText(rs.getString("LOAIDG"));
-               this.txtDiaChi.setText(rs.getString("DIACHI"));
-               this.txtEmail.setText(rs.getString("EMAIL"));
-               this.jDateNgayLapThe.setDate(rs.getDate("NGLAPTHE"));
-               this.txtTinhTrang.setText(rs.getString("TINHTRANG"));
-               
-           }
-           
-    }                                      
- 
-        catch(SQLException e)
-        {
+        try {
+
+            int row = this.tbDocGia.getSelectedRow();
+            int MArow = (int) (this.tbDocGia.getModel().getValueAt(row, 0));
+            String sql1 = " select * from DOCGIA where MADOCGIA='" + MArow + "'";
+            ResultSet rs = DuLieuBang.ShowTextField(sql1);
+
+            if (rs.next()) {
+
+                this.txtMaDocGia.setText(rs.getString("MADOCGIA"));
+                this.txtHoTen.setText(rs.getString("HOTEN"));
+                this.jDateNgaySinh.setDate(rs.getDate("NGAYSINH"));
+                this.txtLoaiDG.setText(rs.getString("LOAIDG"));
+                this.txtDiaChi.setText(rs.getString("DIACHI"));
+                this.txtEmail.setText(rs.getString("EMAIL"));
+                this.jDateNgayLapThe.setDate(rs.getDate("NGLAPTHE"));
+                this.txtTinhTrang.setText(rs.getString("TINHTRANGDG"));
+
+            }
+
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
     }//GEN-LAST:event_tbDocGiaMouseClicked
 
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
@@ -426,8 +439,8 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
         txtTinhTrang.setText("");
         showtb();
     }//GEN-LAST:event_btLamMoiActionPerformed
-public void lamMoi(){
-      txtMaDocGia.setText("");
+    public void lamMoi() {
+        txtMaDocGia.setText("");
         txtHoTen.setText("");
         jDateNgaySinh.setDate(null);
         txtDiaChi.setText("");
@@ -437,82 +450,80 @@ public void lamMoi(){
         txtTimKiem.setText("");
         txtTinhTrang.setText("");
         showtb();
-}
+    }
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaDocGia.getText().length()==0)
-        JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-            if(this.txtHoTen.getText().length()==0)
-        JOptionPane.showMessageDialog(null,"Bạn chưa nhập tên độc giả","Thông báo",1);
-        else
-        {
-            try{
-                int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn cập nhật độc giả này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-                DocGia dg = new DocGia();
+        if (this.txtMaDocGia.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã độc giả", "Thông báo", 1);
+        else if (this.txtHoTen.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên độc giả", "Thông báo", 1);
+        else {
+            try {
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn cập nhật độc giả này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    DocGia dg = new DocGia();
 
-                dg.setmADOCGIA(txtMaDocGia.getText());
-                dg.sethOTEN(txtHoTen.getText());
-                if(jDateNgaySinh.getDate() != null )
-                {
-                    java.util.Date utilStartDate = jDateNgaySinh.getDate();
-                    java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                    dg.setnGAYSINH(sqlStartDate);}
-                //dg.setnGAYSINH((Date) jDateNgaySinh.getDate());
-                dg.setlOAIDG(txtLoaiDG.getText());
-                dg.setdIACHI(txtDiaChi.getText());
-                dg.seteMAIL(txtEmail.getText());
-                if(jDateNgayLapThe.getDate() != null )
-                {
-                    java.util.Date utilStartDate = jDateNgayLapThe.getDate();
-                    java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                    dg.setnGAYLAPTHE(sqlStartDate);}
-                //dg.setnGAYLAPTHE((Date) jDateNgayLapThe.getDate());
-                DocGiaDAO dao = new DocGiaDAO();
-                dao.UpdateDocGia(dg);
-                JOptionPane.showMessageDialog(null, "Độc giả được cập nhật thành công","Thông báo",1 );
-                showtb();
-            }
-            }
-            catch(Exception e)
-            {
-              // JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
+                    dg.setmADOCGIA(txtMaDocGia.getText());
+                    dg.sethOTEN(txtHoTen.getText());
+                    if (jDateNgaySinh.getDate() != null) {
+                        java.util.Date utilStartDate = jDateNgaySinh.getDate();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        dg.setnGAYSINH(sqlStartDate);
+                    }
+                    //dg.setnGAYSINH((Date) jDateNgaySinh.getDate());
+                    dg.setlOAIDG(txtLoaiDG.getText());
+                    dg.setdIACHI(txtDiaChi.getText());
+                    dg.seteMAIL(txtEmail.getText());
+                    if (jDateNgayLapThe.getDate() != null) {
+                        java.util.Date utilStartDate = jDateNgayLapThe.getDate();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        dg.setnGAYLAPTHE(sqlStartDate);
+                    }
+                    
+                    DocGiaDAO dao = new DocGiaDAO();
+                    dao.UpdateDocGia(dg);
+                    JOptionPane.showMessageDialog(null, "Độc giả được cập nhật thành công", "Thông báo", 1);
+                    showtb();
+                }
+            } catch (Exception e) {
+                // JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
                 //ORA-04088:
-                 if(e.getMessage().contains("ORA-04088"))
-                JOptionPane.showMessageDialog(null, "Cập nhật không thành công. Ngày lập thẻ phải lớn hơn ngày sinh!", "Lỗi", JOptionPane.WARNING_MESSAGE);
-            
-                
+                if (e.getMessage().contains("ORA-04088")) {
+                    JOptionPane.showMessageDialog(null, "Cập nhật không thành công. Ngày lập thẻ phải lớn hơn ngày sinh!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+
             }
         }
     }//GEN-LAST:event_btCapNhatActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
-        int temp1 =dem();
- 
-        if(this.txtMaDocGia.getText().length()==0)
-        JOptionPane.showMessageDialog(null,"Bạn cần chọn mã độc giả để xóa","Thông báo",1);
-        else
-        {
-            try{
+        int temp1 = dem();
 
-                int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa độc giả này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-                   DocGiaDAO.DeleteDocGia(txtMaDocGia.getText());
-                   int temp2 = dem();
-                  // System.out.print(temp1 + temp2);
-                   if(temp1 != temp2){
-                    JOptionPane.showMessageDialog(null, "Độc giả xóa thành công!", "Thông báo",1);
-                    showtb();
-                   }
-                   else {
-                        JOptionPane.showMessageDialog(null, "Xóa không thành công. Độc giả này đang mượn sách!", "Thông báo",1);
-                   }
-                } else {
-                    //JOptionPane.showMessageDialog(null, "Xóa không thành công!", "Thông báo",1);
+        if (this.txtMaDocGia.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn cần chọn mã độc giả để xóa", "Thông báo", 1);
+        else {
+            try {
+
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa độc giả này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+
+                    if (DocGiaDAO.checkdg_muonsach(txtMaDocGia.getText()) == 0) {
+                        DocGiaDAO.DeleteDocGia(txtMaDocGia.getText());
+                        int temp2 = dem();
+                        // System.out.print(temp1 + temp2);
+                        if (temp1 != temp2) {
+                            JOptionPane.showMessageDialog(null, "Độc giả xóa thành công!", "Thông báo", 1);
+                            showtb();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Xóa không thành công. Độc giả này đang mượn sách!", "Thông báo", 1);
+                        }
+                    } else {
+                        //JOptionPane.showMessageDialog(null, "Xóa không thành công!", "Thông báo",1);
+                        JOptionPane.showMessageDialog(null, "Xóa không thành công. Độc giả này đang mượn sách!", "Thông báo", 1);
+                    }
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
 
             }
@@ -521,96 +532,116 @@ public void lamMoi(){
 
     private void btThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemMoiActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaDocGia.getText().length()==0)
-        JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-        if(this.txtHoTen.getText().length()==0)
-        JOptionPane.showMessageDialog(null,"Bạn chưa nhập tên độc giả","Thông báo",1);
-        else
-        {
-            try
-            {
-                 int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm độc giả này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-                DocGia dg = new DocGia();
-                dg.setmADOCGIA(txtMaDocGia.getText());
-                dg.sethOTEN(txtHoTen.getText());
-                if(jDateNgaySinh.getDate() != null )
-                {
-                    java.util.Date utilStartDate = jDateNgaySinh.getDate();
-                    java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                    dg.setnGAYSINH(sqlStartDate);}
-                //dg.setnGAYSINH((Date) jDateNgaySinh.getDate());
-                dg.setlOAIDG(txtLoaiDG.getText());
-                dg.setdIACHI(txtDiaChi.getText());
-                dg.seteMAIL(txtEmail.getText());
-                if(jDateNgayLapThe.getDate() != null )
-                {
-                    java.util.Date utilStartDate = jDateNgayLapThe.getDate();
-                    java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                    dg.setnGAYLAPTHE(sqlStartDate);}
-                //dg.setnGAYLAPTHE((Date) jDateNgayLapThe.getDate());
-                DocGiaDAO.InsertDocGia(dg);
-                JOptionPane.showMessageDialog(null, "Độc giả được thêm vào thành công","Thông báo",1 );
-                showtb();
-            }
-            }
-            catch(Exception e)
-            {
-               // JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
-                //ORA-04088:
-                 if(e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_DOCGIA) violated"))
-                JOptionPane.showMessageDialog(null, "Mã độc giả đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-                 if(e.getMessage().contains("ORA-04088"))
-                JOptionPane.showMessageDialog(null, "Thêm không thành công. Ngày lập thẻ phải lớn hơn ngày sinh!", "Lỗi", JOptionPane.WARNING_MESSAGE);
-            }
-        }           
-    }//GEN-LAST:event_btThemMoiActionPerformed
+//        if(this.txtMaDocGia.getText().length()==0)
+//        JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
+//        else
+        if (this.txtHoTen.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên độc giả", "Thông báo", 1);
+        else {
+            try {
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thêm độc giả này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    DocGia dg = new DocGia();
+                    dg.setmADOCGIA(txtMaDocGia.getText());
+                    dg.sethOTEN(txtHoTen.getText());
+                    if (jDateNgaySinh.getDate() != null) {
+                        java.util.Date utilStartDate = jDateNgaySinh.getDate();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        dg.setnGAYSINH(sqlStartDate);
+                    }
+                    //dg.setnGAYSINH((Date) jDateNgaySinh.getDate());
+                    dg.setlOAIDG(txtLoaiDG.getText());
+                    dg.setdIACHI(txtDiaChi.getText());
+                    dg.seteMAIL(txtEmail.getText());
+                    if (jDateNgayLapThe.getDate() != null) {
+                        java.util.Date utilStartDate = jDateNgayLapThe.getDate();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        dg.setnGAYLAPTHE(sqlStartDate);
+                    }
+                    String ns = jDateNgaySinh.getDate().toString();
+                    //dg.setnGAYLAPTHE((Date) jDateNgayLapThe.getDate());
+                    if (isDateAfter(ns) == true) {
 
+                        DocGiaDAO.InsertDocGia(dg);
+                        JOptionPane.showMessageDialog(null, "Độc giả được thêm vào thành công", "Thông báo", 1);
+                        showtb();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Thêm không thành công. Ngày lập thẻ phải lớn hơn ngày sinh!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            } catch (Exception e) {
+                // JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
+                //ORA-04088:
+                if (e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_DOCGIA) violated")) {
+                    JOptionPane.showMessageDialog(null, "Mã độc giả đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+                if (e.getMessage().contains("ORA-04088")) {
+                    JOptionPane.showMessageDialog(null, "Thêm không thành công. Ngày lập thẻ phải lớn hơn ngày sinh!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btThemMoiActionPerformed
+    boolean isDateAfter(String ngsinh) {
+//        System.out.println(ngsinh);
+        try {
+//            System.out.println("co");
+            ngsinh = ngsinh.substring(ngsinh.length() - 4, ngsinh.length());
+            int namsinh = Integer.valueOf(ngsinh);
+            int namlapthe = Calendar.getInstance().get(Calendar.YEAR);
+//            System.out.println(year);
+            int tuoi = namlapthe - namsinh;
+            
+            if (tuoi > 6 && tuoi < 60)
+            {
+                return true;
+            }
+            else
+                return false;
+
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaDocGia.getText().length()!=0)
-        {
-            String sql2 = " select * from DOCGIA where lower(MADOCGIA) like lower('%"+this.txtMaDocGia.getText()+"%') ";
+        if (this.txtMaDocGia.getText().length() != 0) {
+            String sql2 = " select * from DOCGIA where lower(MADOCGIA) like lower('%" + this.txtMaDocGia.getText() + "%') ";
             DuLieuBang.Load(sql2, tbDocGia);
-        }
-        else if(this.txtHoTen.getText().length()!=0)
-        {
-            String sql1 = " select * from DOCGIA where lower(HOTEN) like lower('%"+this.txtHoTen.getText()+"') ||'%' ";
+        } else if (this.txtHoTen.getText().length() != 0) {
+            String sql1 = " select * from DOCGIA where lower(HOTEN) like lower('%" + this.txtHoTen.getText() + "') ||'%' ";
             //lower(TENDAUSACH) like lower('%" +this.txtTimKiem.getText()+"') || '%'"
             DuLieuBang.Load(sql1, tbDocGia);
-        }
-        else if(this.txtTimKiem.getText().length()!=0)
-        {
-            String sql ="SELECT * FROM DOCGIA where MADOCGIA like'%"+this.txtTimKiem.getText()+"%' "
-                    + "or lower(HOTEN) like lower('%"+this.txtTimKiem.getText()+"%')";
+        } else if (this.txtTimKiem.getText().length() != 0) {
+            String sql = "SELECT * FROM DOCGIA where MADOCGIA like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or lower(HOTEN) like lower('%" + this.txtTimKiem.getText() + "%')";
             DuLieuBang.Load(sql, tbDocGia);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập","Thông báo",1);
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập", "Thông báo", 1);
         }
     }//GEN-LAST:event_btTimKiemActionPerformed
 
     private void txtMaDocGiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaDocGiaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txtHoTen.requestFocus();
         }
     }//GEN-LAST:event_txtMaDocGiaKeyPressed
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            String sql ="SELECT * FROM DOCGIA where MADOCGIA like'%"+this.txtTimKiem.getText()+"%' "
-                    + "or HOTEN like '%"+this.txtTimKiem.getText()+"%'";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String sql = "SELECT * FROM DOCGIA where MADOCGIA like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or HOTEN like '%" + this.txtTimKiem.getText() + "%'";
             DuLieuBang.Load(sql, tbDocGia);
         }
     }//GEN-LAST:event_txtTimKiemKeyPressed
-    
-    
+
+    private void txtTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTinhTrangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTinhTrangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCapNhat;
@@ -621,7 +652,6 @@ public void lamMoi(){
     private com.toedter.calendar.JDateChooser jDateNgayLapThe;
     private com.toedter.calendar.JDateChooser jDateNgaySinh;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -637,6 +667,7 @@ public void lamMoi(){
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbMaDocGia;
     private javax.swing.JTable tbDocGia;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
