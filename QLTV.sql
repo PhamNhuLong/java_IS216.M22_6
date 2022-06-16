@@ -216,7 +216,7 @@ BEGIN
 	from PHIEUTRASACH
 	where MAPHIEUTRA = @mapts;
 
-	select @ngmuon = pms.NGAYMUON 
+	select @ngmuon = pms.NGAYMUON, @mapm = pms.MAPHIEUMUONSACH
     from phieumuonsach pms, ctms
     where pms.maphieumuonsach = ctms.maphieumuonsach and pms.madocgia = @madg and ctms.masach = @ms and TINHTRANG = N'chưa trả';
 
@@ -235,6 +235,20 @@ BEGIN
 		SET TIENPHATKINAY = TIENPHATKINAY + (@songay - 4)*1000
 		WHERE MAPHIEUTRA = @mapts
 	END
+
+	UPDATE CTMS
+	SET TINHTRANG = N'đã trả'
+	WHERE MAPHIEUMUONSACH = @mapm and MASACH = @ms
+
+	UPDATE CUONSACH
+	SET TINHTRANG = N'sẵn có'
+	WHERE MASACH = @ms
+
+	UPDATE DAUSACH
+	SET SANCO = SANCO + 1, DANGCHOMUON = DANGCHOMUON -1
+	FROM DAUSACH JOIN CUONSACH ON DAUSACH.MADAUSACH = CUONSACH.MADAUSACH
+	WHERE MASACH = @ms
+
 END;
 
 go
@@ -258,3 +272,4 @@ INSERT INTO CTMS VALUES (1,1,N'chưa trả');
 INSERT INTO CTMS VALUES (2,1,N'chưa trả');
 --INSERT INTO PHIEUTRASACH(MADOCGIA,NGAYTRA,TIENPHATKINAY) VALUES (1,convert(date,'2022-06-10'),0);
 --insert into CTTS values (1,5,0,0);
+

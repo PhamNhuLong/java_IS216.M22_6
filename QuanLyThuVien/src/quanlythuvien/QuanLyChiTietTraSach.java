@@ -366,96 +366,95 @@ public final void showtb()
          {
               JOptionPane.showMessageDialog(null,"Bạn chưa nhập","Thông báo",1);
          }
-       
-        
+    
     }//GEN-LAST:event_TimKiemActionPerformed
 
     private void ThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemMoiActionPerformed
-        // TODO add your handling code here:
-        if(this.txtMaPhieuTra.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu trả","Thông báo",1);
-        else
-            if(this.txtMaSach.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã sách","Thông báo",1);
-        else
-            {
-        try
-        {      int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){      
-            ChiTietTraSach ctts = new ChiTietTraSach();
-            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
-            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
-            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
-            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
-            
-
-            ChiTietTraSachDAO.InsertCTTS(ctts);           
-            JOptionPane.showMessageDialog(null, "Mã phiếu trả được thêm vào thành công","Thông báo",1 );  
-            showtb();
-        }}
-        catch(Exception e)
-                {
-                  //  JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
-                    if(e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_CTTS) violated"))
-                      JOptionPane.showMessageDialog(null, "Mã CTTS đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE); 
-                }
-            }
+//         TODO add your handling code here:
+//        if(this.txtMaPhieuTra.getText().length()==0)
+//            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu trả","Thông báo",1);
+//        else
+//            if(this.txtMaSach.getText().length()==0)
+//                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã sách","Thông báo",1);
+//        else
+//            {
+//        try
+//        {      int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
+//                if (result == JOptionPane.YES_OPTION){      
+//            ChiTietTraSach ctts = new ChiTietTraSach();
+//            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+//            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
+//            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
+//            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
+//            
+//
+//            ChiTietTraSachDAO.InsertCTTS(ctts);           
+//            JOptionPane.showMessageDialog(null, "Mã phiếu trả được thêm vào thành công","Thông báo",1 );  
+//            showtb();
+//        }}
+//        catch(Exception e)
+//                {
+//                    JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
+//                    if(e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_CTTS) violated"))
+//                      JOptionPane.showMessageDialog(null, "Mã CTTS đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE); 
+//                }
+//            }
     }//GEN-LAST:event_ThemMoiActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
-        // TODO add your handling code here:
-        if(this.txtMaPhieuTra.getText().length()==0)
-           JOptionPane.showMessageDialog(null,"Bạn cần chọn mã phiếu trả sách để xóa","Thông báo",1);
-        else
-        {
-        try{  
-                
-        int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.YES_OPTION){
-            ChiTietTraSach ctts = new ChiTietTraSach();
-            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
-            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
-            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
-            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
-        ChiTietTraSachDAO.DeleteCTTS(ctts);
-        JOptionPane.showMessageDialog(null, "Phiếu trả sách xóa thành công!", "Thông báo",1);
-        showtb();
-        } else {
-        JOptionPane.showMessageDialog(null, "Phiếu trả sách xóa thất bại!", "Thông báo",1);
-        }
-      } catch (Exception e){
-          JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-      }
-      }
+//         TODO add your handling code here:
+//        if(this.txtMaPhieuTra.getText().length()==0)
+//           JOptionPane.showMessageDialog(null,"Bạn cần chọn mã phiếu trả sách để xóa","Thông báo",1);
+//        else
+//        {
+//        try{  
+//                
+//        int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
+//        if (result == JOptionPane.YES_OPTION){
+//            ChiTietTraSach ctts = new ChiTietTraSach();
+//            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+//            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
+//            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
+//            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
+//        ChiTietTraSachDAO.DeleteCTTS(ctts);
+//        JOptionPane.showMessageDialog(null, "Phiếu trả sách xóa thành công!", "Thông báo",1);
+//        showtb();
+//        } else {
+//        JOptionPane.showMessageDialog(null, "Phiếu trả sách xóa thất bại!", "Thông báo",1);
+//        }
+//      } catch (Exception e){
+//          JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+//      }
+//      }
     }//GEN-LAST:event_XoaActionPerformed
 
     private void CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapNhatActionPerformed
-        // TODO add your handling code here:
-        if(this.txtMaPhieuTra.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu trả","Thông báo",1);
-    
-        else
-            {
-        try
-        {    
-             int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn cập nhật phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-            ChiTietTraSach ctts = new ChiTietTraSach();
-            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
-            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
-            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
-            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
-            
-            ChiTietTraSachDAO dao = new ChiTietTraSachDAO();
-            dao.UpdateCTTS(ctts);           
-            JOptionPane.showMessageDialog(null, "Mã phiếu trả được sửa thành công","Thông báo",1 );    
-            showtb();
-        }}
-        catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
-                }
-            }
+//         TODO add your handling code here:
+//        if(this.txtMaPhieuTra.getText().length()==0)
+//            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu trả","Thông báo",1);
+//    
+//        else
+//            {
+//        try
+//        {    
+//             int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn cập nhật phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
+//                if (result == JOptionPane.YES_OPTION){
+//            ChiTietTraSach ctts = new ChiTietTraSach();
+//            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+//            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
+//            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
+//            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
+//            
+//            ChiTietTraSachDAO dao = new ChiTietTraSachDAO();
+//            dao.UpdateCTTS(ctts);           
+//            JOptionPane.showMessageDialog(null, "Mã phiếu trả được sửa thành công","Thông báo",1 );    
+//            showtb();
+//        }}
+//        catch(Exception e)
+//                {
+//                    JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
+//                }
+//            }
     }//GEN-LAST:event_CapNhatActionPerformed
 
     private void LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LamMoiActionPerformed
