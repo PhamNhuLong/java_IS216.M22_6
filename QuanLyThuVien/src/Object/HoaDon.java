@@ -5,63 +5,54 @@
  */
 package Object;
 
+import java.sql.Date;
+
 /**
  *
  * @author minh
  */
 public class HoaDon extends PhieuTraSach {
-    private String mAHD,mAPHIEUTRA,tIENNO,tIENTHU,tIENTHUA;
+    private int mAHD,mAPHIEUTRA,tIENNO,tIENTHU;
 
     public HoaDon() {
     }
 
-    public HoaDon(String mAHD, String mAPHIEUTRA, String tIENNO, String tIENTHU, String tIENTHUA) {
-        this.mAHD = mAHD;
-        this.mAPHIEUTRA = mAPHIEUTRA;
-        this.tIENNO = tIENNO;
-        this.tIENTHU = tIENTHU;
-        this.tIENTHUA = tIENTHUA;
+    public HoaDon(int mAPHIEUTRA, int mADOCGIA, int tIENPHATKINAY, Date nGAYTRA) {
+        super(mAPHIEUTRA, mADOCGIA, tIENPHATKINAY, nGAYTRA);
     }
 
-    public String getmAHD() {
+    public int getmAHD() {
         return mAHD;
     }
 
-    public void setmAHD(String mAHD) {
+    public void setmAHD(int mAHD) {
         this.mAHD = mAHD;
     }
 
-    public String getmAPHIEUTRA() {
+    public int getmAPHIEUTRA() {
         return mAPHIEUTRA;
     }
 
-    public void setmAPHIEUTRA(String mAPHIEUTRA) {
+    public void setmAPHIEUTRA(int mAPHIEUTRA) {
         this.mAPHIEUTRA = mAPHIEUTRA;
     }
 
-    public String gettIENNO() {
+    public int gettIENNO() {
         return tIENNO;
     }
 
-    public void settIENNO(String tIENNO) {
+    public void settIENNO(int tIENNO) {
         this.tIENNO = tIENNO;
     }
 
-    public String gettIENTHU() {
+    public int gettIENTHU() {
         return tIENTHU;
     }
 
-    public void settIENTHU(String tIENTHU) {
+    public void settIENTHU(int tIENTHU) {
         this.tIENTHU = tIENTHU;
     }
 
-    public String gettIENTHUA() {
-        return tIENTHUA;
-    }
-
-    public void settIENTHUA(String tIENTHUA) {
-        this.tIENTHUA = tIENTHUA;
-    }
     
 }
     

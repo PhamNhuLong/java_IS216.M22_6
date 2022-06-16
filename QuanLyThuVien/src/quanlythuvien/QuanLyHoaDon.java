@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author Nguyen Linh,minh
+ * @author hai,minh
  */
 public class QuanLyHoaDon extends javax.swing.JFrame {
 
@@ -394,11 +394,10 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
              int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm hóa đơn này","Xác nhận",JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION){
             HoaDon hd = new HoaDon();
-            hd.setmAHD(txtMaHoaDon.getText());
-            hd.setmAPHIEUTRA(txtMaPhieuTra.getText());
-            hd.settIENNO(txtTienNo.getText());
-            hd.settIENTHU(txtTienThu.getText());
-            hd.settIENTHUA(txtTienThua.getText());
+            hd.setmAHD(Integer.valueOf(txtMaHoaDon.getText()));
+            hd.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+            hd.settIENNO(Integer.valueOf(txtTienNo.getText()));
+            hd.settIENTHU(Integer.valueOf(txtTienThu.getText()));
             
             HoaDonDAO.InsertHOADON(hd);
             JOptionPane.showMessageDialog(null, "Hóa đơn được thêm vào thành công","Thông báo",1 );
@@ -451,11 +450,10 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
              int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION){
             HoaDon hd = new HoaDon();
-            hd.setmAHD(txtMaHoaDon.getText());
-            hd.setmAPHIEUTRA(txtMaPhieuTra.getText());
-            hd.settIENNO(txtTienNo.getText());
-            hd.settIENTHU(txtTienThu.getText());
-            hd.settIENTHUA(txtTienThua.getText());
+            hd.setmAHD(Integer.valueOf(txtMaHoaDon.getText()));
+            hd.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+            hd.settIENNO(Integer.valueOf(txtTienNo.getText()));
+            hd.settIENTHU(Integer.valueOf(txtTienThu.getText()));
             HoaDonDAO dao = new HoaDonDAO();
             dao.UpdateHOADON(hd);
             JOptionPane.showMessageDialog(null, "Hóa đơn được sửa thành công","Thông báo",1 );

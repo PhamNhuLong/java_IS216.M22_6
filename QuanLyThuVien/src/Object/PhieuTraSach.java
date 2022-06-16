@@ -11,59 +11,41 @@ import java.sql.*;
  * @author minh
  */
 public class PhieuTraSach {
-    private String mAPHIEUTRA, mADOCGIA, tIENPHATKINAY, tIENNO,tONGNO;
+    private int mAPHIEUTRA,mADOCGIA, tIENPHATKINAY;
     private Date nGAYTRA;
 
     public PhieuTraSach() {
     }
 
-    public PhieuTraSach(String mAPHIEUTRA, String mADOCGIA, String tIENPHATKINAY, String tIENNO, String tONGNO, Date nGAYTRA) {
+    public PhieuTraSach(int mAPHIEUTRA, int mADOCGIA, int tIENPHATKINAY, Date nGAYTRA) {
         this.mAPHIEUTRA = mAPHIEUTRA;
         this.mADOCGIA = mADOCGIA;
         this.tIENPHATKINAY = tIENPHATKINAY;
-        this.tIENNO = tIENNO;
-        this.tONGNO = tONGNO;
         this.nGAYTRA = nGAYTRA;
     }
 
-    public String getmAPHIEUTRA() {
+    public int getmAPHIEUTRA() {
         return mAPHIEUTRA;
     }
 
-    public void setmAPHIEUTRA(String mAPHIEUTRA) {
+    public void setmAPHIEUTRA(int mAPHIEUTRA) {
         this.mAPHIEUTRA = mAPHIEUTRA;
     }
 
-    public String getmADOCGIA() {
+    public int getmADOCGIA() {
         return mADOCGIA;
     }
 
-    public void setmADOCGIA(String mADOCGIA) {
+    public void setmADOCGIA(int mADOCGIA) {
         this.mADOCGIA = mADOCGIA;
     }
 
-    public String gettIENPHATKINAY() {
+    public int gettIENPHATKINAY() {
         return tIENPHATKINAY;
     }
 
-    public void settIENPHATKINAY(String tIENPHATKINAY) {
+    public void settIENPHATKINAY(int tIENPHATKINAY) {
         this.tIENPHATKINAY = tIENPHATKINAY;
-    }
-
-    public String gettIENNO() {
-        return tIENNO;
-    }
-
-    public void settIENNO(String tIENNO) {
-        this.tIENNO = tIENNO;
-    }
-
-    public String gettONGNO() {
-        return tONGNO;
-    }
-
-    public void settONGNO(String tONGNO) {
-        this.tONGNO = tONGNO;
     }
 
     public Date getnGAYTRA() {
@@ -73,5 +55,6 @@ public class PhieuTraSach {
     public void setnGAYTRA(Date nGAYTRA) {
         this.nGAYTRA = nGAYTRA;
     }
+
     
 }
