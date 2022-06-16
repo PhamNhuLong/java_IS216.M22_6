@@ -32,20 +32,21 @@ public class PhieuTraSachDAO {
             pst.setDate(2, (Date) pts.getnGAYTRA());
             pst.setInt(3, pts.gettIENPHATKINAY());
             count += pst.executeUpdate();
-            if(count > 0){
+            if (count > 0) {
                 int ma = getMa();
-                if(ChiTietTraSachDAO.InsertCTTS2(ma, ms) != 0){
+                if (ChiTietTraSachDAO.InsertCTTS2(ma, ms) != 0) {
                     temp++;
                 }
             }
         } catch (SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
         }
-        if(temp >0){
+        if (temp > 0) {
             return true;
         }
         return false;
     }
+
     public static int getMa() {
 
         String sql = "SELECT TOP 1 MAPHIEUTRA  FROM PHIEUTRASACH ORDER BY MAPHIEUTRA DESC";
@@ -53,7 +54,7 @@ public class PhieuTraSachDAO {
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             int ma = 0;
-            while(rs.next()){
+            while (rs.next()) {
                 ma = rs.getInt("MAPHIEUTRA");
             }
             return ma;
@@ -99,41 +100,56 @@ public class PhieuTraSachDAO {
             throw new ArithmeticException(ex.getMessage());
         }
     }
-    
-    public static ArrayList<String> LoadDataCbb(){
-        String sql ="select distinct D.MADOCGIA as MA, HOTEN FROM DOCGIA D JOIN PHIEUMUONSACH P ON P.MADOCGIA = D.MADOCGIA";
+
+    public static ArrayList<String> LoadDataCbb() {
+        String sql = "select distinct D.MADOCGIA as MA, HOTEN FROM DOCGIA D JOIN PHIEUMUONSACH P ON P.MADOCGIA = D.MADOCGIA";
         ArrayList<String> list = new ArrayList<String>();
-        try{
-             pst = conn.prepareStatement(sql);
-             rs = pst.executeQuery();
-             while(rs.next()){
-                 list.add(rs.getString("MA") + "," + rs.getString("HOTEN"));
-             }
-        }catch (SQLException ex) {
+        try {
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getString("MA") + "," + rs.getString("HOTEN"));
+            }
+        } catch (SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
-        } 
+        }
         return list;
     }
-    
-    public static ArrayList<String> LoadSach(String madg){
-        String sql ="SELECT MASACH \n" +
-                    "FROM CTMS JOIN PHIEUMUONSACH P ON CTMS.MAPHIEUMUONSACH = P.MAPHIEUMUONSACH\n" +
-                    "WHERE MADOCGIA  = ? AND TINHTRANG = ?;";
+
+    public static ArrayList<String> LoadSach(String madg) {
+        String sql = "SELECT MASACH \n"
+                + "FROM CTMS JOIN PHIEUMUONSACH P ON CTMS.MAPHIEUMUONSACH = P.MAPHIEUMUONSACH\n"
+                + "WHERE MADOCGIA  = ? AND TINHTRANG = ?;";
         ArrayList<String> list = new ArrayList<String>();
-        try{
-             pst = conn.prepareStatement(sql);
-             pst.setString(1,madg);
-             pst.setString(2,"chưa trả");
-             rs = pst.executeQuery();
-             while(rs.next()){
-                 list.add(rs.getString("MASACH"));
-             }
-        }catch (SQLException ex) {
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, madg);
+            pst.setString(2, "chưa trả");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getString("MASACH"));
+            }
+        } catch (SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
-        } 
-        
+        }
+
         return list;
     }
-    
-   
+
+    public static int checkExists(String mapts) {
+        String sql = "SELECT COUNT(*) as count FROM HOADON WHERE MAPHIEUTRA = ?";
+        int count = 0;
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, mapts);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException ex) {
+            throw new ArithmeticException(ex.getMessage());
+        }
+        return count;
+    }
+
 }
