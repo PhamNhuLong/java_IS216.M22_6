@@ -29,16 +29,30 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
     /**
      * Creates new form QuanLyPhieuMuonSachPanel
      */
+    
     public static String sql = "select * from PHIEUMUONSACH order by MAPHIEUMUONSACH asc";
     public static String sql1 = "select count(*) as tong from PHIEUMUONSACH ";
     public static Connection conn = Connect.getConnect();
     public static PreparedStatement pst = null;
     public static ResultSet rs = null;
     public ArrayList<Sach> listSach = new ArrayList<Sach>();
+    private String strMS = "";
+    private String madg;
     public QuanLyPhieuMuonSachPanel() {
         initComponents();
         showtb();
+        loadcbb();
+        loadsach();
         setBackground(Color.white);
+
+        txtMaPhieuMuonSach.setVisible(false);
+        lbMaPhieuMuonSach.setVisible(false);
+        
+
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMM, y");  
+        java.util.Date date = new java.util.Date();  
+        jDateNgayMuon.setDate(date);
+
         
     }
     public final void showtb()
@@ -62,6 +76,33 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
          return temp;
     }
+     public void loadcbb() {
+        cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
+        cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
+        ArrayList<String> list = PhieuMuonSachDAO.LoadDataCbb();
+        for (String item : list) {
+            cbbMaDG.addItem(item.toString());
+        }
+    }
+      public void loadsach() {
+        ArrayList<String> list = PhieuMuonSachDAO.LoadSach();
+//        final DefaultListModel vegName = new DefaultListModel();
+        String[] mang = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            mang[i] = list.get(i);
+        }
+        listSachMuon.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = mang;
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,16 +122,18 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         jSeparator4 = new javax.swing.JToolBar.Separator();
         btLamMoi = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lbMaPhieuMuonSach = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMaPhieuMuonSach = new javax.swing.JTextField();
         txtMaDocGia = new javax.swing.JTextField();
         jDateNgayMuon = new com.toedter.calendar.JDateChooser();
-        jLabel5 = new javax.swing.JLabel();
-        txtMaSach = new javax.swing.JTextField();
+        lbMaSach = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbMaSach = new javax.swing.JTable();
+        cbbMaDG = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listSachMuon = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhieuMuonSach = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -155,7 +198,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.pink, null));
         jPanel1.setPreferredSize(new java.awt.Dimension(309, 394));
 
-        jLabel2.setText("Mã phiếu mượn sách");
+        lbMaPhieuMuonSach.setText("Mã phiếu mượn sách");
 
         jLabel3.setText("Mã độc giả");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -168,31 +211,17 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setText("Mã sách");
-
-        txtMaSach.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaSachActionPerformed(evt);
-            }
-        });
-        txtMaSach.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMaSachKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtMaSachKeyReleased(evt);
-            }
-        });
+        lbMaSach.setText("Mã sách");
 
         tbMaSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "MASACH", "TENDAUSACH"
+                "MASACH", "TENDAUSACH", "TINHTRANG"
             }
         ));
         tbMaSach.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,6 +230,25 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tbMaSach);
+
+        cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbMaDG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaDGActionPerformed(evt);
+            }
+        });
+
+        listSachMuon.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "sách hiện có" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listSachMuon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listSachMuonMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(listSachMuon);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,42 +259,48 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lbMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaSach)
-                            .addComponent(txtMaDocGia)
-                            .addComponent(jDateNgayMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                            .addComponent(txtMaPhieuMuonSach, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jDateNgayMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                            .addComponent(cbbMaDG, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbMaPhieuMuonSach)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMaPhieuMuonSach))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMaPhieuMuonSach, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbMaDG, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMaDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateNgayMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateNgayMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         tbPhieuMuonSach.setModel(new javax.swing.table.DefaultTableModel(
@@ -393,8 +447,8 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -405,10 +459,10 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         try{
             
            int row = this.tbPhieuMuonSach.getSelectedRow();
-           String MArow = (String) (this.tbPhieuMuonSach.getModel().getValueAt(row, 0));
+           int MArow = (int) (this.tbPhieuMuonSach.getModel().getValueAt(row, 0));
            String sql1 = " select * from PHIEUMUONSACH where MAPHIEUMUONSACH='"+MArow+"'";
            ResultSet rs = DuLieuBang.ShowTextField(sql1);
-           String sql = " select CS.MASACH , DS.TENDAUSACH\n" +
+           String sql = " select CS.MASACH , DS.TENDAUSACH, CT.TINHTRANG\n " +
                      "from CUONSACH CS join DAUSACH DS on CS.MADAUSACH = DS.MADAUSACH join CTMS CT on CS.MASACH = CT.MASACH\n" +
                      "where CT.MAPHIEUMUONSACH = '"+MArow+"'"; 
             DuLieuBang.Load(sql, tbMaSach);
@@ -416,12 +470,9 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
            {             
                this.txtMaPhieuMuonSach.setText(rs.getString("MAPHIEUMUONSACH"));
                this.txtMaDocGia.setText(rs.getString("MADOCGIA"));
-               this.jDateNgayMuon.setDate(rs.getDate("NGAYMUON"));
-               
-           }
-           
+               this.jDateNgayMuon.setDate(rs.getDate("NGAYMUON"));           
+           }         
     }                                      
- 
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, e);
@@ -431,15 +482,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
     
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
-        
-      
-            
-         
-                // TODO add your handling code here:
-//                conn.setAutoCommit(false);
-//                String sql ="Lock table Phieumuonsach in share mode";
-//                pst= conn.prepareStatement(sql);
-                
+                  
                 if(this.txtMaPhieuMuonSach.getText().length()!=0)
                 {
                     String sql2 = " select * from PHIEUMUONSACH where MAPHIEUMUONSACH like '%"+this.txtMaPhieuMuonSach.getText()+"%' ";
@@ -483,33 +526,52 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
     private void btThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemMoiActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaPhieuMuonSach.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu mượn sách","Thông báo",1);
-        else
-            if(this.txtMaDocGia.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-            {
+//        if(this.txtMaPhieuMuonSach.getText().length()==0)
+//            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu mượn sách","Thông báo",1);
+//        else
+//            if(this.txtMaDocGia.getText().length()==0)
+//                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
+//        else
+//            {
+        System.out.println(madg);
+        System.out.println(jDateNgayMuon.getDate());
+        
+        
         try
         {  
             int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm phiếu mượn sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION){
             PhieuMuonSach pms = new PhieuMuonSach();
             pms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
-            pms.setmADOCGIA(txtMaDocGia.getText());
+            pms.setmADOCGIA(madg);
             if(jDateNgayMuon.getDate() != null )
             {
                 java.util.Date utilStartDate = jDateNgayMuon.getDate();
                 java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
                 pms.setnGAYMUON(sqlStartDate);
             }
+            if (listSachMuon.getSelectedIndex() != -1) {
+                    for (Object vegetable : listSachMuon.getSelectedValues()) {
+                        strMS += vegetable + ",";
+                    }
+                    strMS = strMS.substring(0, strMS.length() -1);
+            }
             
-            PhieuMuonSachDAO.InsertPhieuMuonSach(pms);           
-            JOptionPane.showMessageDialog(null, "Phiếu mượn sách được thêm vào thành công","Thông báo",1 );
-            
-            showtb();
+            if(PhieuMuonSachDAO.InsertPhieuMuonSach(pms,strMS))           
+            {
+                String[] word = strMS.split(",");
+                for (int i = 0; i < word.length ; i++)
+                {
+                    int chon = Integer.valueOf(word[i]);
+                    int madausach = ChiTietMuonSachDAO.getMadausach(chon);
+                    ChiTietMuonSachDAO.capnhatdausach(madausach);
+                    ChiTietMuonSachDAO.capnhatcuonsach(chon);
+                }
+                JOptionPane.showMessageDialog(null, "Phiếu mượn sách được thêm vào thành công","Thông báo",1 ); 
+                showtb();
+            }
         }
-        }
+    }
         catch(Exception e)
                 {
                     //JOptionPane.showMessageDialog(null, "Lỗi!" + e.getMessage(),"Thông báo",1 );
@@ -519,7 +581,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Ngày mượn sách phải lớn hơn ngày lập thẻ.", "Lỗi", JOptionPane.WARNING_MESSAGE);  
       
                 }
-            }
+//            }
     }//GEN-LAST:event_btThemMoiActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
@@ -632,26 +694,19 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         new QuanLyChiTietMuonSach().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txtMaSachKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaSachKeyPressed
-        // TODO add your handling code here:
-      
-    }//GEN-LAST:event_txtMaSachKeyPressed
-
-    private void txtMaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSachActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaSachActionPerformed
   
-    private void txtMaSachKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaSachKeyReleased
+    private void cbbMaDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaDGActionPerformed
         // TODO add your handling code here:
-          if(evt.getKeyCode()== KeyEvent.VK_ENTER)
-        {       
-           String sql = " select CS.MASACH , DS.TENDAUSACH\n" +
-                     "from CUONSACH CS join DAUSACH DS on CS.MADAUSACH = DS.MADAUSACH "+
-                     "where CS.MASACH = '"+this.txtMaSach.getText()+"'"; 
-           
-        }
-    }//GEN-LAST:event_txtMaSachKeyReleased
+        String selectedValue = cbbMaDG.getSelectedItem().toString();
+        String[] word = selectedValue.split(",");
+        madg = word[0];
+        
+    }//GEN-LAST:event_cbbMaDGActionPerformed
+
+    private void listSachMuonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSachMuonMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_listSachMuonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -660,27 +715,29 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
     private javax.swing.JButton btThemMoi;
     private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btXoa;
+    private javax.swing.JComboBox<String> cbbMaDG;
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateNgayMuon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbMaPhieuMuonSach;
+    private javax.swing.JLabel lbMaSach;
+    private javax.swing.JList<String> listSachMuon;
     private javax.swing.JTable tbMaSach;
     private javax.swing.JTable tbPhieuMuonSach;
     public static javax.swing.JTextField txtMaDocGia;
     public static javax.swing.JTextField txtMaPhieuMuonSach;
-    private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

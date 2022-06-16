@@ -324,7 +324,7 @@ public class QuanLyChiTietMuonSach extends javax.swing.JFrame {
         try{
             
            int row = this.tbChiTietMuonSach.getSelectedRow();
-           String MArow = (String) (this.tbChiTietMuonSach.getModel().getValueAt(row, 0));
+           int MArow = (int) tbChiTietMuonSach.getModel().getValueAt(row, 1);
            String sql1 = " select * from CTMS where MAPHIEUMUONSACH='"+MArow+"'";
            ResultSet rs = DuLieuBang.ShowTextField(sql1);
            
@@ -369,6 +369,9 @@ public class QuanLyChiTietMuonSach extends javax.swing.JFrame {
                 ctms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
                 ctms.setmASACH(txtMaSach.getText());
                 ChiTietMuonSachDAO.InsertCTMS(ctms); 
+                int madausach = ChiTietMuonSachDAO.getMadausach(Integer.parseInt(txtMaSach.getText()));
+                ChiTietMuonSachDAO.capnhatdausach(madausach);
+                ChiTietMuonSachDAO.capnhatcuonsach(Integer.parseInt(txtMaSach.getText()));
                 showtb();
                 int temp2=dem();
                 if (temp1 != temp2){

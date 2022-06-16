@@ -63,8 +63,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" pref="437" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" pref="435" max="32767" attributes="0"/>
+                  <Component id="jPanel1" pref="435" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="502" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -164,22 +164,27 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel5" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="lbMaSach" max="32767" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" pref="110" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtMaSach" max="32767" attributes="0"/>
-                              <Component id="txtMaDocGia" max="32767" attributes="0"/>
-                              <Component id="jDateNgayMuon" alignment="0" pref="157" max="32767" attributes="0"/>
-                              <Component id="txtMaPhieuMuonSach" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jDateNgayMuon" pref="166" max="32767" attributes="0"/>
+                              <Component id="cbbMaDG" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lbMaPhieuMuonSach" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtMaPhieuMuonSach" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="txtMaDocGia" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -190,34 +195,36 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtMaPhieuMuonSach" pref="40" max="32767" attributes="0"/>
-                      <Component id="jLabel2" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="cbbMaDG" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtMaDocGia" pref="40" max="32767" attributes="0"/>
-                      <Component id="jLabel3" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel4" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jDateNgayMuon" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jDateNgayMuon" pref="40" max="32767" attributes="0"/>
-                      <Component id="jLabel4" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel5" max="32767" attributes="0"/>
-                      <Component id="txtMaSach" pref="40" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbMaSach" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="75" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtMaPhieuMuonSach" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="lbMaPhieuMuonSach" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="txtMaDocGia" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lbMaPhieuMuonSach">
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xe3; phi&#x1ebf;u m&#x1b0;&#x1ee3;n s&#xe1;ch"/>
           </Properties>
@@ -248,17 +255,10 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateNgayMuon">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="lbMaSach">
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xe3; s&#xe1;ch"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtMaSach">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaSachActionPerformed"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMaSachKeyPressed"/>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMaSachKeyReleased"/>
-          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
@@ -270,13 +270,19 @@
             <Component class="javax.swing.JTable" name="tbMaSach">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="2" rowCount="4">
+                  <Table columnCount="3" rowCount="4">
                     <Column editable="true" title="MASACH" type="java.lang.Object"/>
                     <Column editable="true" title="TENDAUSACH" type="java.lang.Object"/>
+                    <Column editable="true" title="TINHTRANG" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -296,6 +302,48 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbMaSachMouseClicked"/>
               </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JComboBox" name="cbbMaDG">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbMaDGActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JList" name="listSachMuon">
+              <Properties>
+                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                  <StringArray count="1">
+                    <StringItem index="0" value="s&#xe1;ch hi&#x1ec7;n c&#xf3;"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listSachMuonMouseClicked"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
