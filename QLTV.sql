@@ -1,6 +1,7 @@
 ﻿create database QLTV;
 use QLTV;
 
+
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2017                    */
 /* Created on:     18/03/2022 23:35:29                          */
@@ -138,6 +139,7 @@ ADD CONSTRAINT FK_CTTS_PT
   FOREIGN KEY (MAPHIEUTRA)
   REFERENCES PHIEUTRASACH (MAPHIEUTRA);
 
+
 /*=================================================*/
 /*===				 BANG USER					===*/
 /*=================================================*/
@@ -199,3 +201,60 @@ BEGIN
 				END
 		END
 END;
+
+DROP PROCEDURE IF EXISTS THEMCTTS; 
+GO
+CREATE PROC THEMCTTS (@mapts int, @ms int)
+AS
+DECLARE @mapm INT = 0;
+DECLARE @madg INT = 0;
+DECLARE @ngmuon DATE;
+DECLARE @ngtra DATE;
+DECLARE @songay int;
+BEGIN
+	select @madg = MADOCGIA
+	from PHIEUTRASACH
+	where MAPHIEUTRA = @mapts;
+
+	select @ngmuon = pms.NGAYMUON 
+    from phieumuonsach pms, ctms
+    where pms.maphieumuonsach = ctms.maphieumuonsach and pms.madocgia = @madg and ctms.masach = @ms and TINHTRANG = N'chưa trả';
+
+	select @ngtra = NGAYTRA
+	from PHIEUTRASACH P, CTTS
+	WHERE P.MAPHIEUTRA = CTTS.MAPHIEUTRA AND P.MADOCGIA = @madg and MASACH = @ms;
+
+	SET @songay = DATEDIFF(D,@ngmuon,@ngtra);
+	IF @songay > 4
+	BEGIN
+		UPDATE CTTS
+		SET SONGAYTRATRE = @songay - 4, TIENPHAT = (@songay - 4)*1000
+		WHERE MAPHIEUTRA = @mapts AND MASACH = @ms;
+
+		UPDATE PHIEUTRASACH
+		SET TIENPHATKINAY = TIENPHATKINAY + (@songay - 4)*1000
+		WHERE MAPHIEUTRA = @mapts
+	END
+END;
+
+go
+CREATE TRIGGER TRG_CTTS
+ON CTTS
+AFTER INSERT
+AS
+DECLARE @MAPHIEUTRA INT = 0;
+DECLARE @MASACH INT = 0;
+BEGIN
+  SELECT @MAPHIEUTRA = INSERTED.MAPHIEUTRA FROM INSERTED;
+  SELECT @MASACH = INSERTED.MASACH FROM INSERTED;
+   EXEC THEMCTTS @mapts = @MAPHIEUTRA,@ms = @MASACH
+END;
+
+GO
+insert into DAUSACH(TENDAUSACH,NAMXB,NXB,SANCO,TONGSO,DANGCHOMUON,VITRI,TACGIA) VALUES (N'hồng hải', 2014, N'hồng hải', 3,3,0,N'kệ 1',N'hồng hải');
+INSERT INTO DOCGIA(HOTEN,NGAYSINH,LOAIDG,DIACHI,NGLAPTHE,TINHTRANGDG,EMAIL) VALUES (N'hồng hải',convert(date,'2001-05-12'),N'sinh viên',N'hồng hải',convert(date,'2022-06-05'),N'còn hạn',N'hai@gmail.com');
+INSERT INTO PHIEUMUONSACH(MADOCGIA,NGAYMUON) VALUES (1,convert(date,'2022-06-05'));
+INSERT INTO CTMS VALUES (1,1,N'chưa trả');
+INSERT INTO CTMS VALUES (2,1,N'chưa trả');
+--INSERT INTO PHIEUTRASACH(MADOCGIA,NGAYTRA,TIENPHATKINAY) VALUES (1,convert(date,'2022-06-10'),0);
+--insert into CTTS values (1,5,0,0);

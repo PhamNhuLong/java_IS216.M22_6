@@ -200,17 +200,17 @@ public class ThongTinTraSach extends javax.swing.JFrame {
         }
     }
     public void showDG(){
-        String ma = QuanLyPhieuTraSachPanel.txtMaDocGia.getText();
-        String sql2 = " select * from DOCGIA where MADOCGIA = '"+ma+"'";
-        rs = DuLieuBang.ShowTextField(sql2);
-        try {
-            if(rs.next())
-            {
-              this.txtTenDocGia.setText(rs.getString("HOTEN"));
-            }
-        } catch (SQLException ex) {
-            
-        }
+//        String ma = QuanLyPhieuTraSachPanel..getText();
+//        String sql2 = " select * from DOCGIA where MADOCGIA = '"+ma+"'";
+//        rs = DuLieuBang.ShowTextField(sql2);
+//        try {
+//            if(rs.next())
+//            {
+//              this.txtTenDocGia.setText(rs.getString("HOTEN"));
+//            }
+//        } catch (SQLException ex) {
+//            
+//        }
     }
     public void showMS(){
         String ma = QuanLyPhieuTraSachPanel.txtMaPhieuTra.getText();

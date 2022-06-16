@@ -5,56 +5,52 @@
  */
 package Object;
 
+import java.sql.Date;
+
 /**
  *
  * @author minh
  */
 public class ChiTietTraSach extends PhieuTraSach {
-    private String mAPHIEUTRA, mASACH, sONGAYTRATRE, tIENPHAt;
+    private int mAPHIEUTRA, mASACH, sONGAYTRATRE, tIENPHAt;
 
     public ChiTietTraSach() {
     }
 
-    public ChiTietTraSach(String mAPHIEUTRA, String mASACH, String sONGAYTRATRE, String tIENPHAt) {
-        this.mAPHIEUTRA = mAPHIEUTRA;
-        this.mASACH = mASACH;
-        this.sONGAYTRATRE = sONGAYTRATRE;
-        this.tIENPHAt = tIENPHAt;
+    public ChiTietTraSach(int mAPHIEUTRA, int mADOCGIA, int tIENPHATKINAY, Date nGAYTRA) {
+        super(mAPHIEUTRA, mADOCGIA, tIENPHATKINAY, nGAYTRA);
     }
 
-    public String getmAPHIEUTRA() {
+    public int getmAPHIEUTRA() {
         return mAPHIEUTRA;
     }
 
-    public void setmAPHIEUTRA(String mAPHIEUTRA) {
+    public void setmAPHIEUTRA(int mAPHIEUTRA) {
         this.mAPHIEUTRA = mAPHIEUTRA;
     }
 
-    public String getmASACH() {
+    public int getmASACH() {
         return mASACH;
     }
 
-    public void setmASACH(String mASACH) {
+    public void setmASACH(int mASACH) {
         this.mASACH = mASACH;
     }
 
-    public String getsONGAYTRATRE() {
+    public int getsONGAYTRATRE() {
         return sONGAYTRATRE;
     }
 
-    public void setsONGAYTRATRE(String sONGAYTRATRE) {
+    public void setsONGAYTRATRE(int sONGAYTRATRE) {
         this.sONGAYTRATRE = sONGAYTRATRE;
     }
 
-    public String gettIENPHAt() {
+    public int gettIENPHAt() {
         return tIENPHAt;
     }
 
-    public void settIENPHAt(String tIENPHAt) {
+    public void settIENPHAt(int tIENPHAt) {
         this.tIENPHAt = tIENPHAt;
     }
-    
-    
-    
     
 }

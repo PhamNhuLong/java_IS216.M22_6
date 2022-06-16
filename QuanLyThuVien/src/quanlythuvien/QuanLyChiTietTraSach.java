@@ -14,7 +14,7 @@ import java.awt.Color;
 
 /**
  *
- * @author Nguyen Linh,minh
+ * @author hai,minh
  */
 public class QuanLyChiTietTraSach extends javax.swing.JFrame {
 
@@ -383,10 +383,10 @@ public final void showtb()
         {      int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION){      
             ChiTietTraSach ctts = new ChiTietTraSach();
-            ctts.setmAPHIEUTRA(txtMaPhieuTra.getText());
-            ctts.setmASACH(txtMaSach.getText());
-            ctts.setsONGAYTRATRE(txtSoNgayTraTre.getText());
-            ctts.settIENPHAt(txtTienPhat.getText());
+            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
+            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
+            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
             
 
             ChiTietTraSachDAO.InsertCTTS(ctts);           
@@ -413,8 +413,10 @@ public final void showtb()
         int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION){
             ChiTietTraSach ctts = new ChiTietTraSach();
-            ctts.setmAPHIEUTRA(txtMaPhieuTra.getText());
-            ctts.setmASACH(txtMaSach.getText());
+            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
+            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
+            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
         ChiTietTraSachDAO.DeleteCTTS(ctts);
         JOptionPane.showMessageDialog(null, "Phiếu trả sách xóa thành công!", "Thông báo",1);
         showtb();
@@ -439,10 +441,10 @@ public final void showtb()
              int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn cập nhật phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION){
             ChiTietTraSach ctts = new ChiTietTraSach();
-            ctts.setmAPHIEUTRA(txtMaPhieuTra.getText());
-            ctts.setmASACH(txtMaSach.getText());
-            ctts.setsONGAYTRATRE(txtSoNgayTraTre.getText());
-            ctts.settIENPHAt(txtTienPhat.getText());
+            ctts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+            ctts.setmASACH(Integer.valueOf(txtMaSach.getText()));
+            ctts.setsONGAYTRATRE(Integer.valueOf(txtSoNgayTraTre.getText()));
+            ctts.settIENPHAt(Integer.valueOf(txtTienPhat.getText()));
             
             ChiTietTraSachDAO dao = new ChiTietTraSachDAO();
             dao.UpdateCTTS(ctts);           

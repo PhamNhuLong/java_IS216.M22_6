@@ -14,22 +14,62 @@ import java.sql.*;
 import javax.swing.*;
 import DAO.*;
 import Object.*;
+import java.awt.Container;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form QuanLyPhieuTraSachPanel
      */
     public static String sql = "select * from PHIEUTRASACH order by MAPHIEUTRA asc";
+    private String madg;
+    private String strMS = "";
+
     public QuanLyPhieuTraSachPanel() {
         initComponents();
         setBackground(Color.white);
         showtb();
+        loadcbb();
+        loadsach();
     }
-    public final void showtb()
-    {
-    DuLieuBang.Load(sql, tbPhieuTraSach);
+
+    public final void showtb() {
+        DuLieuBang.Load(sql, tbPhieuTraSach);
+    }
+
+    public void loadcbb() {
+        cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
+        cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
+        ArrayList<String> list = PhieuTraSachDAO.LoadDataCbb();
+        for (String item : list) {
+            cbbMaDG.addItem(item.toString());
+        }
+    }
+
+    public void loadsach() {
+        ArrayList<String> list = PhieuTraSachDAO.LoadSach(madg);
+//        final DefaultListModel vegName = new DefaultListModel();
+        String[] mang = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            mang[i] = list.get(i);
+        }
+        listSach.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = mang;
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        });
     }
 
     /**
@@ -41,6 +81,8 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbMaSach1 = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btThemMoi = new javax.swing.JButton();
@@ -54,13 +96,16 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtMaPhieuTra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtMaDocGia = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jDateNgayTra = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         txtTienPhatKiNay = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbMaSach = new javax.swing.JTable();
+        cbbMaDG = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        listSach = new javax.swing.JList<>();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhieuTraSach = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -69,6 +114,19 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btTimKiem = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
+
+        tbMaSach1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "MASACH", "TENDAUSACH"
+            }
+        ));
+        jScrollPane3.setViewportView(tbMaSach1);
 
         setPreferredSize(new java.awt.Dimension(1074, 571));
 
@@ -128,11 +186,15 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Mã phiếu trả");
 
+        txtMaPhieuTra.setEditable(false);
+
         jLabel3.setText("Mã độc giả");
 
         jLabel4.setText("Ngày trả");
 
         jLabel5.setText("Tiền phạt kì này");
+
+        txtTienPhatKiNay.setEditable(false);
 
         tbMaSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,27 +209,45 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tbMaSach);
 
+        cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbMaDG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbMaDGActionPerformed(evt);
+            }
+        });
+
+        listSach.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "hai" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listSach.setToolTipText("");
+        jScrollPane4.setViewportView(listSach);
+
+        jLabel6.setText("Chọn sách");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMaPhieuTra)
-                            .addComponent(txtMaDocGia)
-                            .addComponent(jDateNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(txtTienPhatKiNay))))
+                            .addComponent(jDateNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(txtTienPhatKiNay)
+                            .addComponent(cbbMaDG, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,8 +259,8 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     .addComponent(txtMaPhieuTra, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMaDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(cbbMaDG))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -190,8 +270,12 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTienPhatKiNay, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tbPhieuTraSach.setModel(new javax.swing.table.DefaultTableModel(
@@ -350,180 +434,159 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbPhieuTraSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhieuTraSachMouseClicked
         // TODO add your handling code here:
-        try{
-            
-           int row = this.tbPhieuTraSach.getSelectedRow();
-           String MArow = (String) (this.tbPhieuTraSach.getModel().getValueAt(row, 0));
-           String sql1 = " select * from PHIEUTRASACH where MAPHIEUTRA='"+MArow+"'";
-           ResultSet rs = DuLieuBang.ShowTextField(sql1);
-           String sql = " select CS.MASACH , DS.TENDAUSACH\n" +
-                     "from CUONSACH CS join DAUSACH DS on CS.MADAUSACH = DS.MADAUSACH join CTTS CT on CS.MASACH = CT.MASACH\n" +
-                     "where CT.MAPHIEUTRA = '"+MArow+"'"; 
-        DuLieuBang.Load(sql, tbMaSach);
-           if(rs.next())
-           {
-               
-               this.txtMaPhieuTra.setText(rs.getString("MAPHIEUTRA"));
-               this.txtMaDocGia.setText(rs.getString("MADOCGIA"));
-               this.jDateNgayTra.setDate(rs.getDate("NGAYTRA"));
-               this.txtTienPhatKiNay.setText(rs.getString("TIENPHATKINAY"));
-               
-               
-           }
-           
-    }                                      
- 
-        catch(SQLException e)
-        {
+        try {
+
+            int row = this.tbPhieuTraSach.getSelectedRow();
+            String MArow = String.valueOf(this.tbPhieuTraSach.getModel().getValueAt(row, 0));
+            String sql1 = " select * from PHIEUTRASACH where MAPHIEUTRA='" + MArow + "'";
+            ResultSet rs = DuLieuBang.ShowTextField(sql1);
+            String sql = " select CS.MASACH , DS.TENDAUSACH\n"
+                    + "from CUONSACH CS join DAUSACH DS on CS.MADAUSACH = DS.MADAUSACH join CTTS CT on CS.MASACH = CT.MASACH\n"
+                    + "where CT.MAPHIEUTRA = '" + MArow + "'";
+            DuLieuBang.Load(sql, tbMaSach);
+            if (rs.next()) {
+                this.txtMaPhieuTra.setText(rs.getString("MAPHIEUTRA"));
+                this.jDateNgayTra.setDate(rs.getDate("NGAYTRA"));
+                this.txtTienPhatKiNay.setText(rs.getString("TIENPHATKINAY"));
+            }
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
     }//GEN-LAST:event_tbPhieuTraSachMouseClicked
 
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaPhieuTra.getText().length()!=0)
-        {
-            String sql2 = " select * from PhieuTraSach where MAPHIEUTRA like '%"+this.txtMaPhieuTra.getText()+"%' ";
+        if (this.txtMaPhieuTra.getText().length() != 0) {
+            String sql2 = " select * from PhieuTraSach where MAPHIEUTRA like '%" + this.txtMaPhieuTra.getText() + "%' ";
             DuLieuBang.Load(sql2, tbPhieuTraSach);
-        }
-        else if(this.txtMaDocGia.getText().length()!=0)
-        {
-            String sql1 = " select * from PHIEUTRASACH where MADOCGIA like '%"+this.txtMaDocGia.getText()+"%' ";
-            DuLieuBang.Load(sql1, tbPhieuTraSach);
-        }
-        else if(this.txtTimKiem.getText().length()!=0)
-        {
-             String sql ="SELECT * FROM PHIEUTRASACH where MAPHIEUTRA like'%"+this.txtTimKiem.getText()+"%' "
-                    + "or MADOCGIA like '%"+this.txtTimKiem.getText()+"%'";
+//       }  else if (this.txtMaDocGia.getText().length() != 0) {
+//            String sql1 = " select * from PHIEUTRASACH where MADOCGIA like '%" + this.txtMaDocGia.getText() + "%' ";
+//            DuLieuBang.Load(sql1, tbPhieuTraSach);
+        } else if (this.txtTimKiem.getText().length() != 0) {
+            String sql = "SELECT * FROM PHIEUTRASACH where MAPHIEUTRA like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or MADOCGIA like '%" + this.txtTimKiem.getText() + "%'";
             DuLieuBang.Load(sql, tbPhieuTraSach);
 
-        }
-        else
-        {
-             JOptionPane.showMessageDialog(null,"Bạn chưa nhập","Thông báo",1);
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập", "Thông báo", 1);
         }
     }//GEN-LAST:event_btTimKiemActionPerformed
 
     private void btThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemMoiActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaPhieuTra.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu trả","Thông báo",1);
-        else
-            if(this.txtMaDocGia.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-            {
-                try
-            {           
-                int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-            PhieuTraSach pts = new PhieuTraSach();
-            pts.setmAPHIEUTRA(txtMaPhieuTra.getText());
-            pts.setmADOCGIA(txtMaDocGia.getText());
-            if(jDateNgayTra.getDate() != null )
-            {
-                java.util.Date utilStartDate = jDateNgayTra.getDate();
-                java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                pts.setnGAYTRA(sqlStartDate);}
-            pts.settIENPHATKINAY(txtTienPhatKiNay.getText());
-            PhieuTraSachDAO.InsertPhieuTraSach(pts);           
-            JOptionPane.showMessageDialog(null, "Phiếu trả sách được thêm vào thành công","Thông báo",1 );      
-            showtb();
-        }}
-        catch(Exception e)
-                {
-                    //JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
-                     if(e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_PHIEUTRASACH) violated"))
-                JOptionPane.showMessageDialog(null, "Mã phiếu trả sách đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);  
+        try {
+            int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thêm phiếu trả sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                PhieuTraSach pts = new PhieuTraSach();
+                pts.setmAPHIEUTRA(0);
+                pts.setmADOCGIA(Integer.valueOf(madg));
+                if (jDateNgayTra.getDate() != null) {
+                    java.util.Date utilStartDate = jDateNgayTra.getDate();
+                    java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                    pts.setnGAYTRA(sqlStartDate);
+                }
+                pts.settIENPHATKINAY(0);
+                if (listSach.getSelectedIndex() != -1) {
+                    for (Object vegetable : listSach.getSelectedValues()) {
+                        strMS += vegetable + ",";
+                    }
+                    strMS = strMS.substring(0, strMS.length() -1);
+                    
+                }
+                if (PhieuTraSachDAO.InsertPhieuTraSach(pts,strMS)) {
+                    JOptionPane.showMessageDialog(null, "Phiếu trả sách được thêm vào thành công", "Thông báo", 1);
+                    showtb();
                 }
             }
+        } catch (Exception e) {
+            //JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
+            if (e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_PHIEUTRASACH) violated")) {
+                JOptionPane.showMessageDialog(null, "Mã phiếu trả sách đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btThemMoiActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
-            if(this.txtMaPhieuTra.getText().length()==0)
-           JOptionPane.showMessageDialog(null,"Bạn cần chọn mã phiếu trả để xóa","Thông báo",1);
-        else
-                if(this.txtMaDocGia.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-        {
-        try{  
-                
-        int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa độc giả này","Xác nhận", JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.YES_OPTION){
-        PhieuTraSachDAO.DeletePhieuTraSach(txtMaPhieuTra.getText());
-        JOptionPane.showMessageDialog(null, "Phiếu trả xóa thành công!", "Thông báo",1);
-        showtb();
-        } else {
-        //JOptionPane.showMessageDialog(null, "Phiếu trả xóa thất bại!", "Thông báo",1);
+        if (this.txtMaPhieuTra.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn cần chọn mã phiếu trả để xóa", "Thông báo", 1);
+//        else if (this.txtMaDocGia.getText().length() == 0)
+//            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã độc giả", "Thông báo", 1);
+        else {
+            try {
+
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa độc giả này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    PhieuTraSachDAO.DeletePhieuTraSach(txtMaPhieuTra.getText());
+                    JOptionPane.showMessageDialog(null, "Phiếu trả xóa thành công!", "Thông báo", 1);
+                    showtb();
+                } else {
+                    //JOptionPane.showMessageDialog(null, "Phiếu trả xóa thất bại!", "Thông báo",1);
+                }
+            } catch (Exception e) {
+                //   JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+                //ORA-02292:
+                if (e.getMessage().contains("ORA-02292")) {
+                    JOptionPane.showMessageDialog(null, "Bạn không thể xóa phiếu trả sách này", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
         }
-      } catch (Exception e){
-       //   JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-         //ORA-02292:
-          if(e.getMessage().contains("ORA-02292"))
-          JOptionPane.showMessageDialog(null, "Bạn không thể xóa phiếu trả sách này", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-                
-      }
-        } 
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaPhieuTra.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu trả","Thông báo",1);
-          
-        else
-            if(this.txtMaDocGia.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-            {
-                try
-        {       
-            int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn cập nhật phiếu trả sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-            PhieuTraSach pts = new PhieuTraSach();
-            pts.setmAPHIEUTRA(txtMaPhieuTra.getText());
-            pts.setmADOCGIA(txtMaDocGia.getText());
-            if(jDateNgayTra.getDate() != null )
-            {
-                java.util.Date utilStartDate = jDateNgayTra.getDate();
-                java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                pts.setnGAYTRA(sqlStartDate);}
-            pts.settIENPHATKINAY(txtTienPhatKiNay.getText());
-            PhieuTraSachDAO dao = new PhieuTraSachDAO();
-            dao.UpdatePhieuTraSach(pts);           
-            JOptionPane.showMessageDialog(null, "Phiếu trả sách được sửa thành công","Thông báo",1 );  
-            showtb();
-        }}
-        catch(Exception e)
-                {
-                  //  JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
-                    //ORA-01407:
-                     if(e.getMessage().contains("ORA-01407"))
-          JOptionPane.showMessageDialog(null, "Cập nhật không thành công!", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-           
+        if (this.txtMaPhieuTra.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã phiếu trả", "Thông báo", 1);
+
+//        else if (this.txtMaDocGia.getText().length() == 0)
+//            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã độc giả", "Thông báo", 1);
+        else {
+            try {
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn cập nhật phiếu trả sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    PhieuTraSach pts = new PhieuTraSach();
+                    pts.setmAPHIEUTRA(Integer.valueOf(txtMaPhieuTra.getText()));
+//                    pts.setmADOCGIA(Integer.valueOf(txtMaDocGia.getText()));
+                    if (jDateNgayTra.getDate() != null) {
+                        java.util.Date utilStartDate = jDateNgayTra.getDate();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        pts.setnGAYTRA(sqlStartDate);
+                    }
+                    pts.settIENPHATKINAY(Integer.valueOf(txtTienPhatKiNay.getText()));
+                    PhieuTraSachDAO dao = new PhieuTraSachDAO();
+                    dao.UpdatePhieuTraSach(pts);
+                    JOptionPane.showMessageDialog(null, "Phiếu trả sách được sửa thành công", "Thông báo", 1);
+                    showtb();
                 }
+            } catch (Exception e) {
+                //  JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
+                //ORA-01407:
+                if (e.getMessage().contains("ORA-01407")) {
+                    JOptionPane.showMessageDialog(null, "Cập nhật không thành công!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+
             }
+        }
     }//GEN-LAST:event_btCapNhatActionPerformed
 
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
         // TODO add your handling code here:
         txtMaPhieuTra.setText("");
-        txtMaDocGia.setText("");
+//        txtMaDocGia.setText("");
         jDateNgayTra.setDate(null);
         txtTienPhatKiNay.setText("");
         txtTimKiem.setText("");
         DefaultTableModel tableModel = (DefaultTableModel) tbMaSach.getModel();
-       tableModel.setRowCount(0);
+        tableModel.setRowCount(0);
         showtb();
     }//GEN-LAST:event_btLamMoiActionPerformed
 
@@ -539,13 +602,20 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            String sql ="SELECT * FROM PHIEUTRASACH where MAPHIEUTRA like'%"+this.txtTimKiem.getText()+"%' "
-                    + "or MADOCGIA like '%"+this.txtTimKiem.getText()+"%'" ;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String sql = "SELECT * FROM PHIEUTRASACH where MAPHIEUTRA like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or MADOCGIA like '%" + this.txtTimKiem.getText() + "%'";
             DuLieuBang.Load(sql, tbPhieuTraSach);
         }
     }//GEN-LAST:event_txtTimKiemKeyPressed
+
+    private void cbbMaDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaDGActionPerformed
+        // TODO add your handling code here:
+        String selectedValue = cbbMaDG.getSelectedItem().toString();
+        String[] word = selectedValue.split(",");
+        madg = word[0];
+        loadsach();
+    }//GEN-LAST:event_cbbMaDGActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -554,6 +624,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
     private javax.swing.JButton btThemMoi;
     private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btXoa;
+    private javax.swing.JComboBox<String> cbbMaDG;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateNgayTra;
@@ -562,18 +633,22 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JList<String> listSach;
     private javax.swing.JTable tbMaSach;
+    private javax.swing.JTable tbMaSach1;
     private javax.swing.JTable tbPhieuTraSach;
-    public static javax.swing.JTextField txtMaDocGia;
     public static javax.swing.JTextField txtMaPhieuTra;
     private javax.swing.JTextField txtTienPhatKiNay;
     private javax.swing.JTextField txtTimKiem;

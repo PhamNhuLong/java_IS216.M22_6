@@ -21,9 +21,9 @@ public class HoaDonDAO {
         String sql = "CALL THEM_HOA_DON(?,?,?)";
         try {
             stmt = conn.prepareCall(sql);
-            stmt.setString(1, hd.getmAHD());
-            stmt.setString(2, hd.getmAPHIEUTRA());
-            stmt.setString(3, hd.gettIENTHU());
+            stmt.setInt(1, hd.getmAHD());
+            stmt.setInt(2, hd.getmAPHIEUTRA());
+            stmt.setInt(3, hd.gettIENTHU());
             
             
             return stmt.executeUpdate()>0; 
@@ -43,16 +43,15 @@ public class HoaDonDAO {
         }
     }
    public boolean UpdateHOADON(HoaDon hd)  {
-        String sql = "update HOADON set  MAPHIEUTRA = ?, TIENNO = ?, TIENTHU = ?, TIENTHUA = ? where MAHD= ?";
+        String sql = "update HOADON set  MAPHIEUTRA = ?, TIENNO = ?, TIENTHU = ? where MAHD= ?";
         
         try
         {
            pst= conn.prepareStatement(sql); 
-           pst.setString(5, hd.getmAHD());
-           pst.setString(1, hd.getmAPHIEUTRA());
-           pst.setString(2, hd.gettIENNO());
-           pst.setString(3, hd.gettIENTHU());
-           pst.setString(4, hd.gettIENTHUA());
+           pst.setInt(5, hd.getmAHD());
+           pst.setInt(1, hd.getmAPHIEUTRA());
+           pst.setInt(2, hd.gettIENNO());
+           pst.setInt(3, hd.gettIENTHU());
                
             return pst.executeUpdate() >0;
         }        catch(SQLException ex) {
