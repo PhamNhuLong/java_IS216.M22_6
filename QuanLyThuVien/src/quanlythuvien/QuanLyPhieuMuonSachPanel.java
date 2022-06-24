@@ -24,12 +24,12 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+
 public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form QuanLyPhieuMuonSachPanel
      */
-    
     public static String sql = "select * from PHIEUMUONSACH order by MAPHIEUMUONSACH asc";
     public static String sql1 = "select count(*) as tong from PHIEUMUONSACH ";
     public static Connection conn = Connect.getConnect();
@@ -38,6 +38,9 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
     public ArrayList<Sach> listSach = new ArrayList<Sach>();
     private String strMS = "";
     private String madg;
+    SimpleDateFormat formatter = new SimpleDateFormat("d MMM, y");
+    java.util.Date date = new java.util.Date();
+
     public QuanLyPhieuMuonSachPanel() {
         initComponents();
         showtb();
@@ -47,36 +50,32 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
         txtMaPhieuMuonSach.setVisible(false);
         lbMaPhieuMuonSach.setVisible(false);
-        
-
-        SimpleDateFormat formatter = new SimpleDateFormat("d MMM, y");  
-        java.util.Date date = new java.util.Date();  
+        lbMaDocGia.setVisible(false);
+        txtMaDocGia.setVisible(false);
         jDateNgayMuon.setDate(date);
-
-        
-    }
-    public final void showtb()
-    {
-    DuLieuBang.Load(sql, tbPhieuMuonSach);
     }
 
-     public int dem(){
-        int temp =0;
-       
-       
+    public final void showtb() {
+        DuLieuBang.Load(sql, tbPhieuMuonSach);
+    }
+
+    public int dem() {
+        int temp = 0;
+
         try {
-            pst=conn.prepareStatement(sql1);
-            rs= pst.executeQuery();
-            while(rs.next()){
-            temp = rs.getInt("tong");
+            pst = conn.prepareStatement(sql1);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                temp = rs.getInt("tong");
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuanLyPhieuMuonSachPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-         return temp;
+        return temp;
     }
-     public void loadcbb() {
+
+    public void loadcbb() {
         cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
         cbbMaDG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
         ArrayList<String> list = PhieuMuonSachDAO.LoadDataCbb();
@@ -84,7 +83,8 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
             cbbMaDG.addItem(item.toString());
         }
     }
-      public void loadsach() {
+
+    public void loadsach() {
         ArrayList<String> list = PhieuMuonSachDAO.LoadSach();
 //        final DefaultListModel vegName = new DefaultListModel();
         String[] mang = new String[list.size()];
@@ -103,6 +103,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
             }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,10 +124,9 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         btLamMoi = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lbMaPhieuMuonSach = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbcbb = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMaPhieuMuonSach = new javax.swing.JTextField();
-        txtMaDocGia = new javax.swing.JTextField();
         jDateNgayMuon = new com.toedter.calendar.JDateChooser();
         lbMaSach = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -134,6 +134,8 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         cbbMaDG = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         listSachMuon = new javax.swing.JList<>();
+        txtMaDocGia = new javax.swing.JTextField();
+        lbMaDocGia = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhieuMuonSach = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -200,8 +202,8 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
         lbMaPhieuMuonSach.setText("Mã phiếu mượn sách");
 
-        jLabel3.setText("Mã độc giả");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbcbb.setText("Mã độc giả");
+        lbcbb.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel4.setText("Ngày mượn");
 
@@ -210,6 +212,8 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                 txtMaPhieuMuonSachActionPerformed(evt);
             }
         });
+
+        jDateNgayMuon.setEnabled(false);
 
         lbMaSach.setText("Mã sách");
 
@@ -250,6 +254,14 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(listSachMuon);
 
+        txtMaDocGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaDocGiaActionPerformed(evt);
+            }
+        });
+
+        lbMaDocGia.setText("Mã độc giả");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -259,22 +271,21 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                            .addComponent(lbcbb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(lbMaDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateNgayMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                             .addComponent(cbbMaDG, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                            .addComponent(jDateNgayMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                            .addComponent(txtMaDocGia)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbMaPhieuMuonSach)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMaPhieuMuonSach))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMaPhieuMuonSach)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -282,24 +293,26 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbcbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbMaDG, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateNgayMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateNgayMuon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lbMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -447,81 +460,75 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+
     private void tbPhieuMuonSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhieuMuonSachMouseClicked
         // TODO add your handling code here:
-        try{
-            
-           int row = this.tbPhieuMuonSach.getSelectedRow();
-           int MArow = (int) (this.tbPhieuMuonSach.getModel().getValueAt(row, 0));
-           String sql1 = " select * from PHIEUMUONSACH where MAPHIEUMUONSACH='"+MArow+"'";
-           ResultSet rs = DuLieuBang.ShowTextField(sql1);
-           String sql = " select CS.MASACH , DS.TENDAUSACH, CT.TINHTRANG\n " +
-                     "from CUONSACH CS join DAUSACH DS on CS.MADAUSACH = DS.MADAUSACH join CTMS CT on CS.MASACH = CT.MASACH\n" +
-                     "where CT.MAPHIEUMUONSACH = '"+MArow+"'"; 
+        try {
+            lbcbb.setVisible(false);
+            cbbMaDG.setVisible(false);
+            listSachMuon.setVisible(false);
+            lbMaDocGia.setVisible(true);
+            txtMaDocGia.setVisible(true);
+
+            int row = this.tbPhieuMuonSach.getSelectedRow();
+            int MArow = (int) (this.tbPhieuMuonSach.getModel().getValueAt(row, 0));
+            String sql1 = " select MAPHIEUMUONSACH, HOTEN , NGAYMUON from PHIEUMUONSACH,DOCGIA"
+                    + " where PHIEUMUONSACH.MADOCGIA =DOCGIA.MADOCGIA AND MAPHIEUMUONSACH='" + MArow + "'";
+            ResultSet rs = DuLieuBang.ShowTextField(sql1);
+            String sql = " select CS.MASACH , DS.TENDAUSACH, CT.TINHTRANG\n "
+                    + "from CUONSACH CS join DAUSACH DS on CS.MADAUSACH = DS.MADAUSACH join CTMS CT on CS.MASACH = CT.MASACH\n"
+                    + "where CT.MAPHIEUMUONSACH = '" + MArow + "'";
             DuLieuBang.Load(sql, tbMaSach);
-            if(rs.next())
-           {             
-               this.txtMaPhieuMuonSach.setText(rs.getString("MAPHIEUMUONSACH"));
-               this.txtMaDocGia.setText(rs.getString("MADOCGIA"));
-               this.jDateNgayMuon.setDate(rs.getDate("NGAYMUON"));           
-           }         
-    }                                      
-        catch(SQLException e)
-        {
+            if (rs.next()) {
+                this.txtMaPhieuMuonSach.setText(rs.getString("MAPHIEUMUONSACH"));
+                this.txtMaDocGia.setText(rs.getString("HOTEN"));
+                this.jDateNgayMuon.setDate(rs.getDate("NGAYMUON"));
+            }
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
-            
+
     }//GEN-LAST:event_tbPhieuMuonSachMouseClicked
 
-    
+
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
-                  
-                if(this.txtMaPhieuMuonSach.getText().length()!=0)
-                {
-                    String sql2 = " select * from PHIEUMUONSACH where MAPHIEUMUONSACH like '%"+this.txtMaPhieuMuonSach.getText()+"%' ";
-                    DuLieuBang.Load(sql2, tbPhieuMuonSach);
-                }
-                else if(this.txtMaDocGia.getText().length()!=0)
-                {
-                    String sql1 = " select * from PHIEUMUONSACH where MADOCGIA like '%"+this.txtMaDocGia.getText()+"%' ";
-                    DuLieuBang.Load(sql1, tbPhieuMuonSach);
-                }else if(this.jDateNgayMuon.getDate() !=null) {
-                    
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    
-                    String date = sdf.format(jDateNgayMuon.getDate());
-                    String sql1 ="SELECT * FROM PHIEUMUONSACH where ngaymuon = to_date('"+ date+"', 'yyyy-mm-dd') ";
-                    
-                    DuLieuBang.Load(sql1, tbPhieuMuonSach);
-                    
-                }
-                else if(this.txtTimKiem.getText().length()!=0)
-                {
-                    String sql1 ="SELECT * FROM PHIEUMUONSACH where MAPHIEUMUONSACH like'%"+this.txtTimKiem.getText()+"%' "
-                            + "or MADOCGIA like '%"+this.txtTimKiem.getText()+"%'";
-                    DuLieuBang.Load(sql1, tbPhieuMuonSach);
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Bạn chưa nhập","Thông báo",1);
-                }
+
+        if (this.txtMaPhieuMuonSach.getText().length() != 0) {
+            String sql2 = " select * from PHIEUMUONSACH where MAPHIEUMUONSACH like '%" + this.txtMaPhieuMuonSach.getText() + "%' ";
+            DuLieuBang.Load(sql2, tbPhieuMuonSach);
+        } else if (this.txtMaDocGia.getText().length() != 0) {
+            String sql1 = " select * from PHIEUMUONSACH where MADOCGIA like '%" + this.txtMaDocGia.getText() + "%' ";
+            DuLieuBang.Load(sql1, tbPhieuMuonSach);
+        } else if (this.jDateNgayMuon.getDate() != null) {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            String date = sdf.format(jDateNgayMuon.getDate());
+            String sql1 = "SELECT * FROM PHIEUMUONSACH where ngaymuon = to_date('" + date + "', 'yyyy-mm-dd') ";
+
+            DuLieuBang.Load(sql1, tbPhieuMuonSach);
+
+        } else if (this.txtTimKiem.getText().length() != 0) {
+            String sql1 = "SELECT * FROM PHIEUMUONSACH where MAPHIEUMUONSACH like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or MADOCGIA like '%" + this.txtTimKiem.getText() + "%'";
+            DuLieuBang.Load(sql1, tbPhieuMuonSach);
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập", "Thông báo", 1);
+        }
 //            } catch (SQLException ex) {
 //                Logger.getLogger(QuanLyPhieuMuonSachPanel.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-           // Thread.sleep(4000);
-          //  conn.commit();
-            
-       // } catch (SQLException ex) {
+        // Thread.sleep(4000);
+        //  conn.commit();
+
+        // } catch (SQLException ex) {
         //    Logger.getLogger(QuanLyPhieuMuonSachPanel.class.getName()).log(Level.SEVERE, null, ex);
-      
-        
+
     }//GEN-LAST:event_btTimKiemActionPerformed
 
     private void btThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemMoiActionPerformed
@@ -533,126 +540,130 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 //                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
 //        else
 //            {
-        System.out.println(madg);
-        System.out.println(jDateNgayMuon.getDate());
-        
-        
-        try
-        {  
-            int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn thêm phiếu mượn sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-            PhieuMuonSach pms = new PhieuMuonSach();
-            pms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
-            pms.setmADOCGIA(madg);
-            if(jDateNgayMuon.getDate() != null )
-            {
-                java.util.Date utilStartDate = jDateNgayMuon.getDate();
-                java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                pms.setnGAYMUON(sqlStartDate);
-            }
-            if (listSachMuon.getSelectedIndex() != -1) {
+
+        try {
+            int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thêm phiếu mượn sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                int sl = PhieuMuonSachDAO.kiemtraSL(madg);
+                int count = 0;
+                if (listSachMuon.getSelectedIndex() != -1) {
                     for (Object vegetable : listSachMuon.getSelectedValues()) {
                         strMS += vegetable + ",";
+                        count++;
                     }
-                    strMS = strMS.substring(0, strMS.length() -1);
-            }
-            
-            if(PhieuMuonSachDAO.InsertPhieuMuonSach(pms,strMS))           
-            {
-                String[] word = strMS.split(",");
-                for (int i = 0; i < word.length ; i++)
-                {
-                    int chon = Integer.valueOf(word[i]);
-                    int madausach = ChiTietMuonSachDAO.getMadausach(chon);
-                    ChiTietMuonSachDAO.capnhatdausach(madausach);
-                    ChiTietMuonSachDAO.capnhatcuonsach(chon);
+                    strMS = strMS.substring(0, strMS.length() - 1);
                 }
-                JOptionPane.showMessageDialog(null, "Phiếu mượn sách được thêm vào thành công","Thông báo",1 ); 
-                showtb();
+                if (!DocGiaDAO.checkHanDocGia(madg)) {
+                    JOptionPane.showMessageDialog(null, "Độc giả đã hết hạn", "Thông báo", 1);
+                } else if (PhieuMuonSachDAO.kiemtraQuaHan(madg) >= 1) {
+                    JOptionPane.showMessageDialog(null, "Độc giả có sách quá hạn", "Thông báo", 1);
+                } else if (sl >= 4) {
+                    JOptionPane.showMessageDialog(null, "Độc giả đã mượn 4 cuốn sách", "Thông báo", 1);
+                } else if (sl + count > 4) {
+                    JOptionPane.showMessageDialog(null, "Độc giả đã mượn " + sl + " cuốn sách. Quá số lượng rồi", "Thông báo", 1);
+                } else if (DocGiaDAO.checkHanDocGia(madg)) {
+                    PhieuMuonSach pms = new PhieuMuonSach();
+                    pms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
+                    pms.setmADOCGIA(madg);
+                    if (jDateNgayMuon.getDate() != null) {
+                        java.util.Date utilStartDate = jDateNgayMuon.getDate();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        pms.setnGAYMUON(sqlStartDate);
+                    }
+
+                    if (PhieuMuonSachDAO.InsertPhieuMuonSach(pms, strMS)) {
+                        String[] word = strMS.split(",");
+                        for (int i = 0; i < word.length; i++) {
+                            int chon = Integer.valueOf(word[i]);
+                            int madausach = ChiTietMuonSachDAO.getMadausach(chon);
+                            ChiTietMuonSachDAO.capnhatdausach(madausach);
+                            ChiTietMuonSachDAO.capnhatcuonsach(chon);
+                        }
+                        JOptionPane.showMessageDialog(null, "Phiếu mượn sách được thêm vào thành công", "Thông báo", 1);
+                        showtb();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Độc giả đã hết hạn", "Thông báo", 1);
+                }
+
             }
+        } catch (Exception e) {
+            //JOptionPane.showMessageDialog(null, "Lỗi!" + e.getMessage(),"Thông báo",1 );
+            if (e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_PHIEUMUONSACH) violated")) {
+                JOptionPane.showMessageDialog(null, "Mã phiếu mượn sách đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            }
+            if (e.getMessage().contains("ORA-04088")) {
+                JOptionPane.showMessageDialog(null, "Ngày mượn sách phải lớn hơn ngày lập thẻ.", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            }
+
         }
-    }
-        catch(Exception e)
-                {
-                    //JOptionPane.showMessageDialog(null, "Lỗi!" + e.getMessage(),"Thông báo",1 );
-                if(e.getMessage().contains("ORA-00001: unique constraint (SINHVIEN02.PK_PHIEUMUONSACH) violated"))
-                JOptionPane.showMessageDialog(null, "Mã phiếu mượn sách đã tồn tại, vui lòng nhập lại ", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-                 if(e.getMessage().contains("ORA-04088"))
-                    JOptionPane.showMessageDialog(null, "Ngày mượn sách phải lớn hơn ngày lập thẻ.", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-      
-                }
 //            }
     }//GEN-LAST:event_btThemMoiActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
         int temp1 = dem();
-        if(this.txtMaPhieuMuonSach.getText().length()==0)
-           JOptionPane.showMessageDialog(null,"Bạn cần chọn mã phiếu mượn sách để xóa","Thông báo",1);
-        else
-             if(this.txtMaDocGia.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-        {
-        try{  
-                
-        int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa phiếu mượn sách này","Xác nhận", JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.YES_OPTION){
-        PhieuMuonSachDAO.DeletePhieuMuonSach(txtMaPhieuMuonSach.getText());
-        int temp2 = dem();
-        if(temp1!=temp2){
-        JOptionPane.showMessageDialog(null, "Phiếu mượn sách xóa thành công!", "Thông báo",1);
-        showtb();
-        }else{
-         JOptionPane.showMessageDialog(null, "Phiếu mượn này chưa được trả, không thể xóa!", "Thông báo",1);
+        if (this.txtMaPhieuMuonSach.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn cần chọn mã phiếu mượn sách để xóa", "Thông báo", 1);
+        else if (this.txtMaDocGia.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã độc giả", "Thông báo", 1);
+        else {
+            try {
+
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa phiếu mượn sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    PhieuMuonSachDAO.DeletePhieuMuonSach(txtMaPhieuMuonSach.getText());
+                    int temp2 = dem();
+                    if (temp1 != temp2) {
+                        JOptionPane.showMessageDialog(null, "Phiếu mượn sách xóa thành công!", "Thông báo", 1);
+                        showtb();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Phiếu mượn này chưa được trả, không thể xóa!", "Thông báo", 1);
+                    }
+                } else {
+                    // JOptionPane.showMessageDialog(null, "Phiếu mượn sách xóa thất bại!", "Thông báo",1);
+                }
+            } catch (Exception e) {
+                // JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+                //ORA-02292:
+                if (e.getMessage().contains("ORA-02292")) {
+                    JOptionPane.showMessageDialog(null, "Phiếu mượn này chưa trả sách. Bạn không thể xóa phiếu mượn này.", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
-        } else {
-       // JOptionPane.showMessageDialog(null, "Phiếu mượn sách xóa thất bại!", "Thông báo",1);
-        }
-      } catch (Exception e){
-         // JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-         //ORA-02292:
-         if(e.getMessage().contains("ORA-02292"))
-         JOptionPane.showMessageDialog(null, "Phiếu mượn này chưa trả sách. Bạn không thể xóa phiếu mượn này.", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-      } 
-      }
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
         // TODO add your handling code here:
-        if(this.txtMaPhieuMuonSach.getText().length()==0)
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã phiếu mượn sách","Thông báo",1);
-        else
-             if(this.txtMaDocGia.getText().length()==0)
-                JOptionPane.showMessageDialog(null,"Bạn chưa nhập mã độc giả","Thông báo",1);
-        else
-        {
-        try{  
-            int result = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn cập nhật phiếu mượn sách này","Xác nhận",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-            PhieuMuonSach pms = new PhieuMuonSach();
-            pms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
-            pms.setmADOCGIA(txtMaDocGia.getText());
-            if(jDateNgayMuon.getDate() != null )
-            {
-                java.util.Date utilStartDate = jDateNgayMuon.getDate();
-                java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                pms.setnGAYMUON(sqlStartDate);
-            }
-            PhieuMuonSachDAO dao = new PhieuMuonSachDAO();
-            dao.UpdatePhieuMuonSach(pms);           
-            JOptionPane.showMessageDialog(null, "Phiếu mượn sách được sửa thành công","Thông báo",1 ); 
-            showtb();
-        }
-        }
-        catch(Exception e)
-                {
-                    //JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
-                    //ORA-04088:
-                     if(e.getMessage().contains("ORA-04088"))
-                    JOptionPane.showMessageDialog(null, "Ngày mượn sách phải lớn hơn ngày lập thẻ.", "Lỗi", JOptionPane.WARNING_MESSAGE);  
-      
+        if (this.txtMaPhieuMuonSach.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã phiếu mượn sách", "Thông báo", 1);
+        else if (this.txtMaDocGia.getText().length() == 0)
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã độc giả", "Thông báo", 1);
+        else {
+            try {
+                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn cập nhật phiếu mượn sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    PhieuMuonSach pms = new PhieuMuonSach();
+                    pms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
+                    pms.setmADOCGIA(txtMaDocGia.getText());
+                    if (jDateNgayMuon.getDate() != null) {
+                        java.util.Date utilStartDate = jDateNgayMuon.getDate();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        pms.setnGAYMUON(sqlStartDate);
+                    }
+                    PhieuMuonSachDAO dao = new PhieuMuonSachDAO();
+                    dao.UpdatePhieuMuonSach(pms);
+                    JOptionPane.showMessageDialog(null, "Phiếu mượn sách được sửa thành công", "Thông báo", 1);
+                    showtb();
                 }
+            } catch (Exception e) {
+                //JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
+                //ORA-04088:
+                if (e.getMessage().contains("ORA-04088")) {
+                    JOptionPane.showMessageDialog(null, "Ngày mượn sách phải lớn hơn ngày lập thẻ.", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
         }
     }//GEN-LAST:event_btCapNhatActionPerformed
 
@@ -660,10 +671,15 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         txtMaPhieuMuonSach.setText("");
         txtMaDocGia.setText("");
-        jDateNgayMuon.setDate(null);
+        jDateNgayMuon.setDate(date);
         txtTimKiem.setText("");
-       DefaultTableModel tableModel = (DefaultTableModel) tbMaSach.getModel();
-       tableModel.setRowCount(0);
+        lbcbb.setVisible(true);
+        cbbMaDG.setVisible(true);
+        listSachMuon.setVisible(true);
+        lbMaDocGia.setVisible(false);
+        txtMaDocGia.setVisible(false);
+        DefaultTableModel tableModel = (DefaultTableModel) tbMaSach.getModel();
+        tableModel.setRowCount(0);
         showtb();
     }//GEN-LAST:event_btLamMoiActionPerformed
 
@@ -673,40 +689,42 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            
-            String sql ="SELECT * FROM PHIEUMUONSACH where MAPHIEUMUONSACH like'%"+this.txtTimKiem.getText()+"%' "
-                    + "or MADOCGIA like '%"+this.txtTimKiem.getText()+"%'";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            String sql = "SELECT * FROM PHIEUMUONSACH where MAPHIEUMUONSACH like'%" + this.txtTimKiem.getText() + "%' "
+                    + "or MADOCGIA like '%" + this.txtTimKiem.getText() + "%'";
             DuLieuBang.Load(sql, tbPhieuMuonSach);
         }
     }//GEN-LAST:event_txtTimKiemKeyPressed
 
     private void tbMaSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMaSachMouseClicked
         // TODO add your handling code here:
-        if(evt.getModifiers() == InputEvent.BUTTON3_MASK )
-        {
-            
+        if (evt.getModifiers() == InputEvent.BUTTON3_MASK) {
+
         }
     }//GEN-LAST:event_tbMaSachMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        new QuanLyChiTietMuonSach().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-  
     private void cbbMaDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbMaDGActionPerformed
         // TODO add your handling code here:
         String selectedValue = cbbMaDG.getSelectedItem().toString();
         String[] word = selectedValue.split(",");
         madg = word[0];
-        
+
     }//GEN-LAST:event_cbbMaDGActionPerformed
 
     private void listSachMuonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSachMuonMouseClicked
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_listSachMuonMouseClicked
+
+    private void txtMaDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaDocGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaDocGiaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new QuanLyChiTietMuonSach().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -719,7 +737,6 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateNgayMuon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -731,12 +748,14 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbMaDocGia;
     private javax.swing.JLabel lbMaPhieuMuonSach;
     private javax.swing.JLabel lbMaSach;
+    private javax.swing.JLabel lbcbb;
     private javax.swing.JList<String> listSachMuon;
     private javax.swing.JTable tbMaSach;
     private javax.swing.JTable tbPhieuMuonSach;
-    public static javax.swing.JTextField txtMaDocGia;
+    private javax.swing.JTextField txtMaDocGia;
     public static javax.swing.JTextField txtMaPhieuMuonSach;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables

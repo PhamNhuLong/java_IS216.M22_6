@@ -16,10 +16,13 @@ import DAO.*;
 import Object.*;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -248,6 +251,11 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         labelTienThu.setText("Tiền thu");
 
         txtTienThu.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        txtTienThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTienThuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -256,7 +264,9 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(labelTienThu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,14 +276,14 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                             .addComponent(labelMaPhieuTra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelChonSach, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTienPhatKiNay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbbMaDG, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaPhieuTra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTienThu, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTienThu, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTienPhatKiNay, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbbMaDG, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtMaPhieuTra))
+                        .addGap(13, 13, 13))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,9 +309,9 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(labelChonSach, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTienThu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTienThu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelTienThu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTienThu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -418,26 +428,24 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
-                            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(460, 546, Short.MAX_VALUE)
-                                .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtTimKiem)
-                                .addGap(51, 51, 51))
-                            .addComponent(jScrollPane1))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -469,6 +477,8 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         tbMaSach.setVisible(true);
         listSach.setVisible(false);
         labelChonSach.setVisible(false);
+        txtTienThu.setVisible(false);
+        labelTienThu.setVisible(false);
         try {
             int row = this.tbPhieuTraSach.getSelectedRow();
             String MArow = String.valueOf(this.tbPhieuTraSach.getModel().getValueAt(row, 0));
@@ -528,7 +538,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     if (PhieuTraSachDAO.InsertPhieuTraSach(pts, strMS)) {
                         JOptionPane.showMessageDialog(null, "Phiếu trả sách được thêm vào thành công", "Thông báo", 1);
                         showtb();
-                        
+
                     }
                 }
             } catch (Exception e) {
@@ -546,8 +556,18 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
-        txtTienThu.setVisible(true);
-        labelTienThu.setVisible(true);
+        if (this.txtMaPhieuTra.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn phiếu trả", "Thông báo", 1);
+        } else {
+            if (HoaDonDAO.kiemtra(this.txtMaPhieuTra.getText()) == 0) {
+                txtTienThu.setVisible(true);
+                labelTienThu.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Đã thu tiền phiếu này rồi", "Thông báo", 1);
+            }
+
+        }
+
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
@@ -561,28 +581,23 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                 int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn tạo phiếu thu này", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     int tienno = Integer.valueOf(txtTienPhatKiNay.getText());
-                    if (tienno == 0) {
-                        JOptionPane.showMessageDialog(null, "Không có nợ đâu mà trả", "Thông báo", 1);
+                    int tienthu = Integer.valueOf(txtTienThu.getText());
+                    if (tienno != tienthu) {
+                        JOptionPane.showMessageDialog(null, "Tiền thu phải bằng tiền nợ", "Thông báo", 1);
                     } else {
-                        if (PhieuTraSachDAO.checkExists(this.txtMaPhieuTra.getText()) > 0) {
-                            JOptionPane.showMessageDialog(null, "Được trả rồi", "Thông báo", 1);
-                        } else {
-                            int tienthu = Integer.valueOf(txtTienThu.getText());
-                            if (tienno != tienthu) {
-                                JOptionPane.showMessageDialog(null, "Tiền thu phải bằng tiền nợ", "Thông báo", 1);
-                            } else {
-                                HoaDon hd = new HoaDon();
-                                hd.setmAHD(0);
-                                hd.setmAPHIEUTRA(Integer.valueOf(this.txtMaPhieuTra.getText()));
-                                hd.settIENTHU(tienthu);
-                                hd.settIENNO(0);
-                                if (HoaDonDAO.ThemHoaDon(hd)) {
-                                    JOptionPane.showMessageDialog(null, "Hóa đơn được thêm vào thành công", "Thông báo", 1);
-                                    showtb();
-                                    lammoi();
-                                }
-                            }
+                        String mapts = this.txtMaPhieuTra.getText();
+                        HoaDon hd = new HoaDon();
+                        hd.setmAHD(0);
+                        hd.setmAPHIEUTRA(Integer.valueOf(mapts));
+                        hd.settIENTHU(tienthu);
+                        hd.settIENNO(0);
+                        if (HoaDonDAO.ThemHoaDon(hd)) {
+                            JOptionPane.showMessageDialog(null, "Hóa đơn được thêm vào thành công", "Thông báo", 1);
+                            showtb();
+                            lammoi();
+                            inhoadon(mapts);
                         }
+
                     }
                 }
             } catch (Exception e) {
@@ -596,7 +611,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btCapNhatActionPerformed
 
-    private void lammoi(){
+    private void lammoi() {
         txtMaPhieuTra.setText("");
         txtNgayTra.setText(ngayht);
         txtTienPhatKiNay.setText("");
@@ -612,7 +627,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         listSach.setVisible(true);
         labelChonSach.setVisible(true);
     }
-    
+
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
         // TODO add your handling code here:
         lammoi();
@@ -643,6 +658,81 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         loadsach();
     }//GEN-LAST:event_cbbMaDGActionPerformed
 
+    private void txtTienThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienThuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTienThuActionPerformed
+    
+    private void inhoadon(String mapt){
+       int mahd = HoaDonDAO.getMa();
+       ArrayList<ChiTietTraSachHoaDon> list = HoaDonDAO.inhoadon(mapt);
+       int sum = 0;
+        StringBuilder htmlContent = new StringBuilder();
+        htmlContent.append("<html>");
+        htmlContent.append("<head>");
+        htmlContent.append("<style>\n"
+                + "table {\n"
+                + "  font-family: arial, sans-serif;\n"
+                + "  border-collapse: collapse;\n"
+                + "  width: 100%;\n"
+                + "}\n"
+                + "\n"
+                + "td, th {\n"
+                + "  border: 1px solid #dddddd;\n"
+                + "  text-align: left;\n"
+                + "  padding: 8px;\n"
+                + "}\n"
+                + "\n"
+                + "</style>");
+        htmlContent.append("</head>");
+        htmlContent.append("<body >");
+        htmlContent.append("<h2 align=\"center\" style=\"color:green;font-weight:normal;margin:0\">Hóa đơn</h2>");
+        htmlContent.append("<p align=\"right\">");
+        htmlContent.append(ngayht);
+        htmlContent.append("</p>");
+        htmlContent.append("<p> Mã hóa đơn: ");
+        htmlContent.append(mahd);
+        htmlContent.append("</p>");
+        htmlContent.append("<table cellspacing = \"0\" >");
+        htmlContent.append("<tr>\n"
+                + "        <th>STT</th>\n"
+                + "        <th>Tên đầu sách</th>\n"
+                + "        <th>Số ngày trả trễ</th>\n"
+                + "        <th>Tiền phạt</th>\n"
+                + "    </tr>");
+        for (int i = 0; i < list.size(); i++) {
+            sum = sum + list.get(i).gettIENPHAt();
+            htmlContent.append("<tr>");
+             htmlContent.append("<td>");
+            htmlContent.append(i+1);
+            htmlContent.append("</td>");
+            htmlContent.append("<td>");
+            htmlContent.append(list.get(i).getTenDauSach());
+            htmlContent.append("</td>");
+            htmlContent.append("<td>");
+            htmlContent.append(list.get(i).getsONGAYTRATRE());
+            htmlContent.append("</td>");
+            htmlContent.append("<td>");
+            htmlContent.append(list.get(i).gettIENPHAt());
+            htmlContent.append("</td>");
+            htmlContent.append("</tr>");
+        }
+        htmlContent.append("<tr></tr>");
+        htmlContent.append("</table>");
+        htmlContent.append("<p align=\"right\">Tổng cộng tiền nợ: ");
+        htmlContent.append(sum);
+        htmlContent.append("</p>");
+        htmlContent.append("</body>");
+        htmlContent.append("</html>");
+       
+        JEditorPane bill = new JEditorPane();
+        bill.setContentType("text/html");
+        bill.setText(htmlContent.toString());
+        try {
+            bill.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(QuanLyPhieuTraSachPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCapNhat;

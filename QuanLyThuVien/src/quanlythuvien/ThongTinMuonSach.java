@@ -26,7 +26,7 @@ public class ThongTinMuonSach extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(Color.white); 
         showPMS();
-        showDG();
+//        showDG();
         showMS();
              
     }
@@ -46,19 +46,19 @@ public class ThongTinMuonSach extends javax.swing.JFrame {
             
         }
     }
-    public void showDG(){
-        String ma = QuanLyPhieuMuonSachPanel.txtMaDocGia.getText();
-        String sql2 = " select * from DOCGIA where MADOCGIA = '"+ma+"'";
-        rs = DuLieuBang.ShowTextField(sql2);
-        try {
-            if(rs.next())
-            {
-              this.txtTenDocGia.setText(rs.getString("HOTEN"));
-            }
-        } catch (SQLException ex) {
-            
-        }
-    }
+//    public void showDG(){
+//        String ma = QuanLyPhieuMuonSachPanel.txtMaDocGia.getText();
+//        String sql2 = " select * from DOCGIA where MADOCGIA = '"+ma+"'";
+//        rs = DuLieuBang.ShowTextField(sql2);
+//        try {
+//            if(rs.next())
+//            {
+//              this.txtTenDocGia.setText(rs.getString("HOTEN"));
+//            }
+//        } catch (SQLException ex) {
+//            
+//        }
+//    }
     public void showMS(){
         String ma = QuanLyPhieuMuonSachPanel.txtMaPhieuMuonSach.getText();
         String sql = " select CS.MASACH , DS.TENDAUSACH\n" +
@@ -123,6 +123,11 @@ public class ThongTinMuonSach extends javax.swing.JFrame {
         txtMaPhieuMuonSach.setEditable(false);
 
         txtMaDocGia.setEditable(false);
+        txtMaDocGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaDocGiaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("TenDocGia");
 
@@ -190,6 +195,10 @@ public class ThongTinMuonSach extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtMaDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaDocGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaDocGiaActionPerformed
 
     /**
      * @param args the command line arguments
