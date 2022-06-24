@@ -16,7 +16,7 @@ Chức năng chung:
 Chức năng của quản lý: Bao gồm các chức năng của thủ thư và có thêm:
 - Chức năng báo cáo, thống kê.
 
-Giới thiệu công nghệ mới đã sử dụng trong đồ án:
+GIỚI THIỆU CÔNG NGHỆ MỚI ĐƯỢC SỬ DỤNG
 - Nén project thành .exe
 - Vẽ biểu đồ khi tra cứu thống kê.
 
