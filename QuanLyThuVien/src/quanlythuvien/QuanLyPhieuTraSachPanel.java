@@ -165,7 +165,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         jToolBar1.add(btThemMoi);
         jToolBar1.add(jSeparator2);
 
-        btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-delete-50.png"))); // NOI18N
+        btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bill.png"))); // NOI18N
         btXoa.setFocusable(false);
         btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -215,6 +215,11 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         labelTienPhat.setText("Tiền phạt kì này");
 
         txtTienPhatKiNay.setEditable(false);
+        txtTienPhatKiNay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTienPhatKiNayActionPerformed(evt);
+            }
+        });
 
         tbMaSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -433,18 +438,18 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtTimKiem)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -661,6 +666,10 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
     private void txtTienThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienThuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTienThuActionPerformed
+
+    private void txtTienPhatKiNayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienPhatKiNayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTienPhatKiNayActionPerformed
     
     private void inhoadon(String mapt){
        int mahd = HoaDonDAO.getMa();

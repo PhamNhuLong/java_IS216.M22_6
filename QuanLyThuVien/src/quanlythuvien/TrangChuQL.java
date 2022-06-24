@@ -58,6 +58,7 @@ public JPanel childpanel;
         lbuser = new javax.swing.JLabel();
         jBReport = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jBReport2 = new javax.swing.JButton();
         pnMain = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -181,6 +182,18 @@ public JPanel childpanel;
             }
         });
 
+        jBReport2.setBackground(new java.awt.Color(255, 51, 102));
+        jBReport2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jBReport2.setForeground(new java.awt.Color(255, 255, 255));
+        jBReport2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-warning-64.png"))); // NOI18N
+        jBReport2.setText("CẢNH BÁO");
+        jBReport2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        jBReport2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBReport2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -189,17 +202,10 @@ public JPanel childpanel;
             .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator1)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btDauSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btPhieuTraSach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btPhieuMuonSach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btTheDocGia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(lbuser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,9 +213,15 @@ public JPanel childpanel;
                         .addGap(9, 9, 9))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jBReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBReport2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btDauSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btPhieuTraSach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btPhieuMuonSach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btTheDocGia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addComponent(jSeparator1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +248,9 @@ public JPanel childpanel;
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBReport, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBReport2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbuser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -247,7 +261,7 @@ public JPanel childpanel;
         pnMain.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/hinhtruong.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/ezgif.com-gif-maker.jpg"))); // NOI18N
         jLabel2.setPreferredSize(new java.awt.Dimension(250, 250));
         pnMain.add(jLabel2, java.awt.BorderLayout.CENTER);
 
@@ -256,7 +270,7 @@ public JPanel childpanel;
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("TRƯỜNG THCS TRIỆU AN");
+        jLabel3.setText("THƯ VIỆN TỰ TẠO");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 0, 204), null));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -291,13 +305,61 @@ public JPanel childpanel;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        jPanel2.getAccessibleContext().setAccessibleName("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        //phieuNhapSach.setVisible(true);
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jBReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReportActionPerformed
+        // TODO add your handling code here:
+        childpanel = new BaoCaoThongKePanel();
+        pnMain.removeAll();
+        pnMain.add(childpanel);
+        pnMain.validate();
+    }//GEN-LAST:event_jBReportActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(this,"Bạn có muốn đăng xuất ","Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION){
+            dispose();
+            TestLogin test = new TestLogin();
+            test.setVisible(true);
+        }else
+        {
+            return;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        childpanel = new home();
+        pnMain.removeAll();
+        pnMain.add(childpanel);
+        pnMain.validate();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btPhieuTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPhieuTraSachActionPerformed
+        // TODO add your handling code here:
+        //phieuTraSach.setVisible(true);
+
+        childpanel = new QuanLyPhieuTraSachPanel();
+        pnMain.removeAll();
+        pnMain.add(childpanel);
+        pnMain.validate();
+    }//GEN-LAST:event_btPhieuTraSachActionPerformed
 
     private void btPhieuMuonSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPhieuMuonSachActionPerformed
         // TODO add your handling code here:
@@ -307,6 +369,15 @@ public JPanel childpanel;
         pnMain.add(childpanel);
         pnMain.validate();
     }//GEN-LAST:event_btPhieuMuonSachActionPerformed
+
+    private void btDauSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDauSachActionPerformed
+        // TODO add your handling code here:
+        //quanLyDauSach.setVisible(true);
+        childpanel = new QuanLyDauSachPanel();
+        pnMain.removeAll();
+        pnMain.add(childpanel);
+        pnMain.validate();
+    }//GEN-LAST:event_btDauSachActionPerformed
 
 //    public JPanel getMainPanel() {
 //        return pnMain;
@@ -319,64 +390,16 @@ public JPanel childpanel;
         pnMain.removeAll();
         pnMain.add(childpanel);
         pnMain.validate();
-        
+
     }//GEN-LAST:event_btTheDocGiaActionPerformed
 
-    private void btDauSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDauSachActionPerformed
+    private void jBReport2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReport2ActionPerformed
         // TODO add your handling code here:
-        //quanLyDauSach.setVisible(true);
-        childpanel = new QuanLyDauSachPanel();
+        childpanel = new CanhBaoPanel();
         pnMain.removeAll();
         pnMain.add(childpanel);
         pnMain.validate();
-    }//GEN-LAST:event_btDauSachActionPerformed
-
-    private void btPhieuTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPhieuTraSachActionPerformed
-        // TODO add your handling code here:
-        //phieuTraSach.setVisible(true);
-        
-        childpanel = new QuanLyPhieuTraSachPanel();
-        pnMain.removeAll();
-        pnMain.add(childpanel);
-        pnMain.validate();
-    }//GEN-LAST:event_btPhieuTraSachActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        //phieuNhapSach.setVisible(true);
-        
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        childpanel = new home();
-        pnMain.removeAll();
-        pnMain.add(childpanel);
-        pnMain.validate();
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        int result = JOptionPane.showConfirmDialog(this,"Bạn có muốn đăng xuất ","Xác nhận", JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.YES_OPTION){
-        dispose();
-        TestLogin test = new TestLogin();
-        test.setVisible(true);
-        }else
-        {
-            return;
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jBReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReportActionPerformed
-        // TODO add your handling code here:
-        childpanel = new BaoCaoThongKePanel();
-        pnMain.removeAll();
-        pnMain.add(childpanel);
-        pnMain.validate();
-    }//GEN-LAST:event_jBReportActionPerformed
+    }//GEN-LAST:event_jBReport2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -546,6 +569,7 @@ public JPanel childpanel;
     private javax.swing.JButton btPhieuTraSach;
     private javax.swing.JButton btTheDocGia;
     private javax.swing.JButton jBReport;
+    private javax.swing.JButton jBReport2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
