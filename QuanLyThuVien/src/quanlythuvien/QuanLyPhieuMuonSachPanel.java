@@ -52,7 +52,8 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         lbMaPhieuMuonSach.setVisible(false);
         lbMaDocGia.setVisible(false);
         txtMaDocGia.setVisible(false);
-        jDateNgayMuon.setDate(date);
+        txtNgayMuon.setText(formatter.format(date));
+        
     }
 
     public final void showtb() {
@@ -116,18 +117,13 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btThemMoi = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        btXoa = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        btCapNhat = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
         btLamMoi = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lbMaPhieuMuonSach = new javax.swing.JLabel();
         lbcbb = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMaPhieuMuonSach = new javax.swing.JTextField();
-        jDateNgayMuon = new com.toedter.calendar.JDateChooser();
         lbMaSach = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbMaSach = new javax.swing.JTable();
@@ -136,6 +132,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         listSachMuon = new javax.swing.JList<>();
         txtMaDocGia = new javax.swing.JTextField();
         lbMaDocGia = new javax.swing.JLabel();
+        txtNgayMuon = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhieuMuonSach = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -159,31 +156,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
             }
         });
         jToolBar1.add(btThemMoi);
-        jToolBar1.add(jSeparator2);
-
-        btXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-delete-50.png"))); // NOI18N
-        btXoa.setFocusable(false);
-        btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btXoaActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator3);
-
-        btCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-edit-50.png"))); // NOI18N
-        btCapNhat.setFocusable(false);
-        btCapNhat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btCapNhat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btCapNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCapNhatActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(btCapNhat);
-        jToolBar1.add(jSeparator4);
 
         btLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-refresh-50.png"))); // NOI18N
         btLamMoi.setFocusable(false);
@@ -212,8 +185,6 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                 txtMaPhieuMuonSachActionPerformed(evt);
             }
         });
-
-        jDateNgayMuon.setEnabled(false);
 
         lbMaSach.setText("Mã sách");
 
@@ -274,14 +245,14 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbcbb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                             .addComponent(lbMaDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbbMaDG, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(jDateNgayMuon, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(txtMaDocGia)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(txtMaDocGia)
+                            .addComponent(txtNgayMuon)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbMaPhieuMuonSach)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -300,16 +271,16 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                     .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateNgayMuon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(txtNgayMuon))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(lbMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMaPhieuMuonSach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -460,7 +431,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -487,7 +458,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
             if (rs.next()) {
                 this.txtMaPhieuMuonSach.setText(rs.getString("MAPHIEUMUONSACH"));
                 this.txtMaDocGia.setText(rs.getString("HOTEN"));
-                this.jDateNgayMuon.setDate(rs.getDate("NGAYMUON"));
+                this.txtNgayMuon.setText(rs.getString("NGAYMUON"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -504,16 +475,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
         } else if (this.txtMaDocGia.getText().length() != 0) {
             String sql1 = " select * from PHIEUMUONSACH where MADOCGIA like '%" + this.txtMaDocGia.getText() + "%' ";
             DuLieuBang.Load(sql1, tbPhieuMuonSach);
-        } else if (this.jDateNgayMuon.getDate() != null) {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            String date = sdf.format(jDateNgayMuon.getDate());
-            String sql1 = "SELECT * FROM PHIEUMUONSACH where ngaymuon = to_date('" + date + "', 'yyyy-mm-dd') ";
-
-            DuLieuBang.Load(sql1, tbPhieuMuonSach);
-
-        } else if (this.txtTimKiem.getText().length() != 0) {
+        }  else if (this.txtTimKiem.getText().length() != 0) {
             String sql1 = "SELECT * FROM PHIEUMUONSACH where MAPHIEUMUONSACH like'%" + this.txtTimKiem.getText() + "%' "
                     + "or MADOCGIA like '%" + this.txtTimKiem.getText() + "%'";
             DuLieuBang.Load(sql1, tbPhieuMuonSach);
@@ -565,9 +527,8 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
                     PhieuMuonSach pms = new PhieuMuonSach();
                     pms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
                     pms.setmADOCGIA(madg);
-                    if (jDateNgayMuon.getDate() != null) {
-                        java.util.Date utilStartDate = jDateNgayMuon.getDate();
-                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                    if (date.getTime() != 0) {
+                        java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
                         pms.setnGAYMUON(sqlStartDate);
                     }
 
@@ -600,78 +561,11 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 //            }
     }//GEN-LAST:event_btThemMoiActionPerformed
 
-    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-        // TODO add your handling code here:
-        int temp1 = dem();
-        if (this.txtMaPhieuMuonSach.getText().length() == 0)
-            JOptionPane.showMessageDialog(null, "Bạn cần chọn mã phiếu mượn sách để xóa", "Thông báo", 1);
-        else if (this.txtMaDocGia.getText().length() == 0)
-            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã độc giả", "Thông báo", 1);
-        else {
-            try {
-
-                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa phiếu mượn sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION) {
-                    PhieuMuonSachDAO.DeletePhieuMuonSach(txtMaPhieuMuonSach.getText());
-                    int temp2 = dem();
-                    if (temp1 != temp2) {
-                        JOptionPane.showMessageDialog(null, "Phiếu mượn sách xóa thành công!", "Thông báo", 1);
-                        showtb();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Phiếu mượn này chưa được trả, không thể xóa!", "Thông báo", 1);
-                    }
-                } else {
-                    // JOptionPane.showMessageDialog(null, "Phiếu mượn sách xóa thất bại!", "Thông báo",1);
-                }
-            } catch (Exception e) {
-                // JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-                //ORA-02292:
-                if (e.getMessage().contains("ORA-02292")) {
-                    JOptionPane.showMessageDialog(null, "Phiếu mượn này chưa trả sách. Bạn không thể xóa phiếu mượn này.", "Lỗi", JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        }
-    }//GEN-LAST:event_btXoaActionPerformed
-
-    private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
-        // TODO add your handling code here:
-        if (this.txtMaPhieuMuonSach.getText().length() == 0)
-            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã phiếu mượn sách", "Thông báo", 1);
-        else if (this.txtMaDocGia.getText().length() == 0)
-            JOptionPane.showMessageDialog(null, "Bạn chưa nhập mã độc giả", "Thông báo", 1);
-        else {
-            try {
-                int result = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn cập nhật phiếu mượn sách này", "Xác nhận", JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION) {
-                    PhieuMuonSach pms = new PhieuMuonSach();
-                    pms.setmAPHIEUMUONSACH(txtMaPhieuMuonSach.getText());
-                    pms.setmADOCGIA(txtMaDocGia.getText());
-                    if (jDateNgayMuon.getDate() != null) {
-                        java.util.Date utilStartDate = jDateNgayMuon.getDate();
-                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                        pms.setnGAYMUON(sqlStartDate);
-                    }
-                    PhieuMuonSachDAO dao = new PhieuMuonSachDAO();
-                    dao.UpdatePhieuMuonSach(pms);
-                    JOptionPane.showMessageDialog(null, "Phiếu mượn sách được sửa thành công", "Thông báo", 1);
-                    showtb();
-                }
-            } catch (Exception e) {
-                //JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
-                //ORA-04088:
-                if (e.getMessage().contains("ORA-04088")) {
-                    JOptionPane.showMessageDialog(null, "Ngày mượn sách phải lớn hơn ngày lập thẻ.", "Lỗi", JOptionPane.WARNING_MESSAGE);
-                }
-
-            }
-        }
-    }//GEN-LAST:event_btCapNhatActionPerformed
-
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
         // TODO add your handling code here:
         txtMaPhieuMuonSach.setText("");
         txtMaDocGia.setText("");
-        jDateNgayMuon.setDate(date);
+        txtNgayMuon.setText(formatter.format(date));
         txtTimKiem.setText("");
         lbcbb.setVisible(true);
         cbbMaDG.setVisible(true);
@@ -728,14 +622,11 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCapNhat;
     private javax.swing.JButton btLamMoi;
     private javax.swing.JButton btThemMoi;
     private javax.swing.JButton btTimKiem;
-    private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbbMaDG;
     private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateNgayMuon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -744,9 +635,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
-    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbMaDocGia;
     private javax.swing.JLabel lbMaPhieuMuonSach;
@@ -757,6 +646,7 @@ public class QuanLyPhieuMuonSachPanel extends javax.swing.JPanel {
     private javax.swing.JTable tbPhieuMuonSach;
     private javax.swing.JTextField txtMaDocGia;
     public static javax.swing.JTextField txtMaPhieuMuonSach;
+    private javax.swing.JTextField txtNgayMuon;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
