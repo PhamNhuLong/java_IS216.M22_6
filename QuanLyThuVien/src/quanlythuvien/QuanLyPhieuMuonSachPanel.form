@@ -63,7 +63,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" pref="442" max="32767" attributes="0"/>
+                  <Component id="jPanel1" pref="435" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" pref="442" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -93,37 +93,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btThemMoiActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
-        </Component>
-        <Component class="javax.swing.JButton" name="btXoa">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Icons/icons8-delete-50.png"/>
-            </Property>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btXoaActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
-        </Component>
-        <Component class="javax.swing.JButton" name="btCapNhat">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Icons/icons8-edit-50.png"/>
-            </Property>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCapNhatActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator4">
         </Component>
         <Component class="javax.swing.JButton" name="btLamMoi">
           <Properties>
@@ -168,15 +138,15 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="lbMaSach" max="32767" attributes="0"/>
                               <Component id="lbcbb" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" pref="110" max="32767" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" pref="109" max="32767" attributes="0"/>
                               <Component id="lbMaDocGia" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbbMaDG" max="32767" attributes="0"/>
-                              <Component id="jScrollPane3" alignment="0" pref="166" max="32767" attributes="0"/>
-                              <Component id="jDateNgayMuon" alignment="0" pref="166" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="0" pref="167" max="32767" attributes="0"/>
                               <Component id="txtMaDocGia" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNgayMuon" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -203,9 +173,9 @@
                       <Component id="lbMaDocGia" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel4" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jDateNgayMuon" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel4" pref="40" max="32767" attributes="0"/>
+                      <Component id="txtNgayMuon" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -214,7 +184,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbMaPhieuMuonSach" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="txtMaPhieuMuonSach" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -248,11 +218,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateNgayMuon">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbMaSach">
           <Properties>
@@ -355,6 +320,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xe3; &#x111;&#x1ed9;c gi&#x1ea3;"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtNgayMuon">
         </Component>
       </SubComponents>
     </Container>

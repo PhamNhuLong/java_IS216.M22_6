@@ -65,17 +65,16 @@ public class DocGiaDAO {
     }
 
     public boolean UpdateDocGia(DocGia dg) {
-        String sql = "update DOCGIA set  HOTEN = ?, NGAYSINH = ?, LOAIDG = ?, DIACHI=?, EMAIL =?, nglapthe=? where MADOCGIA = ?";
+        String sql = "update DOCGIA set  HOTEN = ?, NGAYSINH = ?, LOAIDG = ?, DIACHI=?, EMAIL =? where MADOCGIA = ?";
 
         try {
             pst = conn.prepareStatement(sql);
-            pst.setString(7, dg.getmADOCGIA());
+            pst.setString(6, dg.getmADOCGIA());
             pst.setString(1, dg.gethOTEN());
             pst.setDate(2, (Date) dg.getnGAYSINH());
             pst.setString(3, dg.getlOAIDG());
             pst.setString(4, dg.getdIACHI());
             pst.setString(5, dg.geteMAIL());
-            pst.setDate(6, (Date) dg.getnGAYLAPTHE());
 
             return pst.executeUpdate() > 0;
         } catch (SQLException ex) {
