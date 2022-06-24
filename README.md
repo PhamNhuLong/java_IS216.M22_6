@@ -41,11 +41,11 @@ CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 
 
 CÁC BƯỚC CHẠY ỨNG DỤNG
-Bước 1: Clone project về máy
-Bước 2: Setup cho cơ sở dữ liệu
-- Kích hoạt tài khoản sa với(username: sa, password: 123456789)
-- Bật chế độ connect SQL server bằng SQL Server Authentication
-- Enable port và đặt port 1433 trong SQL Server Configuration Manager
-Bước 3: Chạy file QLTV.sql để tạo cơ sở dữ liệu.
-Bước 4: import các thư viện liệt kê ở trên.
-Bước 5: Chạy chương trình và trải nghiệm.
+- Bước 1: Clone project về máy
+- Bước 2: Setup cho cơ sở dữ liệu
+    + Kích hoạt tài khoản sa với(username: sa, password: 123456789)
+    + Bật chế độ connect SQL server bằng SQL Server Authentication
+    + Enable port và đặt port 1433 trong SQL Server Configuration Manager
+- Bước 3: Chạy file QLTV.sql để tạo cơ sở dữ liệu.
+- Bước 4: import các thư viện liệt kê ở trên.
+- Bước 5: Chạy chương trình và trải nghiệm.
