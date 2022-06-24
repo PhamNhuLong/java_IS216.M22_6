@@ -136,20 +136,5 @@ public class PhieuTraSachDAO {
         return list;
     }
 
-    public static int checkExists(String mapts) {
-        String sql = "SELECT COUNT(*) as count FROM HOADON WHERE MAPHIEUTRA = ?";
-        int count = 0;
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, mapts);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                count = rs.getInt("count");
-            }
-        } catch (SQLException ex) {
-            throw new ArithmeticException(ex.getMessage());
-        }
-        return count;
-    }
-
+  
 }
