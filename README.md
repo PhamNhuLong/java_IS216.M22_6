@@ -21,25 +21,10 @@ GIỚI THIỆU CÔNG NGHỆ MỚI ĐƯỢC SỬ DỤNG
 - Vẽ biểu đồ khi tra cứu thống kê.
 
 GIỚI THIỆU THÀNH VIÊN TRONG NHÓM:
-Họ tên
-MSSV
-Nhiệm vụ
-Hoàn thành
-Nguyễn Thị Hồng Hải
-19521467
-Xây dựng database
-Xây dựng các chức năng cơ bản của ứng dụng
-100%
-Nguyễn Nhật Minh
-19521844
-Xây dựng database
-Xây dựng các chức năng cơ bản của ứng dụng
-100%
-Phạm Như Long
-19521798
-Xây dựng database
-Thực hiện test
-100%
+
+Nguyễn Thị Hồng Hải - 19521467 - Xây dựng database, xây dựng các chức năng của ứng dụng
+Nguyễn Nhật Minh - 19521844 - Xây dựng database, xây dựng các chức năng cơ bản của ứng dụng
+Phạm Như Long - 19521798 - Xây dựng database, thực hiện test
 
 CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 - Microsoft SQL Server
