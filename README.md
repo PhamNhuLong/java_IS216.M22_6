@@ -3,6 +3,7 @@
 GIỚI THIỆU ĐỒ ÁN
 Quản lý thư viện là app window được xây dựng bằng ngôn ngữ Java cùng với cơ sở dữ liệu là MS SQL Server. Ứng dụng tích hợp các tính năng cơ bản đáp ứng cho việc quản lý thư viện và một số chức năng nâng cao.
 
+
 CÁC CHỨC NĂNG ĐÃ LÀM
 
 Chức năng chung: 
@@ -16,15 +17,20 @@ Chức năng chung:
 Chức năng của quản lý: Bao gồm các chức năng của thủ thư và có thêm:
 - Chức năng báo cáo, thống kê.
 
+
 GIỚI THIỆU CÔNG NGHỆ MỚI ĐƯỢC SỬ DỤNG
 - Nén project thành .exe
 - Vẽ biểu đồ khi tra cứu thống kê.
 
+
 GIỚI THIỆU THÀNH VIÊN TRONG NHÓM:
 
 Nguyễn Thị Hồng Hải - 19521467 - Xây dựng database, xây dựng các chức năng của ứng dụng
+
 Nguyễn Nhật Minh - 19521844 - Xây dựng database, xây dựng các chức năng cơ bản của ứng dụng
+
 Phạm Như Long - 19521798 - Xây dựng database, thực hiện test
+
 
 CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 - Microsoft SQL Server
@@ -34,6 +40,7 @@ CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 - jcalendar-1.4.jar
 - mssql-jdbc-10.2.0.jre17.jar
 - Jasperreports JAR 6.3.0
+
 
 CÁC BƯỚC CHẠY ỨNG DỤNG
 Bước 1: Clone project về máy
