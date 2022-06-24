@@ -66,27 +66,27 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPanel1" pref="395" max="32767" attributes="0"/>
-                          <Component id="jToolBar1" max="32767" attributes="0"/>
+                          <Component id="jPanel1" pref="318" max="32767" attributes="0"/>
+                          <Component id="jToolBar1" pref="318" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" alignment="0" pref="554" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jButton1" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="txtTimKiem" min="-2" pref="428" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btTimKiem" min="-2" pref="44" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="txtTimKiem" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btTimKiem" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
+                  <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -208,9 +208,12 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="367" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="labelTienThu" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
@@ -221,17 +224,17 @@
                               <Component id="labelChonSach" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jScrollPane4" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
-                              <Component id="txtTienPhatKiNay" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
-                              <Component id="txtNgayTra" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
-                              <Component id="cbbMaDG" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
-                              <Component id="txtMaPhieuTra" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
-                              <Component id="txtTienThu" min="-2" pref="261" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="txtTienThu" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtTienPhatKiNay" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNgayTra" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cbbMaDG" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtMaPhieuTra" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -264,9 +267,9 @@
                       <Component id="labelChonSach" pref="39" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtTienThu" min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="labelTienThu" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="labelTienThu" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="txtTienThu" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>
@@ -418,6 +421,9 @@
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTienThuActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -493,10 +499,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" pref="885" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
+              <Component id="jLabel1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

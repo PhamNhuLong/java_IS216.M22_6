@@ -52,8 +52,6 @@ public class TestLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtuser = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jBDocGia = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         showPass = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -103,20 +101,7 @@ public class TestLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 102));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("THƯ VIỆN TRƯỜNG THCS TRIỆU AN");
-
-        jBDocGia.setBackground(new java.awt.Color(255, 153, 153));
-        jBDocGia.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jBDocGia.setText("ĐĂNG NHẬP VỚI TƯ CÁCH ĐỘC GIẢ");
-        jBDocGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBDocGiaActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("------------HOẶC------------");
+        jLabel3.setText("THƯ VIỆN ");
 
         showPass.setText("Hiển thị mật khẩu");
         showPass.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +119,7 @@ public class TestLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,14 +128,9 @@ public class TestLogin extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(showPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jBDocGia)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBLogin)
@@ -177,10 +157,6 @@ public class TestLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jBLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -224,7 +200,7 @@ public class TestLogin extends javax.swing.JFrame {
         // TODO add your handling code here
         boolean kt = false;
         int quyen =0;
-               String ten = txtuser.getText();
+        String ten = txtuser.getText();
         String mk = String.valueOf(txtpass.getPassword());
         for(NguoiDung ND:list){
             if(ND.getTen().equalsIgnoreCase(ten) && ND.getMatKhau().equals(mk)  ){
@@ -259,13 +235,6 @@ public class TestLogin extends javax.swing.JFrame {
         if(JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thoát chương trình hay không?","Thông báo",JOptionPane.YES_NO_OPTION)==0)
             dispose();
     }//GEN-LAST:event_jBLogOutActionPerformed
-
-    private void jBDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDocGiaActionPerformed
-        // TODO add your handling code here:
-                dispose();
-                TraCuuDauSach trangChu = new TraCuuDauSach();
-                trangChu.setVisible(true);
-    }//GEN-LAST:event_jBDocGiaActionPerformed
 
     private void txtpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpassActionPerformed
         // TODO add your handling code here:
@@ -337,13 +306,11 @@ public class TestLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBDocGia;
     private javax.swing.JButton jBLogOut;
     private javax.swing.JButton jBLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

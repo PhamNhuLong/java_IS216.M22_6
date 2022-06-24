@@ -65,7 +65,7 @@ create table DOCGIA (
    DIACHI               nvarchar(50)          null,
    EMAIL                nvarchar(40)          null,
    NGLAPTHE             datetime             null,
-   TINHTRANGDG          nvarchar(20)          null,
+   NGDENHAN          datetime          null,
 )
 
 /*==============================================================*/
@@ -266,7 +266,7 @@ END;
 
 GO
 insert into DAUSACH(TENDAUSACH,NAMXB,NXB,SANCO,TONGSO,DANGCHOMUON,VITRI,TACGIA) VALUES (N'hồng hải', 2014, N'hồng hải', 3,3,0,N'kệ 1',N'hồng hải');
-INSERT INTO DOCGIA(HOTEN,NGAYSINH,LOAIDG,DIACHI,NGLAPTHE,TINHTRANGDG,EMAIL) VALUES (N'hồng hải',convert(date,'2001-05-12'),N'sinh viên',N'hồng hải',convert(date,'2022-06-05'),N'còn hạn',N'hai@gmail.com');
+INSERT INTO DOCGIA(HOTEN,NGAYSINH,LOAIDG,DIACHI,NGLAPTHE,NGDENHAN,EMAIL) VALUES (N'hồng hải',convert(date,'2001-05-12'),N'sinh viên',N'hồng hải',convert(date,'2022-06-05'),convert(date,'2022-12-05'),N'bnnm8549@gmail.com');
 INSERT INTO PHIEUMUONSACH(MADOCGIA,NGAYMUON) VALUES (1,convert(date,'2022-06-05'));
 INSERT INTO CTMS VALUES (1,1,N'chưa trả');
 INSERT INTO CTMS VALUES (2,1,N'chưa trả');

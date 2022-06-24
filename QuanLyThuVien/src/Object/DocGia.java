@@ -15,12 +15,12 @@ import java.sql.Date;
 public class DocGia {
 
    private String mADOCGIA,hOTEN,lOAIDG,dIACHI,eMAIL;
-   private Date nGAYSINH,nGAYLAPTHE;
+   private Date nGAYSINH,nGAYLAPTHE, nGAYDENHAN;
 
     public DocGia() {
     }
 
-    public DocGia(String mADOCGIA, String hOTEN, String lOAIDG, String dIACHI, String eMAIL, Date nGAYSINH, Date nGAYLAPTHE) {
+    public DocGia(String mADOCGIA, String hOTEN, String lOAIDG, String dIACHI, String eMAIL, Date nGAYSINH, Date nGAYLAPTHE, Date nGAYDENHAN) {
         this.mADOCGIA = mADOCGIA;
         this.hOTEN = hOTEN;
         this.lOAIDG = lOAIDG;
@@ -28,6 +28,7 @@ public class DocGia {
         this.eMAIL = eMAIL;
         this.nGAYSINH = nGAYSINH;
         this.nGAYLAPTHE = nGAYLAPTHE;
+        this.nGAYDENHAN = nGAYDENHAN;
     }
 
     public String getmADOCGIA() {
@@ -37,8 +38,6 @@ public class DocGia {
     public void setmADOCGIA(String mADOCGIA) {
         this.mADOCGIA = mADOCGIA;
     }
-
-    
 
     public String gethOTEN() {
         return hOTEN;
@@ -87,7 +86,14 @@ public class DocGia {
     public void setnGAYLAPTHE(Date nGAYLAPTHE) {
         this.nGAYLAPTHE = nGAYLAPTHE;
     }
-   
-   
+
+    public Date getnGAYDENHAN() {
+        return nGAYDENHAN;
+    }
+
+    public void setnGAYDENHAN(Date nGAYDENHAN) {
+        this.nGAYDENHAN = nGAYDENHAN;
+    }
+
     
 }

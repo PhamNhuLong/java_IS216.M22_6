@@ -22,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
 
-
 public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
 
     /**
@@ -33,6 +32,8 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
     public static PreparedStatement pst = null;
     public static ResultSet rs = null;
     public static Connection conn = Connect.getConnect();
+    SimpleDateFormat formatter = new SimpleDateFormat("d MMM, y");
+    Date date = new Date();
 
     public QuanLyTheDocGiaPanel() {
         initComponents();
@@ -41,9 +42,7 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
         txtMaDocGia.setVisible(false);
         lbMaDocGia.setVisible(false);
         //System.out.print(tbDocGia.getRowCount());
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("d MMM, y");  
-        Date date = new Date();  
+        btnGiaHan.setVisible(false);
         jDateNgayLapThe.setDate(date);
     }
 
@@ -90,7 +89,8 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
         jDateNgaySinh = new com.toedter.calendar.JDateChooser();
         jDateNgayLapThe = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
-        txtTinhTrang = new javax.swing.JTextField();
+        jDateNgayDenHan = new com.toedter.calendar.JDateChooser();
+        btnGiaHan = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -132,11 +132,20 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel9.setText("Tình trạng");
+        jDateNgayLapThe.setEnabled(false);
 
-        txtTinhTrang.addActionListener(new java.awt.event.ActionListener() {
+        jLabel9.setText("Ngày đến hạn");
+
+        jDateNgayDenHan.setEnabled(false);
+
+        btnGiaHan.setBackground(new java.awt.Color(255, 0, 0));
+        btnGiaHan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnGiaHan.setForeground(new java.awt.Color(255, 255, 255));
+        btnGiaHan.setText("Gia hạn độc giả");
+        btnGiaHan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGiaHan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTinhTrangActionPerformed(evt);
+                btnGiaHanActionPerformed(evt);
             }
         });
 
@@ -167,10 +176,14 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                         .addComponent(txtDiaChi, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtLoaiDG, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jDateNgaySinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtHoTen, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(txtTinhTrang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHoTen, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jDateNgayDenHan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                     .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(btnGiaHan)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,9 +213,11 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateNgayLapThe, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateNgayDenHan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnGiaHan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,14 +416,12 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
     private void tbDocGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDocGiaMouseClicked
         // TODO add your handling code here:
         try {
-
             int row = this.tbDocGia.getSelectedRow();
             int MArow = (int) (this.tbDocGia.getModel().getValueAt(row, 0));
             String sql1 = " select * from DOCGIA where MADOCGIA='" + MArow + "'";
             ResultSet rs = DuLieuBang.ShowTextField(sql1);
-
+            Date denhan = new Date();
             if (rs.next()) {
-
                 this.txtMaDocGia.setText(rs.getString("MADOCGIA"));
                 this.txtHoTen.setText(rs.getString("HOTEN"));
                 this.jDateNgaySinh.setDate(rs.getDate("NGAYSINH"));
@@ -416,10 +429,12 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                 this.txtDiaChi.setText(rs.getString("DIACHI"));
                 this.txtEmail.setText(rs.getString("EMAIL"));
                 this.jDateNgayLapThe.setDate(rs.getDate("NGLAPTHE"));
-                this.txtTinhTrang.setText(rs.getString("TINHTRANGDG"));
-
+                this.jDateNgayDenHan.setDate(rs.getDate("NGDENHAN"));
+                denhan = rs.getDate("NGDENHAN");
             }
-
+            if (!denhan.after(date)) {
+                btnGiaHan.setVisible(true);
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -428,16 +443,7 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
 
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
         // TODO add your handling code here:
-        txtMaDocGia.setText("");
-        txtHoTen.setText("");
-        jDateNgaySinh.setDate(null);
-        txtDiaChi.setText("");
-        txtLoaiDG.setText("");
-        txtEmail.setText("");
-        jDateNgayLapThe.setDate(null);
-        txtTimKiem.setText("");
-        txtTinhTrang.setText("");
-        showtb();
+        lamMoi();
     }//GEN-LAST:event_btLamMoiActionPerformed
     public void lamMoi() {
         txtMaDocGia.setText("");
@@ -446,9 +452,10 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
         txtDiaChi.setText("");
         txtLoaiDG.setText("");
         txtEmail.setText("");
-        jDateNgayLapThe.setDate(null);
+        jDateNgayLapThe.setDate(date);
         txtTimKiem.setText("");
-        txtTinhTrang.setText("");
+        jDateNgayDenHan.setDate(null);
+        btnGiaHan.setVisible(false);
         showtb();
     }
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
@@ -479,11 +486,11 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                         java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
                         dg.setnGAYLAPTHE(sqlStartDate);
                     }
-                    
+
                     DocGiaDAO dao = new DocGiaDAO();
                     dao.UpdateDocGia(dg);
                     JOptionPane.showMessageDialog(null, "Độc giả được cập nhật thành công", "Thông báo", 1);
-                    showtb();
+                    lamMoi();
                 }
             } catch (Exception e) {
                 // JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
@@ -544,6 +551,13 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                     DocGia dg = new DocGia();
                     dg.setmADOCGIA(txtMaDocGia.getText());
                     dg.sethOTEN(txtHoTen.getText());
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.MONTH, 4);
+                    if (cal.getTime() != null) {
+                        java.util.Date utilStartDate = cal.getTime();
+                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+                        dg.setnGAYDENHAN(sqlStartDate);
+                    }
                     if (jDateNgaySinh.getDate() != null) {
                         java.util.Date utilStartDate = jDateNgaySinh.getDate();
                         java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
@@ -590,14 +604,12 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
             int namlapthe = Calendar.getInstance().get(Calendar.YEAR);
 //            System.out.println(year);
             int tuoi = namlapthe - namsinh;
-            
-            if (tuoi > 6 && tuoi < 60)
-            {
-                return true;
-            }
-            else
-                return false;
 
+            if (tuoi > 6 && tuoi < 60) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (Exception e) {
             return false;
@@ -638,9 +650,26 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTimKiemKeyPressed
 
-    private void txtTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTinhTrangActionPerformed
+    private void btnGiaHanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaHanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTinhTrangActionPerformed
+        String sql4 = "UPDATE DOCGIA SET NGDENHAN = ? WHERE MADOCGIA = ?";
+        try {
+            pst = conn.prepareStatement(sql4);
+            if (jDateNgayDenHan.getDate() != null) {
+                Calendar cal= jDateNgayDenHan.getCalendar();
+                cal.add(Calendar.MONTH, 4);
+                Date currentDatePlusOne = cal.getTime();
+                java.sql.Date sqlStartDate = new java.sql.Date(currentDatePlusOne.getTime());
+                pst.setDate(1, sqlStartDate);
+            }
+            pst.setString(2,txtMaDocGia.getText());
+             pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Độc giả được gia hạn thành công", "Thông báo", 1);
+            lamMoi();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyTheDocGiaPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGiaHanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -649,6 +678,8 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btThemMoi;
     private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btXoa;
+    private javax.swing.JButton btnGiaHan;
+    private com.toedter.calendar.JDateChooser jDateNgayDenHan;
     private com.toedter.calendar.JDateChooser jDateNgayLapThe;
     private com.toedter.calendar.JDateChooser jDateNgaySinh;
     private javax.swing.JLabel jLabel1;
@@ -675,6 +706,5 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtLoaiDG;
     private javax.swing.JTextField txtMaDocGia;
     private javax.swing.JTextField txtTimKiem;
-    private javax.swing.JTextField txtTinhTrang;
     // End of variables declaration//GEN-END:variables
 }
