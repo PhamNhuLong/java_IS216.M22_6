@@ -1,7 +1,5 @@
-﻿# java_IS216.M22_6
-Đồ án java
 GIỚI THIỆU ĐỒ ÁN
-Quản lý thư viện là app window được xây dựng bằng ngôn ngữ Java cùng với cơ sở dữ liệu là MS SQL Server. Ứng dụng tích hợp các tính năng cơ bản đáp ứng cho việc quản lý thư viện và một số chức năng nâng cao.
+- Quản lý thư viện là app window được xây dựng bằng ngôn ngữ Java cùng với cơ sở dữ liệu là MS SQL Server. Ứng dụng tích hợp các tính năng cơ bản đáp ứng cho việc quản lý thư viện và một số chức năng nâng cao.
 
 
 CÁC CHỨC NĂNG ĐÃ LÀM
@@ -37,7 +35,8 @@ CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 - rs2xml.jar
 - jcalendar-1.4.jar
 - mssql-jdbc-10.2.0.jre17.jar
-- Jasperreports JAR 6.3.0
+- Jasperreports JAR 6.3.0 (https://jar-download.com/artifacts/net.sf.jasperreports/jasperreports/6.3.0/source-code)
+- JFreeChart-1.5.0
 
 
 CÁC BƯỚC CHẠY ỨNG DỤNG
