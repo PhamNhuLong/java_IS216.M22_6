@@ -225,7 +225,7 @@ public JPanel childpanel;
         pnMain.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/hinhtruong.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/ezgif.com-gif-maker.jpg"))); // NOI18N
         jLabel2.setPreferredSize(new java.awt.Dimension(250, 250));
         pnMain.add(jLabel2, java.awt.BorderLayout.CENTER);
 
@@ -234,7 +234,7 @@ public JPanel childpanel;
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("TRƯỜNG THCS TRIỆU AN");
+        jLabel3.setText("THƯ VIỆN TỰ TẠO");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 0, 204), null));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

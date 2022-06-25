@@ -22,11 +22,25 @@ GIỚI THIỆU CÔNG NGHỆ MỚI ĐƯỢC SỬ DỤNG
 
 
 GIỚI THIỆU THÀNH VIÊN TRONG NHÓM:
-
-- Nguyễn Thị Hồng Hải - 19521467 - Xây dựng database, xây dựng các chức năng của ứng dụng
-- Nguyễn Nhật Minh - 19521844 - Xây dựng database, xây dựng các chức năng cơ bản của ứng dụng
-- Phạm Như Long - 19521798 - Xây dựng database, thực hiện test
-
+Họ tên
+MSSV
+Nhiệm vụ
+Hoàn thành
+Nguyễn Thị Hồng Hải
+19521467
+Xây dựng database
+Xây dựng các chức năng cơ bản của ứng dụng
+100%
+Nguyễn Nhật Minh
+19521844
+Xây dựng database
+Xây dựng các chức năng cơ bản của ứng dụng
+100%
+Phạm Như Long
+19521798
+Xây dựng database
+Thực hiện test
+100%
 
 CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 - Microsoft SQL Server
@@ -35,8 +49,7 @@ CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 - rs2xml.jar
 - jcalendar-1.4.jar
 - mssql-jdbc-10.2.0.jre17.jar
-- Jasperreports JAR 6.3.0 (https://jar-download.com/artifacts/net.sf.jasperreports/jasperreports/6.3.0/source-code)
-- JFreeChart-1.5.0
+- Jasperreports JAR 6.3.0
 
 
 CÁC BƯỚC CHẠY ỨNG DỤNG
