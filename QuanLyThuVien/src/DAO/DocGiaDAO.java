@@ -101,5 +101,16 @@ public class DocGiaDAO {
             throw new ArithmeticException(ex.getMessage());
         }
     }
-
+     public static boolean UpdateHan(int madg) {
+        
+        try {
+            stmt = conn.prepareCall(
+                    "{call UPDATENGDENHAN(?)}");
+            stmt.setInt("madocgia", madg);
+           boolean result = stmt.execute();
+           return result;
+        } catch (SQLException ex) {
+            throw new ArithmeticException(ex.getMessage());
+        }
+    }
 }

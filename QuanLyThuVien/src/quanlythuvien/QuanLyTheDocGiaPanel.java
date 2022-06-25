@@ -425,6 +425,7 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
 
     private void tbDocGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDocGiaMouseClicked
         // TODO add your handling code here:
+         btnGiaHan.setVisible(false);
         try {
             txtNgayDenHan.setVisible(true);
             DHLb.setVisible(true);
@@ -520,13 +521,6 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                     DocGia dg = new DocGia();
                     dg.setmADOCGIA(txtMaDocGia.getText());
                     dg.sethOTEN(txtHoTen.getText());
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.MONTH, 4);
-                    if (cal.getTime() != null) {
-                        java.util.Date utilStartDate = cal.getTime();
-                        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-                        dg.setnGAYDENHAN(sqlStartDate);
-                    }
                     if (jDateNgaySinh.getDate() != null) {
                         java.util.Date utilStartDate = jDateNgaySinh.getDate();
                         java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
@@ -620,29 +614,11 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
 
     private void btnGiaHanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaHanActionPerformed
         // TODO add your handling code here:
-        String sql4 = "UPDATE DOCGIA SET NGDENHAN = ? WHERE MADOCGIA = ?";
         try {
-            pst = conn.prepareStatement(sql4);
-            if (txtNgayLapThe != null) {
-                String nglt = txtNgayLapThe.getText();
-                Date date1;
-                try {
-                    date1 = (Date) formatter.parse(nglt);
-                    Calendar calender = Calendar.getInstance();
-                    calender.setTime(date1);
-                    calender.add(Calendar.MONTH, 4);
-                    Date currentDatePlusOne = calender.getTime();
-                    java.sql.Date sqlStartDate = new java.sql.Date(currentDatePlusOne.getTime());
-                    pst.setDate(1, sqlStartDate);
-                } catch (ParseException ex) {
-                    Logger.getLogger(QuanLyTheDocGiaPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            pst.setString(2, txtMaDocGia.getText());
-            pst.executeUpdate();
+            DocGiaDAO.UpdateHan(Integer.valueOf(txtMaDocGia.getText()));
             JOptionPane.showMessageDialog(null, "Độc giả được gia hạn thành công", "Thông báo", 1);
             lamMoi();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(QuanLyTheDocGiaPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGiaHanActionPerformed
