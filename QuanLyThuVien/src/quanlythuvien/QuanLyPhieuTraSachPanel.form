@@ -110,8 +110,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="435" max="32767" attributes="0"/>
-                  <Component id="jPanel1" pref="435" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="485" max="32767" attributes="0"/>
+                  <Component id="jPanel1" pref="485" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -214,23 +214,25 @@
                           <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                           <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="labelTienThu" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="labelTienPhat" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="labelMaPhieuTra" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="labelChonSach" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="labelTienThu" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Component id="labelTienPhat" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Component id="lbMaDG" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Component id="labelMaPhieuTra" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Component id="labelChonSach" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Component id="lbTenDocGia" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtTenDocGia" max="32767" attributes="0"/>
                               <Component id="txtTienThu" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtTienPhatKiNay" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtNgayTra" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cbbMaDG" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtMaPhieuTra" max="32767" attributes="0"/>
+                              <Component id="cbbMaDG" alignment="0" pref="226" max="32767" attributes="0"/>
+                              <Component id="txtMaPhieuTra" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       </Group>
@@ -248,13 +250,18 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel3" pref="40" max="32767" attributes="0"/>
+                      <Component id="lbMaDG" pref="40" max="32767" attributes="0"/>
                       <Component id="cbbMaDG" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel4" pref="40" max="32767" attributes="0"/>
                       <Component id="txtNgayTra" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtTenDocGia" pref="43" max="32767" attributes="0"/>
+                      <Component id="lbTenDocGia" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -292,7 +299,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="lbMaDG">
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xe3; &#x111;&#x1ed9;c gi&#x1ea3;"/>
           </Properties>
@@ -427,6 +434,13 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTienThuActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtTenDocGia">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbTenDocGia">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="M&#xe3; &#x111;&#x1ed9;c gi&#x1ea3;"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

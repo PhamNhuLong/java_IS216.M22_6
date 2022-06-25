@@ -53,6 +53,8 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         labelMaPhieuTra.setVisible(false);
         txtMaPhieuTra.setVisible(false);
         tbMaSach.setVisible(false);
+        lbTenDocGia.setVisible(false);
+        txtTenDocGia.setVisible(false);
     }
 
     public final void showtb() {
@@ -112,7 +114,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         labelMaPhieuTra = new javax.swing.JLabel();
         txtMaPhieuTra = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lbMaDG = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         labelTienPhat = new javax.swing.JLabel();
         txtTienPhatKiNay = new javax.swing.JTextField();
@@ -125,6 +127,8 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         txtNgayTra = new javax.swing.JTextField();
         labelTienThu = new javax.swing.JLabel();
         txtTienThu = new javax.swing.JTextField();
+        txtTenDocGia = new javax.swing.JTextField();
+        lbTenDocGia = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPhieuTraSach = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -208,7 +212,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
 
         txtMaPhieuTra.setEditable(false);
 
-        jLabel3.setText("Mã độc giả");
+        lbMaDG.setText("Mã độc giả");
 
         jLabel4.setText("Ngày trả");
 
@@ -262,6 +266,8 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
             }
         });
 
+        lbTenDocGia.setText("Mã độc giả");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -273,21 +279,23 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(12, 12, 12))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(labelTienThu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTienPhat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMaPhieuTra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelChonSach, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelTienThu, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(labelTienPhat, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(lbMaDG, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(labelMaPhieuTra, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(labelChonSach, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(lbTenDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTienThu, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTienPhatKiNay, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbbMaDG, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtMaPhieuTra))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenDocGia)
+                            .addComponent(txtTienThu)
+                            .addComponent(jScrollPane4)
+                            .addComponent(txtTienPhatKiNay)
+                            .addComponent(txtNgayTra)
+                            .addComponent(cbbMaDG, 0, 226, Short.MAX_VALUE)
+                            .addComponent(txtMaPhieuTra, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(13, 13, 13))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -299,12 +307,16 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     .addComponent(txtMaPhieuTra, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(lbMaDG, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(cbbMaDG))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(txtNgayTra))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTenDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(lbTenDocGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelTienPhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -468,8 +480,8 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -484,10 +496,15 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         labelChonSach.setVisible(false);
         txtTienThu.setVisible(false);
         labelTienThu.setVisible(false);
+        lbTenDocGia.setVisible(true);
+        txtTenDocGia.setVisible(true);
+        lbMaDG.setVisible(false);
+        cbbMaDG.setVisible(false);
         try {
             int row = this.tbPhieuTraSach.getSelectedRow();
             String MArow = String.valueOf(this.tbPhieuTraSach.getModel().getValueAt(row, 0));
-            String sql1 = " select * from PHIEUTRASACH where MAPHIEUTRA='" + MArow + "'";
+            String sql1 = " select MAPHIEUTRA, HOTEN , NGAYTRA,TIENPHATKINAY from PHIEUTRASACH,DOCGIA"
+                    + " where PHIEUTRASACH.MADOCGIA =DOCGIA.MADOCGIA AND MAPHIEUTRA='" + MArow + "'";
             ResultSet rs = DuLieuBang.ShowTextField(sql1);
             String sql = " select CS.MASACH , DS.TENDAUSACH, CT.SONGAYTRATRE, CT.TIENPHAT\n"
                     + "from CUONSACH CS join DAUSACH DS on CS.MADAUSACH = DS.MADAUSACH join CTTS CT on CS.MASACH = CT.MASACH\n"
@@ -497,6 +514,7 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                 this.txtMaPhieuTra.setText(rs.getString("MAPHIEUTRA"));
                 this.txtNgayTra.setText(rs.getDate("NGAYTRA").toString());
                 this.txtTienPhatKiNay.setText(rs.getString("TIENPHATKINAY"));
+                this.txtTenDocGia.setText(rs.getString("HOTEN"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -631,6 +649,10 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
         tbMaSach.setVisible(false);
         listSach.setVisible(true);
         labelChonSach.setVisible(true);
+        lbTenDocGia.setVisible(false);
+        txtTenDocGia.setVisible(false);
+        lbMaDG.setVisible(true);
+        cbbMaDG.setVisible(true);
     }
 
     private void btLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLamMoiActionPerformed
@@ -752,7 +774,6 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbbMaDG;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -770,12 +791,15 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labelMaPhieuTra;
     private javax.swing.JLabel labelTienPhat;
     private javax.swing.JLabel labelTienThu;
+    private javax.swing.JLabel lbMaDG;
+    private javax.swing.JLabel lbTenDocGia;
     private javax.swing.JList<String> listSach;
     private javax.swing.JTable tbMaSach;
     private javax.swing.JTable tbMaSach1;
     private javax.swing.JTable tbPhieuTraSach;
     public static javax.swing.JTextField txtMaPhieuTra;
     private javax.swing.JTextField txtNgayTra;
+    private javax.swing.JTextField txtTenDocGia;
     private javax.swing.JTextField txtTienPhatKiNay;
     private javax.swing.JTextField txtTienThu;
     private javax.swing.JTextField txtTimKiem;
