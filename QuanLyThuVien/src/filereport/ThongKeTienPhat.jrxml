@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5cbb9757-a0d4-4d33-a8d1-12885700e22d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Month" class="java.lang.String"/>
+	<parameter name="Year" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select pt.MADOCGIA, dg.HOTEN, COUNT(ct.masach) as TONGSOSACHTRA, SUM(pt.TIENPHATKINAY) as TONGTIEN
+from PHIEUTRASACH pt , DOCGIA dg ,CTTS ct 
+where pt.MAPHIEUTRA = ct.MAPHIEUTRA and dg.MADOCGIA = pt.MADOCGIA 
+and MONTH(NGAYTRA) = $P{Month} and year(NGAYTRA)= $P{Year}
+group by pt.MADOCGIA,  dg.HOTEN order by TONGSOSACHTRA, TONGTIEN desc ;]]>
+	</queryString>
+	<field name="MADOCGIA" class="java.lang.Integer"/>
+	<field name="HOTEN" class="java.lang.String"/>
+	<field name="TONGSOSACHTRA" class="java.lang.Integer"/>
+	<field name="TONGTIEN" class="java.lang.Integer"/>
+	<variable name="TONGTIEN_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{TONGTIEN}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="802" uuid="a20f865b-deb3-44e9-a21f-e5d5f290e564"/>
+				<imageExpression><![CDATA["D:\\Nam3\\java\\doan\\QuanLyThuVien\\src\\Icons\\1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="79" uuid="5113a7c4-7075-4033-b9ab-bbd41e709403"/>
+				<imageExpression><![CDATA["D:\\Nam3\\java\\doan\\QuanLyThuVien\\src\\Icons\\pink2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="118" y="13" width="324" height="47" uuid="3f318966-57fc-4292-a337-d029d0360db2"/>
+				<textElement>
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[Thống kê tiền phạt]]></text>
+			</staticText>
+			<image>
+				<reportElement x="455" y="0" width="96" height="79" uuid="1c0a00ed-bd00-45bc-a872-aea0bf095feb"/>
+				<imageExpression><![CDATA["D:\\Nam3\\java\\doan\\QuanLyThuVien\\src\\Icons\\bag_business_currency_dollar_finance_money_icon_127242.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="8" y="0" width="93" height="79" uuid="92627ca7-b656-421b-9c37-5d522eccc705"/>
+				<imageExpression><![CDATA["D:\\Nam3\\java\\doan\\QuanLyThuVien\\src\\Icons\\analytics_documents_report_statistics_icon_127215.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="72" y="15" width="19" height="20" uuid="72b7c3d9-3414-40c1-bc49-e2a78e414bf9"/>
+				<textFieldExpression><![CDATA[$P{Month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="91" y="15" width="0" height="20" uuid="ab0ebc05-1469-47a9-aef8-6e1a0ccab92a"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="15" width="100" height="20" uuid="9cc8c399-a5ea-47f4-aa4b-3bb72db85561"/>
+				<textFieldExpression><![CDATA[$P{Year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="15" width="38" height="20" uuid="9bfcd21a-edff-4f42-b5f7-e4f9f7235ed2"/>
+				<text><![CDATA[Tháng]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="10" width="555" height="51" uuid="d92e37a5-a038-4b96-a6ff-22350acf4c3c"/>
+				<imageExpression><![CDATA["D:\\Nam3\\java\\doan\\QuanLyThuVien\\src\\Icons\\green1.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="18" y="20" width="100" height="20" uuid="b6c506dd-f78a-46e9-ab74-5bfc91bbdcf4"/>
+				<text><![CDATA[Mã độc giả]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="20" width="100" height="20" uuid="a7134a53-589a-46e9-86a5-a558b2b34751"/>
+				<text><![CDATA[Họ tên độc giả]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="20" width="100" height="20" uuid="46382219-3a52-4dd8-9431-f490811f8c33"/>
+				<text><![CDATA[Tổng số sách trả]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="20" width="100" height="20" uuid="9dd9f035-c785-4f6a-9cb7-09b9c0c12c09"/>
+				<text><![CDATA[Tổng tiền phạt]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="18" y="0" width="100" height="20" uuid="835c5e36-4ab4-4101-a5b4-d4b11f22c711"/>
+				<textFieldExpression><![CDATA[$F{MADOCGIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="100" height="20" uuid="bd6e72a0-6962-42b8-8447-c51ab30ea0c2"/>
+				<textFieldExpression><![CDATA[$F{HOTEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="0" width="100" height="20" uuid="1f0f6d06-7178-4b9e-b498-ba2597b1db29"/>
+				<textFieldExpression><![CDATA[$F{TONGSOSACHTRA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="80fe9c62-bc5b-42c1-a89d-af791c5cb17a"/>
+				<textFieldExpression><![CDATA[$F{TONGTIEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="33119c2a-f41a-4b76-8dd7-cb59401e135c"/>
+				<textFieldExpression><![CDATA[$V{TONGTIEN_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="0" width="45" height="20" uuid="e008f97b-bda5-4021-acc6-43696a65cd23"/>
+				<text><![CDATA[Tổng tiền]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

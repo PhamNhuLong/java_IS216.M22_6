@@ -7,20 +7,40 @@ package quanlythuvien;
 
 import DAO.Connect;
 import DAO.DuLieuBang;
+import Object.ThongKe;
+import java.awt.CardLayout;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
- * @author Nguyen Linh
+ * @author minh
  */
 public class BaoCaoThongKePanel extends javax.swing.JPanel {
 
@@ -34,6 +54,8 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
     public BaoCaoThongKePanel() {
         initComponents();
         panelTraCuu.setVisible(false);
+        pnBarChart.setVisible(false);
+            
     }
 
     /**
@@ -59,33 +81,21 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
         jBInBaoCao = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        pnBarChart = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1074, 571));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 250));
 
         jLabel1.setText("Loại Thống Kê");
 
-        cbThongKe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê tiền phạt theo tháng trong năm", "Thống kê tình trạng mượn sách theo tháng" }));
-        cbThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbThongKeMouseClicked(evt);
-            }
-        });
-        cbThongKe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbThongKeActionPerformed(evt);
-            }
-        });
+        cbThongKe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê tình trạng mượn sách theo tháng", "Thống kê tiền phạt của độc giả theo tháng" }));
 
         jLabel2.setText("Chọn năm");
 
-        txtNam.setText("Năm");
-
         jLabel4.setText("Chọn tháng");
-
-        txtThang.setText("Tháng");
 
         tbTraCuu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,7 +113,7 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Tên đầu sách", "Tác giả", "Nhà xuất bản", "Số lượt mượn"
+                "Đầu sách", "Tác giả", "Nhà xuất bản", "Số lượt mượn"
             }
         ) {
             Class[] types = new Class [] {
@@ -120,11 +130,15 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
         panelTraCuu.setLayout(panelTraCuuLayout);
         panelTraCuuLayout.setHorizontalGroup(
             panelTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTraCuuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelTraCuuLayout.setVerticalGroup(
             panelTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelTraCuuLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 78, Short.MAX_VALUE))
         );
 
         jBTraCuu.setText("Tra cứu");
@@ -155,16 +169,17 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbThongKe, 0, 316, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtNam, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jBTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtThang, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(4, 4, 4)
-                .addComponent(jBInBaoCao)
-                .addContainerGap(182, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtNam, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                                    .addComponent(txtThang))
+                                .addGap(25, 25, 25)
+                                .addComponent(jBTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBInBaoCao)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,20 +187,21 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtThang, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                    .addComponent(txtThang, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBInBaoCao, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNam, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBInBaoCao, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNam, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
@@ -201,7 +217,7 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1074, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,82 +226,224 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        pnBarChart.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnBarChartLayout = new javax.swing.GroupLayout(pnBarChart);
+        pnBarChart.setLayout(pnBarChartLayout);
+        pnBarChartLayout.setHorizontalGroup(
+            pnBarChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnBarChartLayout.setVerticalGroup(
+            pnBarChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 272, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnBarChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnBarChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBInBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInBaoCaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jBInBaoCaoActionPerformed
-
-    private void cbThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbThongKeActionPerformed
-        // TODO add your handling code here:
-         if(cbThongKe.getSelectedItem().equals("Thống kê tiền phạt theo tháng trong năm")){
-           txtThang.setEnabled(false);
-           jBTraCuu.setEnabled(false);
-        } else {
-            txtThang.setEnabled(true);
-           jBTraCuu.setEnabled(true);
+        HashMap map = new HashMap();
+        
+        if(cbThongKe.getSelectedItem().equals("Thống kê tình trạng mượn sách theo tháng"))
+        {
+             try{   
+                try {
+                    String dir = "src\\filereport\\ThongKeSachMuon.jrxml";
+                    JasperDesign jd = JRXmlLoader.load(dir);
+                    JasperReport jr = JasperCompileManager.compileReport(dir);
+                    map.put("Month", txtThang.getText());
+                    map.put("Year", txtNam.getText());
+                    JasperPrint jp = JasperFillManager.fillReport(jr, map, conn);
+                    JasperViewer.viewReport(jp,false);
+                } catch (JRException ex) {
+                    Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           
+            conn.commit();
+        }  catch (SQLException ex) {
+                Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(cbThongKe.getSelectedItem().equals("Thống kê tiền phạt của độc giả theo tháng"))
+        {
+             try{   
+                try {
+                    String dir = "src\\filereport\\ThongKeTienPhat.jrxml";
+                    JasperDesign jd = JRXmlLoader.load(dir);
+                    JasperReport jr = JasperCompileManager.compileReport(dir);
+                    map.put("Month", txtThang.getText());
+                    map.put("Year", txtNam.getText());
+                    JasperPrint jp = JasperFillManager.fillReport(jr, map, conn);
+                    JasperViewer.viewReport(jp,false);
+                } catch (JRException ex) {
+                    Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+           
+            conn.commit();
+        }  catch (SQLException ex) {
+                Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
-    }//GEN-LAST:event_cbThongKeActionPerformed
-
-    private void cbThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbThongKeMouseClicked
-        // TODO add your handling code here:
-//        if(cbThongKe.getSelectedItem().equals("Thống kê tiền phạt theo tháng trong năm")){
-//           txtThang.setEnabled(false);
-//           jBTraCuu.setEnabled(false);
-//        } else {
-//            txtThang.setEnabled(true);
-//           jBTraCuu.setEnabled(true);
-//        }
+    }//GEN-LAST:event_jBInBaoCaoActionPerformed
+    
+    public void setDataToChart(JPanel jpnItem){
+        List<ThongKe> listItem = getListPMS();
         
-    }//GEN-LAST:event_cbThongKeMouseClicked
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        if(listItem != null){
+            for(ThongKe item : listItem){
+                dataset.addValue( item.getSosachmuon(), "Sách" , item.getTendausach() );
+            }
+        }
+        
+        JFreeChart barChart = ChartFactory.createBarChart( 
+                "Thống kê mượn sách",
+                "Đầu sách","Số lượt mượn"
+                , dataset, PlotOrientation.VERTICAL, false, true, false);
+        
+        ChartPanel chartPanel = new ChartPanel(barChart);
+//        chartPanel.setPreferredSize(new Dimension(jpnItem.getWidth),200);
 
+        jpnItem.removeAll();
+        jpnItem.setLayout(new CardLayout());
+        jpnItem.add(chartPanel);
+        jpnItem.validate();
+        jpnItem.repaint();
+    }
+    public void setDataToChart2(JPanel jpnItem){
+        List<ThongKe> listItem = getListPTS();
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        if(listItem != null){
+            for(ThongKe item : listItem){
+                dataset.addValue(item.getTienphat(),"Tiền phạt", item.getMadocgia());
+            }
+        }
+        
+        JFreeChart barChart = ChartFactory.createBarChart( 
+                "Thống kê trả sách",
+                "Mã độc giả","Tiền phạt"
+                , dataset, PlotOrientation.VERTICAL, false, true, false);
+        
+        ChartPanel chartPanel = new ChartPanel(barChart);
+//        chartPanel.setPreferredSize(new Dimension(jpnItem.getWidth),200);
+
+        jpnItem.removeAll();
+        jpnItem.setLayout(new CardLayout());
+        jpnItem.add(chartPanel);
+        jpnItem.validate();
+        jpnItem.repaint();
+    }
+    public List<ThongKe> getListPMS(){
+        conn = Connect.getConnect();
+        String sql ="select TENDAUSACH, TACGIA, NXB, count(ds.madausach) as TONGSOLUOTMUON\n "+
+                        "from dausach ds, cuonsach cs, ctms ct, phieumuonsach pm\n "+
+                        " where ds.madausach = cs.madausach and cs.masach = ct.masach and ct.maphieumuonsach = pm.maphieumuonsach\n"+
+                        "and MONTH(NGAYMUON) = '"+ txtThang.getText() +"' and year(NGAYMUON)= '"+ txtNam.getText() +"' \n " +
+                        " group by TENDAUSACH, tacgia, nxb order by  TONGSOLUOTMUON desc";
+        List<ThongKe> list = new ArrayList<>();
+        try{
+             pst = conn.prepareStatement(sql);
+             rs = pst.executeQuery();
+             while(rs.next()){
+                 ThongKe tk = new ThongKe();
+                 tk.setTendausach(rs.getString("TENDAUSACH"));
+                 tk.setSosachmuon(rs.getInt("TONGSOLUOTMUON"));
+                 list.add(tk);
+             }
+        }catch (SQLException ex) {
+            throw new ArithmeticException(ex.getMessage());
+        } 
+        return list;
+    }
+        public List<ThongKe> getListPTS(){
+        conn = Connect.getConnect();
+        String sql2 ="select pt.MADOCGIA, dg.HOTEN, COUNT(ct.masach) as TONGSOSACHTRA, SUM(pt.TIENPHATKINAY) as TONGTIEN\n "+
+                        "from PHIEUTRASACH pt , DOCGIA dg ,CTTS ct \n "+
+                        "where pt.MAPHIEUTRA = ct.MAPHIEUTRA and dg.MADOCGIA = pt.MADOCGIA \n"+
+                        "and MONTH(NGAYTRA) = '"+ txtThang.getText() +"' and year(NGAYTRA)= '"+ txtNam.getText() +"' \n " +
+                        "group by pt.MADOCGIA,  dg.HOTEN order by TONGSOSACHTRA, TONGTIEN desc";
+        List<ThongKe> list = new ArrayList<>();
+        try{
+             pst = conn.prepareStatement(sql2);
+             rs = pst.executeQuery();
+             while(rs.next()){
+                 ThongKe tk = new ThongKe();
+                 tk.setMadocgia(rs.getString("MADOCGIA"));
+                 tk.setTienphat(rs.getFloat("TONGTIEN"));
+                 list.add(tk);
+             }
+        }catch (SQLException ex) {
+            throw new ArithmeticException(ex.getMessage());
+        } 
+        return list;
+    }
+    
     private void jBTraCuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTraCuuActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel dtm = (DefaultTableModel) tbTraCuu.getModel();
-           dtm.setRowCount(0);
+         if(cbThongKe.getSelectedItem().equals("Thống kê tình trạng mượn sách theo tháng")){
          try {
             conn = Connect.getConnect();
             conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             conn.setAutoCommit(false);
-            String sql ="select Tendausach, tacgia, nxb, count(ds.madausach) as tong\n "+
-                    "from dausach ds, cuonsach cs, ctms ct, phieumuonsach pm\n "+
-                    " where ds.madausach = cs.madausach and cs.masach = ct.masach and ct.maphieumuonsach = pm.maphieumuonsach\n"+
-                    "and extract(month from ngaymuon) = ? and extract (year from ngaymuon) = ?\n " +
-                    " group by tendausach, tacgia, nxb order by tong desc";
-            pst = conn.prepareStatement(sql);
-            pst.setInt(1,Integer.parseInt(txtThang.getText()));
-            pst.setInt(2, Integer.parseInt(txtNam.getText()));
-            rs = pst.executeQuery();
-            while(rs.next()){
-                Object[] obj={rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)};
-                dtm.addRow(obj);
-                tbTraCuu.setModel(dtm);
-            }
-            
-                panelTraCuu.setVisible(true);
+            String sql ="select TENDAUSACH, TACGIA, NXB, count(ds.madausach) as TONGSOLUOTMUON\n "+
+                        "from dausach ds, cuonsach cs, ctms ct, phieumuonsach pm\n "+
+                        " where ds.madausach = cs.madausach and cs.masach = ct.masach and ct.maphieumuonsach = pm.maphieumuonsach\n"+
+                        "and MONTH(NGAYMUON) = '"+ txtThang.getText() +"' and year(NGAYMUON)= '"+ txtNam.getText() +"' \n " +
+                        " group by tendausach, tacgia, nxb order by  TONGSOLUOTMUON desc";
+            DuLieuBang.Load(sql, tbTraCuu);
+            panelTraCuu.setVisible(true);
+            setDataToChart(pnBarChart);
+            pnBarChart.setVisible(true);
             
         } catch (SQLException ex) {
             Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+        }
+        if(cbThongKe.getSelectedItem().equals("Thống kê tiền phạt của độc giả theo tháng")){
+         try {
+            conn = Connect.getConnect();
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            conn.setAutoCommit(false);
+            String sql2 ="select pt.MADOCGIA, dg.HOTEN, COUNT(ct.masach) as TONGSOSACHTRA, SUM(pt.TIENPHATKINAY) as TONGTIEN\n "+
+                        "from PHIEUTRASACH pt , DOCGIA dg ,CTTS ct \n "+
+                        "where pt.MAPHIEUTRA = ct.MAPHIEUTRA and dg.MADOCGIA = pt.MADOCGIA \n"+
+                        "and MONTH(NGAYTRA) = '"+ txtThang.getText() +"' and year(NGAYTRA)= '"+ txtNam.getText() +"' \n " +
+                        "group by pt.MADOCGIA,  dg.HOTEN order by TONGSOSACHTRA, TONGTIEN desc";
+            DuLieuBang.Load(sql2, tbTraCuu);
+            panelTraCuu.setVisible(true);
+            setDataToChart2(pnBarChart);
+            pnBarChart.setVisible(true);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        } 
     }//GEN-LAST:event_jBTraCuuActionPerformed
-
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbThongKe;
@@ -299,6 +457,7 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelTraCuu;
+    private javax.swing.JPanel pnBarChart;
     private javax.swing.JTable tbTraCuu;
     private javax.swing.JTextField txtNam;
     private javax.swing.JTextField txtThang;
