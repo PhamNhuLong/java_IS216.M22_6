@@ -22,9 +22,8 @@ public class PhieuTraSachDAO {
     public static CallableStatement stmt = null;
     public static Connection conn = Connect.getConnect();
 
-    public static boolean InsertPhieuTraSach(PhieuTraSach pts, String ms) {
+    public static boolean InsertPhieuTraSach(PhieuTraSach pts) {
         int count = 0;
-        int temp = 0;
         String sql = "insert into PHIEUTRASACH(MADOCGIA, NGAYTRA, TIENPHATKINAY) values(?,?,?)";
         try {
             pst = conn.prepareStatement(sql);
@@ -32,16 +31,10 @@ public class PhieuTraSachDAO {
             pst.setDate(2, (Date) pts.getnGAYTRA());
             pst.setInt(3, pts.gettIENPHATKINAY());
             count += pst.executeUpdate();
-            if (count > 0) {
-                int ma = getMa();
-                if (ChiTietTraSachDAO.InsertCTTS2(ma, ms) != 0) {
-                    temp++;
-                }
-            }
         } catch (SQLException ex) {
             throw new ArithmeticException(ex.getMessage());
         }
-        if (temp > 0) {
+        if (count > 0) {
             return true;
         }
         return false;
