@@ -95,7 +95,9 @@ public class PhieuTraSachDAO {
     }
 
     public static ArrayList<String> LoadDataCbb() {
-        String sql = "select distinct D.MADOCGIA as MA, HOTEN FROM DOCGIA D JOIN PHIEUMUONSACH P ON P.MADOCGIA = D.MADOCGIA";
+        String sql = "select distinct D.MADOCGIA as MA, HOTEN FROM DOCGIA D JOIN PHIEUMUONSACH P ON P.MADOCGIA = D.MADOCGIA \n"
+                + "JOIN CTMS ON CTMS.MAPHIEUMUONSACH = P.MAPHIEUMUONSACH\n"
+                + "WHERE TINHTRANG = N'chưa trả'";
         ArrayList<String> list = new ArrayList<String>();
         try {
             pst = conn.prepareStatement(sql);
@@ -129,5 +131,4 @@ public class PhieuTraSachDAO {
         return list;
     }
 
-  
 }
