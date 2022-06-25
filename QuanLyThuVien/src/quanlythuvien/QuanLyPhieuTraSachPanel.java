@@ -558,11 +558,12 @@ public class QuanLyPhieuTraSachPanel extends javax.swing.JPanel {
                     pts.setnGAYTRA(sqlStartDate);
                     pts.settIENPHATKINAY(0);
 
-                    if (PhieuTraSachDAO.InsertPhieuTraSach(pts, strMS)) {
-                        JOptionPane.showMessageDialog(null, "Phiếu trả sách được thêm vào thành công", "Thông báo", 1);
-                        showtb();
+                    PhieuTraSachDAO.InsertPhieuTraSach(pts);
+                    int ma = PhieuTraSachDAO.getMa();
+                    ChiTietTraSachDAO.InsertCTTS2(ma, strMS);
+                    JOptionPane.showMessageDialog(null, "Phiếu trả sách được thêm vào thành công", "Thông báo", 1);
+                    showtb();
 
-                    }
                 }
             } catch (Exception e) {
                 //JOptionPane.showMessageDialog(null, "Lỗi!"+ e.getMessage(),"Thông báo",1 );
