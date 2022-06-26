@@ -20,6 +20,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
@@ -42,6 +43,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author minh
  */
+//testcommit
 public class BaoCaoThongKePanel extends javax.swing.JPanel {
 
     /**
@@ -404,6 +406,11 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
     
     private void jBTraCuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTraCuuActionPerformed
         // TODO add your handling code here:
+         if(Integer.valueOf(txtThang.getText()) > 12 || Integer.valueOf(txtThang.getText()) < 1)
+             JOptionPane.showMessageDialog(null,"Nhập sai tháng rồi cha","Thông báo",1);
+         else if(Integer.valueOf(txtNam.getText()) > 2022 || Integer.valueOf(txtNam.getText()) < 2000)
+             JOptionPane.showMessageDialog(null,"Nhập năm từ 2000 đến năm 2022","Thông báo",1);
+         else {
          if(cbThongKe.getSelectedItem().equals("Thống kê tình trạng mượn sách theo tháng")){
          try {
             conn = Connect.getConnect();
@@ -442,6 +449,7 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
             Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         } 
+        }  
     }//GEN-LAST:event_jBTraCuuActionPerformed
   
 
