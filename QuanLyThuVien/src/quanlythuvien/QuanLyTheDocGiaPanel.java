@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
-
+//testcommit
 public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
 
     /**
@@ -195,7 +195,7 @@ public class QuanLyTheDocGiaPanel extends javax.swing.JPanel {
                                     .addComponent(jDateNgaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(4, 4, 4)
-                                        .addComponent(rdbtSinhVien)
+                                        .addComponent(rdbtSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(rdbtGiangVien)
                                         .addGap(0, 0, Short.MAX_VALUE))

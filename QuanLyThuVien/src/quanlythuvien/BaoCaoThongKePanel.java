@@ -43,6 +43,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author minh
  */
+//testcommit
 public class BaoCaoThongKePanel extends javax.swing.JPanel {
 
     /**
@@ -448,7 +449,7 @@ public class BaoCaoThongKePanel extends javax.swing.JPanel {
             Logger.getLogger(BaoCaoThongKePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         } 
-        }
+        }  
     }//GEN-LAST:event_jBTraCuuActionPerformed
   
 
