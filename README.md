@@ -19,6 +19,7 @@ Chức năng của quản lý: Bao gồm các chức năng của thủ thư và 
 GIỚI THIỆU CÔNG NGHỆ MỚI ĐƯỢC SỬ DỤNG
 - Nén project thành .exe
 - Vẽ biểu đồ khi tra cứu thống kê.
+- Gửi mail cảnh báo trả trễ.
 
 
 GIỚI THIỆU THÀNH VIÊN TRONG NHÓM:
@@ -50,6 +51,8 @@ CÁC THƯ VIỆN, NỀN TẢNG ĐÃ SỬ DỤNG
 - jcalendar-1.4.jar
 - mssql-jdbc-10.2.0.jre17.jar
 - Jasperreports JAR 6.3.0
+- javax.mail.jar
+- activation-1.1.1.jar
 
 
 CÁC BƯỚC CHẠY ỨNG DỤNG
