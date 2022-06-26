@@ -295,9 +295,13 @@ INSERT INTO DOCGIA(HOTEN,NGAYSINH,LOAIDG,DIACHI,NGLAPTHE,NGDENHAN,EMAIL) VALUES 
 INSERT INTO PHIEUMUONSACH(MADOCGIA,NGAYMUON) VALUES (1,convert(date,'2022-06-05'));
 INSERT INTO CTMS VALUES (1,1,N'chưa trả');
 INSERT INTO CTMS VALUES (2,1,N'chưa trả');
-update CUONSACH set TINHTRANG = N'đang cho mượn' where MASACH = 1
-update CUONSACH set TINHTRANG = N'đang cho mượn' where MASACH = 2
-update DAUSACH set SANCO = SANCO -2, DANGCHOMUON = DANGCHOMUON + 2 where MADAUSACH = 1
+update CUONSACH set TINHTRANG = N'đang cho mượn' where MASACH = 1;
+update CUONSACH set TINHTRANG = N'đang cho mượn' where MASACH = 2;
+update DAUSACH set SANCO = SANCO -2, DANGCHOMUON = DANGCHOMUON + 2 where MADAUSACH = 1;
+insert into NGUOIDUNG values ('hai','hai',1);
+insert into NGUOIDUNG values ('long','long',1);
+insert into NGUOIDUNG values ('minh','minh',1);
+insert into NGUOIDUNG values ('thuthu','thuthu',2);
 --INSERT INTO PHIEUTRASACH(MADOCGIA,NGAYTRA,TIENPHATKINAY) VALUES (1,convert(date,'2022-06-10'),0);
 --insert into CTTS values (1,5,0,0);
 
