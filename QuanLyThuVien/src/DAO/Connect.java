@@ -23,7 +23,7 @@ public class Connect {
         String db = "QLTV";
         String port = "1433";
         String username = "sa";
-        String password = "123456789";
+        String password = "332001";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String connectURL = "jdbc:sqlserver://" + hostname + ":" + port + ";DatabaseName=" + db + ";encrypt=true;trustServerCertificate=true;";
